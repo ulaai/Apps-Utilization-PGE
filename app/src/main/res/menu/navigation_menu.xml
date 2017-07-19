@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/nav_profile"
+          android:title="My Profile"
+          android:icon="@mipmap/ic_person_black_24dp"/>
+
+    <group android:id="@+id/nav_util"
+          android:title="Utilization">
+            <item
+                android:id="@+id/fr1"
+                android:orderInCategory="100"
+                android:title="First Tab"
+                android:icon="@mipmap/ic_show_chart_black_24dp"
+                app:showAsAction="always"/>
+
+            <item
+                android:id="@+id/fr2"
+                android:orderInCategory="100"
+                android:title="Second Tab"
+                android:icon="@mipmap/ic_show_chart_black_24dp"
+                app:showAsAction="always"/>
+
+
+            <item
+                android:id="@+id/fr3"
+                android:orderInCategory="100"
+                android:title="Third Tab"
+                android:icon="@mipmap/ic_show_chart_black_24dp"
+                app:showAsAction="always"/>
+
+
+    </group>
+
+    <group>
+        <item
+            android:id="@+id/close"
+            android:orderInCategory="100"
+            android:title="Close"
+            android:icon="@mipmap/ic_close_black_24dp"
+            app:showAsAction="always"/>
+
+    </group>
+
+</menu>
