@@ -31,6 +31,8 @@
         </activity>
         <activity android:name="com.example.uli2.userprofilemgmt.MainActivity" >
         </activity>
+        <activity android:name="com.example.uli2.userprofilemgmt.ApplicationActivity" >
+        </activity>
     </application>
 
 </manifest>

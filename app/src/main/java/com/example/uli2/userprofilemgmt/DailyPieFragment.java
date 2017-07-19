@@ -1,6 +1,7 @@
 package com.example.uli2.userprofilemgmt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
@@ -16,6 +17,7 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
@@ -47,6 +49,7 @@ public class DailyPieFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_daily_pie, container, false);
         PieChart pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
         LineChart lChart = (LineChart)rootView.findViewById(R.id.line1chart);
+        Button appButton = (Button)rootView.findViewById(R.id.appbutton);
 
         float mult = 100;
         String[] mResult = new String[] { "High", "Low" };
@@ -62,6 +65,15 @@ public class DailyPieFragment extends Fragment {
         MakePieChart(pChart, mResult, mValues);
 
         MakeLineChart(lChart, mResult, mValues);
+
+        appButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ApplicationActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 
