@@ -35,4 +35,6 @@ dependencies {
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     testCompile 'junit:junit:4.12'
+    compile 'net.sourceforge.jtds:jtds:1.2.7'
+
 }
