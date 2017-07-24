@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:2:1-28:12
+ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:2:1-33:12
 	package
 		ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:3:11-53
 		INJECTED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml
@@ -22,7 +22,7 @@ ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\Andro
 	android:name
 		ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:6:22-76
 application
-ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:8:5-26:19
+ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:8:5-31:19
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\user\.android\build-cache\99c68902f2c24cdc957df0c1e9c12d014d673449\output\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support:cardview-v7:26.0.0-alpha1] C:\Users\user\.android\build-cache\bcfcfa2ef0fe0f18b3a79f6339397e2aa9f40ab1\output\AndroidManifest.xml:26:5-20
 MERGED from [com.android.support:design:26.0.0-alpha1] C:\Users\user\.android\build-cache\d594ed8d39b24ff20d61cbc2db3e57f5e31cbdd1\output\AndroidManifest.xml:29:5-20
@@ -68,9 +68,17 @@ ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\Andro
 	android:name
 		ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:22:19-47
 activity#com.example.uli2.userprofilemgmt.ApplicationActivity
-ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:24:9-25:20
+ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:24:9-27:20
+	android:theme
+		ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:26:13-51
 	android:name
-		ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:24:19-54
+		ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:25:13-48
+activity#com.example.uli2.userprofilemgmt.LOLActivity
+ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:28:9-30:20
+	android:theme
+		ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:29:19-57
+	android:name
+		ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:28:19-46
 uses-sdk
 INJECTED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\user\.android\build-cache\99c68902f2c24cdc957df0c1e9c12d014d673449\output\AndroidManifest.xml:5:5-7:41

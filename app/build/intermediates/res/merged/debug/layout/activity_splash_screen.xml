@@ -8,6 +8,7 @@
     tools:context="com.example.uli2.userprofilemgmt.SplashScreen"
     android:layout_gravity="center">
     <ImageView
+        android:id="@+id/splash_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/logo"
@@ -17,5 +18,17 @@
         android:foregroundGravity="center_horizontal"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp"
+        android:layout_weight="1"
+        android:foregroundGravity="center_horizontal"
+        android:layout_below="@+id/splash_logo"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="72dp"/>
 
 </RelativeLayout>

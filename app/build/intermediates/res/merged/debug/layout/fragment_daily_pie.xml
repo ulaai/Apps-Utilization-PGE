@@ -46,13 +46,30 @@
             android:layout_height="378dp"
             android:layout_below="@+id/space"/>
 
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/hb1chart"
+            android:name="layout.Pie2Fragment"
+            android:layout_width="match_parent"
+            android:layout_height="378dp"
+            android:layout_below="@+id/line1chart"/>
         <Button
             android:id="@+id/appbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="All App"/>
+        <Button
+            android:id="@+id/toalbum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To ALbum"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
 
 
     </LinearLayout>
-
 </ScrollView>

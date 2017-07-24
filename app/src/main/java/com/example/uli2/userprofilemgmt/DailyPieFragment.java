@@ -14,28 +14,40 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class DailyPieFragment extends Fragment {
@@ -49,10 +61,11 @@ public class DailyPieFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_daily_pie, container, false);
         PieChart pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
         LineChart lChart = (LineChart)rootView.findViewById(R.id.line1chart);
+        HorizontalBarChart hbChart = (HorizontalBarChart)rootView.findViewById(R.id.hb1chart);
         Button appButton = (Button)rootView.findViewById(R.id.appbutton);
 
         float mult = 100;
-        String[] mResult = new String[] { "High", "Low" };
+        final String[] mResult = new String[] { "High", "Low" };
         int[] mValues = new int[] {92, 8};
         int sumValues=0;
         int[] mPercent = new int[mValues.length];
@@ -66,10 +79,22 @@ public class DailyPieFragment extends Fragment {
 
         MakeLineChart(lChart, mResult, mValues);
 
+        MakeHorizontalBarChart(hbChart, mResult, mValues);
+
+
         appButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ApplicationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button toalbum = (Button) rootView.findViewById(R.id.toalbum);
+        toalbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), LOLActivity.class);
                 startActivity(intent);
             }
         });
@@ -237,5 +262,80 @@ public class DailyPieFragment extends Fragment {
             lChart.setData(data);
         }
 
+    }
+
+    private class CategoryBarChartXaxisFormatter implements IAxisValueFormatter {
+
+        ArrayList<String> mValues;
+
+        CategoryBarChartXaxisFormatter(ArrayList<String> values) {
+            this.mValues = values;
+        }
+
+        @Override
+        public String getFormattedValue(float value, AxisBase axis) {
+
+            int val = (int) value;
+            String label = "";
+            if (val >= 0 && val < mValues.size()) {
+                label = mValues.get(val);
+            } else {
+                label = "";
+            }
+            return label;
+        }
+    }
+
+    private void MakeHorizontalBarChart(HorizontalBarChart hbChart, String[] mResult, int[]
+            mValues) {
+        ArrayList<String> labels = new ArrayList<>();
+        labels.add("January");
+        labels.add("February");
+        labels.add("March");
+        labels.add("April");
+        labels.add("May");
+        labels.add("June");
+
+        hbChart.setDrawBarShadow(false);
+        hbChart.setDrawValueAboveBar(true);
+        hbChart.getDescription().setEnabled(false);
+        hbChart.setPinchZoom(false);
+        hbChart.setDrawGridBackground(false);
+
+
+        XAxis xl = hbChart.getXAxis();
+        xl.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xl.setDrawAxisLine(true);
+        xl.setDrawGridLines(false);
+        CategoryBarChartXaxisFormatter xaxisFormatter = new CategoryBarChartXaxisFormatter(labels);
+        xl.setValueFormatter(xaxisFormatter);
+        xl.setGranularity(1);
+
+        YAxis yl = hbChart.getAxisLeft();
+        yl.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        yl.setDrawGridLines(false);
+        yl.setEnabled(false);
+        yl.setAxisMinimum(0f);
+
+        YAxis yr = hbChart.getAxisRight();
+        yr.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        yr.setDrawGridLines(false);
+        yr.setAxisMinimum(0f);
+
+        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+        for (int i = 0; i < 6; i++) {
+            yVals1.add(new BarEntry(i, (i+1)*10));
+        }
+
+        BarDataSet set1;
+        set1 = new BarDataSet(yVals1, "DataSet 1");
+        set1.setColors(ColorTemplate.MATERIAL_COLORS);
+        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+        dataSets.add(set1);
+        BarData data = new BarData(dataSets);
+        data.setValueTextSize(10f);
+        data.setBarWidth(.9f);
+        hbChart.setData(data);
+        hbChart.getLegend().setEnabled(false);
     }
 }

@@ -1,13 +1,5 @@
 [
     {
-        "merged": "U:\\home\\uli2\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout-v16\\notification_template_custom_big.xml",
-        "source": "U:\\home\\uli2\\.android\\build-cache\\dc373de451af52bfa39c6ca49877954fae91b25a\\output\\res\\layout-v16\\notification_template_custom_big.xml"
-    },
-    {
-        "merged": "U:\\home\\uli2\\AndroidStudioProjects\\CobaChart\\app\\libs\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout-v16\\notification_template_custom_big.xml",
-        "source": "U:\\home\\uli2\\.android\\build-cache\\dc373de451af52bfa39c6ca49877954fae91b25a\\output\\res\\layout-v16\\notification_template_custom_big.xml"
-    },
-    {
         "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout-v16\\notification_template_custom_big.xml",
         "source": "C:\\Users\\user\\.android\\build-cache\\acb6e3c4493d71f9ccd03264fe551a1a2a42fa05\\output\\res\\layout-v16\\notification_template_custom_big.xml"
     }

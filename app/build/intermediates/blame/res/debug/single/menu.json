@@ -1,10 +1,10 @@
 [
     {
-        "merged": "U:\\home\\uli2\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\menu\\navigation_menu.xml",
-        "source": "U:\\home\\uli2\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\menu\\navigation_menu.xml"
-    },
-    {
         "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\menu\\navigation_menu.xml",
         "source": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\menu\\navigation_menu.xml"
+    },
+    {
+        "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_album.xml",
+        "source": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\menu\\menu_album.xml"
     }
 ]

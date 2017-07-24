@@ -3,39 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\user\.android\build-cache\d594ed8d39b24ff20d61cbc2db3e57f5e31cbdd1\output\jars\classes.jar"
+        jar="C:\Users\user\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
-        <dex dex="U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\build\intermediates\pre-dexed\debug\classes_03bc5c94b5eb60699ecbaee682aabaca8ca81e1e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\user\.android\build-cache\e9366f08f632603b7a6e16b02498ea2b1361f232\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
-        <dex dex="U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\build\intermediates\pre-dexed\debug\classes_2d0166873fed84f7d97a68bb586599796c515249.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\user\.android\build-cache\d2c3607edb2f2ce2707d1a5a9df0a5bdce8690d4\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
-        <dex dex="U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\build\intermediates\pre-dexed\debug\classes_394966f26ffd6b18add0a272e2fa78caf880c28f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\user\.android\build-cache\bcfcfa2ef0fe0f18b3a79f6339397e2aa9f40ab1\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="e176fd06c2ad5b50a2f5cb4de6000a83a7cb48f5">
-        <dex dex="U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\build\intermediates\pre-dexed\debug\classes_126bf12b4d23472d05ccbcf1c061229fe03f815b.jar" />
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\build\intermediates\pre-dexed\debug\glide-3.7.0_56487dcc601537ec955eea625d9774ba24b2cff3.jar" />
     </item>
 
 </items>
