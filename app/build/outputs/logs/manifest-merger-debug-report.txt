@@ -75,8 +75,6 @@ ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\Andro
 		ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:25:13-48
 activity#com.example.uli2.userprofilemgmt.LOLActivity
 ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:28:9-30:20
-	android:theme
-		ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:29:19-57
 	android:name
 		ADDED from U:\Campus\KP\AndroidStudioProjects\UserProfileMgmt\app\src\main\AndroidManifest.xml:28:19-46
 uses-sdk

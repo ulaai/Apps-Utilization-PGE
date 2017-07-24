@@ -4,12 +4,12 @@
         "source": "C:\\Users\\user\\.android\\build-cache\\d594ed8d39b24ff20d61cbc2db3e57f5e31cbdd1\\output\\res\\layout\\design_layout_snackbar_include.xml"
     },
     {
-        "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "C:\\Users\\user\\.android\\build-cache\\acb6e3c4493d71f9ccd03264fe551a1a2a42fa05\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
-    },
-    {
         "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
         "source": "C:\\Users\\user\\.android\\build-cache\\d594ed8d39b24ff20d61cbc2db3e57f5e31cbdd1\\output\\res\\layout\\design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "C:\\Users\\user\\.android\\build-cache\\acb6e3c4493d71f9ccd03264fe551a1a2a42fa05\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
     {
         "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
@@ -154,6 +154,10 @@
     {
         "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
         "source": "C:\\Users\\user\\.android\\build-cache\\acb6e3c4493d71f9ccd03264fe551a1a2a42fa05\\output\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_monthly.xml",
+        "source": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\layout\\fragment_monthly.xml"
     },
     {
         "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\app_item_layout.xml",
