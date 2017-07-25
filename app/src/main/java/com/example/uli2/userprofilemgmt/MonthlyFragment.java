@@ -1,16 +1,20 @@
 package com.example.uli2.userprofilemgmt;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +27,8 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -42,39 +48,13 @@ public class MonthlyFragment extends Fragment {
     private RecyclerView recyclerView;
     private AlbumsAdapter adapter;
     private List<Album> albumList;
+    private ImageView thumbnail;
+    CoordinatorLayout.Behavior behavior;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_monthly, container, false);
-
-        final CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) rootView.findViewById(R.id.collapsing_toolbar);
-        AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id.appbar);
-
-        collapsingToolbar.setTitle(" ");
-        appBarLayout.setExpanded(true);
-
-        // hiding & showing the title when toolbar expanded & collapsed
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isShow = false;
-            int scrollRange = -1;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbar.setTitle(getString(R.string.app_name));
-                    isShow = true;
-                } else if (isShow) {
-                    collapsingToolbar.setTitle(" ");
-                    isShow = false;
-                }
-            }
-        });
-
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         albumList = new ArrayList<>();
@@ -82,10 +62,10 @@ public class MonthlyFragment extends Fragment {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(rootView.getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10),
-                true));
+        recyclerView.addItemDecoration(new MonthlyFragment.GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+
 
         prepareAlbums();
 
@@ -103,12 +83,6 @@ public class MonthlyFragment extends Fragment {
 
         MakePieChart(pChart, mResult, mValues);
 
-
-        try {
-//            Glide.with(this).load(R.id.pie1chart).into((ImageView) findViewById(R.id.backdrop));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         return rootView;
     }
@@ -340,4 +314,5 @@ public class MonthlyFragment extends Fragment {
                 0, 2, 0);
         return s;
     }
+
 }

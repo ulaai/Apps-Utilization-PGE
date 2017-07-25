@@ -10,6 +10,8 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:elevation="3dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:focusable="true"
         card_view:cardCornerRadius="0dp">
 
         <RelativeLayout
@@ -28,6 +30,7 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:layout_below="@id/thumbnail"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"

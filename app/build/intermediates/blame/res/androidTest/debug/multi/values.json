@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "outputFile": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,31 @@
                     "endOffset": 96
                 },
                 "from": {
-                    "file": "C:\\Users\\user\\.android\\build-cache\\c477f85effd077dbb65170788e812b93040ae079\\output\\res\\values\\values.xml",
+                    "file": "/home/uli/AndroidStudioProjects/UserProfileMgmt/C:\\Users\\user\\.android\\build-cache\\c477f85effd077dbb65170788e812b93040ae079\\output\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 229,
+                        "endColumn": 45,
+                        "endOffset": 270
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 45,
+                    "endOffset": 96
+                },
+                "from": {
+                    "file": "/home/uli/.android/build-cache/72f1836376f7ec88f4096a9c5db7be05c6141493/output/res/values/values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

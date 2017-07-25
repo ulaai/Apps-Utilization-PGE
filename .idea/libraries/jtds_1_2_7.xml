@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jtds-1.2.7">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sourceforge.jtds/jtds/1.2.7/47f9b00937707c328eccbcdd38867a799ea91b44/jtds-1.2.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sourceforge.jtds/jtds/1.2.7/2c23dbee1504ce5163f5b70e9482ac16d877ed01/jtds-1.2.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

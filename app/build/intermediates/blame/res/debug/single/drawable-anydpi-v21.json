@@ -1,10 +1,18 @@
 [
     {
-        "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility.xml",
-        "source": "C:\\Users\\user\\.android\\build-cache\\d594ed8d39b24ff20d61cbc2db3e57f5e31cbdd1\\output\\res\\drawable-anydpi-v21\\design_ic_visibility.xml"
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility_off.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/C:\\Users\\user\\.android\\build-cache\\d594ed8d39b24ff20d61cbc2db3e57f5e31cbdd1\\output\\res\\drawable-anydpi-v21\\design_ic_visibility_off.xml"
     },
     {
-        "merged": "U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility_off.xml",
-        "source": "C:\\Users\\user\\.android\\build-cache\\d594ed8d39b24ff20d61cbc2db3e57f5e31cbdd1\\output\\res\\drawable-anydpi-v21\\design_ic_visibility_off.xml"
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/C:\\Users\\user\\.android\\build-cache\\d594ed8d39b24ff20d61cbc2db3e57f5e31cbdd1\\output\\res\\drawable-anydpi-v21\\design_ic_visibility.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/design_ic_visibility.xml",
+        "source": "/home/uli/.android/build-cache/d60324f3c0a173c0163ee00bf97de343b018d605/output/res/drawable-anydpi-v21/design_ic_visibility.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/design_ic_visibility_off.xml",
+        "source": "/home/uli/.android/build-cache/d60324f3c0a173c0163ee00bf97de343b018d605/output/res/drawable-anydpi-v21/design_ic_visibility_off.xml"
     }
 ]

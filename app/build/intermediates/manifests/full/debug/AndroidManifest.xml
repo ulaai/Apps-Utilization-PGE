@@ -35,8 +35,6 @@
             android:name="com.example.uli2.userprofilemgmt.ApplicationActivity"
             android:theme="@style/AppThemeToolBar" >
         </activity>
-        <activity android:name="com.example.uli2.userprofilemgmt.LOLActivity" >
-        </activity>
     </application>
 
 </manifest>
