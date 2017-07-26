@@ -1,5 +1,7 @@
 package com.example.uli2.userprofilemgmt;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -87,8 +89,14 @@ public class DailyPieFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ApplicationActivity.class);
+                Bundle bundle = null;
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    bundle = ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext())
+                            .toBundle();
+                }
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
+                startActivity(intent, bundle);
             }
         });
 

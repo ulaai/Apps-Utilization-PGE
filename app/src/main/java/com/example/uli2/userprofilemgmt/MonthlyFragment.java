@@ -120,47 +120,23 @@ public class MonthlyFragment extends Fragment {
      * Adding few albums for testing
      */
     private void prepareAlbums() {
-        int[] covers = new int[]{
-                R.drawable.album1,
-                R.drawable.album2,
-                R.drawable.album3,
-                R.drawable.album4,
-                R.drawable.album5,
-                R.drawable.album6,
-                R.drawable.album7,
-                R.drawable.album8,
-                R.drawable.album9,
-                R.drawable.album10,
-                R.drawable.album11};
+        int[] icons = new int[]{
+                R.drawable.util_icon,
+                R.drawable.topapp_icon,
+                R.drawable.topuser_icon,
+                R.drawable.visitor_icon
+        };
 
-        Album a = new Album("Maroon5", 13, covers[0]);
+        Album a = new Album("Utilization",  icons[0], ".ApplicationActivity");
         albumList.add(a);
 
-        a = new Album("Sugar Ray", 8, covers[1]);
+        a = new Album("Top Application", icons[1], ".TopApplicationActivity");
         albumList.add(a);
 
-        a = new Album("Bon Jovi", 11, covers[2]);
+        a = new Album("Top User", icons[2], "c");
         albumList.add(a);
 
-        a = new Album("The Corrs", 12, covers[3]);
-        albumList.add(a);
-
-        a = new Album("The Cranberries", 14, covers[4]);
-        albumList.add(a);
-
-        a = new Album("Westlife", 1, covers[5]);
-        albumList.add(a);
-
-        a = new Album("Black Eyed Peas", 11, covers[6]);
-        albumList.add(a);
-
-        a = new Album("VivaLaVida", 14, covers[7]);
-        albumList.add(a);
-
-        a = new Album("The Cardigans", 11, covers[8]);
-        albumList.add(a);
-
-        a = new Album("Pussycat Dolls", 17, covers[9]);
+        a = new Album("Visitor", icons[3], "d");
         albumList.add(a);
 
         adapter.notifyDataSetChanged();

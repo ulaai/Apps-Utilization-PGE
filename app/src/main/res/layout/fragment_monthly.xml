@@ -18,32 +18,33 @@
             android:fitsSystemWindows="true"
             android:background="@color/white"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleTextAppearance="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pie1chart"
-            android:name="layout.Pie2Fragment"
-            android:layout_width="match_parent"
-            android:layout_height="378dp"/>
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pie1chart"
+                android:name="layout.Pie2Fragment"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
+
+
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
+
 
     <FrameLayout
         android:id="@+id/dashboard_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:scrollbars="vertical" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:scrollbars="vertical" />
 
 
     </FrameLayout>

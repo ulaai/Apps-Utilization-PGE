@@ -6,16 +6,16 @@ package com.example.uli2.userprofilemgmt;
 
 public class Album {
     private String name;
-    private int numOfSongs;
     private int thumbnail;
+    private String chart;
 
     public Album() {
     }
 
-    public Album(String name, int numOfSongs, int thumbnail) {
+    public Album(String name, int thumbnail, String chart) {
         this.name = name;
-        this.numOfSongs = numOfSongs;
         this.thumbnail = thumbnail;
+        this.chart = chart;
     }
 
     public String getName() {
@@ -26,14 +26,6 @@ public class Album {
         this.name = name;
     }
 
-    public int getNumOfSongs() {
-        return numOfSongs;
-    }
-
-    public void setNumOfSongs(int numOfSongs) {
-        this.numOfSongs = numOfSongs;
-    }
-
     public int getThumbnail() {
         return thumbnail;
     }
@@ -42,4 +34,11 @@ public class Album {
         this.thumbnail = thumbnail;
     }
 
+    public String getChart() {
+        return chart;
+    }
+
+    public void setChart(String chart) {
+        this.chart = chart;
+    }
 }
