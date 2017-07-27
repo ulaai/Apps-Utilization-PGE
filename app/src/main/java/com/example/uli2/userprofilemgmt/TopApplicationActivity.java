@@ -2,6 +2,8 @@ package com.example.uli2.userprofilemgmt;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -23,6 +25,11 @@ public class TopApplicationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_application);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         HorizontalBarChart hbChart = (HorizontalBarChart) findViewById(R.id.hb1chart);
         float mult = 100;
         final String[] mResult = new String[] { "High", "Low" };
@@ -37,6 +44,16 @@ public class TopApplicationActivity extends AppCompatActivity {
 
         MakeHorizontalBarChart(hbChart, mResult, mValues);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void MakeHorizontalBarChart(HorizontalBarChart hbChart, String[] mResult, int[]

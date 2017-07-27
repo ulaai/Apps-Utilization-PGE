@@ -104,7 +104,7 @@ public class DailyPieFragment extends Fragment {
         toalbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ApplicationActivity.class);
+                Intent intent = new Intent(getContext(), ActivityA.class);
                 startActivity(intent);
             }
         });

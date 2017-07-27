@@ -1,5 +1,6 @@
 package com.example.uli2.userprofilemgmt;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,10 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
         //get element from your dataset at this position and replace the contents of the view
         // with the element
         final String name = values.get(position);
+
+        if(position == 0) {
+            holder.layout.setBackgroundColor(Color.BLUE);
+        }
         holder.txtHeader.setText(name);
         holder.txtHeader.setOnClickListener(new View.OnClickListener() {
             @Override

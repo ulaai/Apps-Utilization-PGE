@@ -25,8 +25,17 @@
             android:name=".ApplicationActivity"
             android:theme="@style/AppThemeToolBar">
         </activity>
-        <activity android:name=".TopApplicationActivity"
-                  android:theme="@style/AppThemeToolBar">
+        <activity
+            android:name=".TopApplicationActivity"
+            android:theme="@style/AppThemeToolBar">
+        </activity>
+        <activity
+            android:name=".TopUserActivity"
+            android:theme="@style/AppThemeToolBar">
+        </activity>
+        <activity android:name=".ActivityA">
+        </activity>
+        <activity android:name=".ActivityB">
         </activity>
     </application>
 

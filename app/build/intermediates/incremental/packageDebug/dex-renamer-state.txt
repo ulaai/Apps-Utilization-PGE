@@ -1,7 +1,4 @@
-#Wed Jul 26 14:21:24 WIB 2017
-base.0=/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7c930a27f44d8106b45851b5426fefdea2aaac13
-renamed.1=classes2.dex
+#Thu Jul 27 07:52:34 WIB 2017
+base.0=/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
 renamed.0=classes.dex
-file.1=/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_3e1f465066b9e299c1a8bb139422a3c97fc785b7/classes.dex
-base.1=/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_3e1f465066b9e299c1a8bb139422a3c97fc785b7
-file.0=/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7c930a27f44d8106b45851b5426fefdea2aaac13/classes.dex
+file.0=/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

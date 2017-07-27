@@ -39,6 +39,14 @@
             android:name="com.example.uli2.userprofilemgmt.TopApplicationActivity"
             android:theme="@style/AppThemeToolBar" >
         </activity>
+        <activity
+            android:name="com.example.uli2.userprofilemgmt.TopUserActivity"
+            android:theme="@style/AppThemeToolBar" >
+        </activity>
+        <activity android:name="com.example.uli2.userprofilemgmt.ActivityA" >
+        </activity>
+        <activity android:name="com.example.uli2.userprofilemgmt.ActivityB" >
+        </activity>
     </application>
 
 </manifest>

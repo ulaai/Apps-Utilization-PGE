@@ -133,7 +133,7 @@ public class MonthlyFragment extends Fragment {
         a = new Album("Top Application", icons[1], ".TopApplicationActivity");
         albumList.add(a);
 
-        a = new Album("Top User", icons[2], "c");
+        a = new Album("Top User", icons[2], ".TopUserActivity");
         albumList.add(a);
 
         a = new Album("Visitor", icons[3], "d");

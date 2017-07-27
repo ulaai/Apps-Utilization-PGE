@@ -7,6 +7,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.uli2.userprofilemgmt.TopApplicationActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
         <TextView
             android:id="@+id/text"
@@ -30,6 +38,5 @@
             android:layout_width="match_parent"
             android:layout_height="378dp"
             android:layout_below="@+id/line1chart"/>
-
 
 </LinearLayout>
