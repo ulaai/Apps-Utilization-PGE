@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -21,12 +22,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApplicationActivity extends ActionBarActivity {
+public class ApplicationActivity extends ActionBarActivity implements AsyncResponse {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     ProgressBar progressBar;
-    List<String> input = new ArrayList<>();
+    List<List<String>> input = new ArrayList<List<String>>();
 
     Connection con = null;
     Statement stmt = null;
@@ -55,57 +56,20 @@ public class ApplicationActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        ConnectionClass connectionClass = new ConnectionClass();
-        connectionClass.execute("select ApplicationName from Applications");
+//        ConnectionClass connectionClass = new ConnectionClass();
+//        connectionClass.execute("select ApplicationName from Applications");
+        Singleton.getInstance().newSingleton();
+        Singleton.getInstance().setDelegate(this);
+        Singleton.getInstance().getApplicationActivity();
+
 
     }
 
-    private class ConnectionClass extends AsyncTask<String, String, String> {
-        String z="";
-        int y = 0;
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                String q = strings[0];
-                Class.forName("net.sourceforge.jtds.jdbc.Driver");
-                con = DriverManager.getConnection(db, uname, pass);
-                if(con == null) {
-                    z = "Cannot connect. Check your internet access!";
-                }
-                else {
-                    String query ="select ApplicationName from Applications";
-                    Statement stmt = con.createStatement();
-                    ResultSet rs = stmt.executeQuery(query);
-                    while(rs.next())
-                    {
-                        String applicationName = rs.getString("ApplicationName");
-                        input.add(""+applicationName);
-                        z = input.get(input.size()-1);
-                    }
-                    rs.close();
-                    con.close();
-                }
-            }
-            catch (Exception e) {
-                e.getMessage();
-            }
-            return z;
-        }
 
-        @Override
-        protected void onPreExecute() {
-            progressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            progressBar.setVisibility(View.GONE);
-            int size = input.size();
-            mAdapter = new AppAdapter(input);
-            recyclerView.setAdapter(mAdapter);
-
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_app, menu);
+        return true;
     }
 
     @Override
@@ -114,7 +78,19 @@ public class ApplicationActivity extends ActionBarActivity {
         {
             finish();
         }
+        if (item.getItemId() == R.id.sort) {
+
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void processFinish(String output) {
+        Singleton.getInstance().MonthlyAppUtilization = Singleton.getInstance().results;
+        input = Singleton.getInstance().MonthlyAppUtilization;
+        mAdapter = new AppAdapter(input);
+        recyclerView.setAdapter(mAdapter);
+
     }
 }

@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,11 +17,15 @@ import java.util.List;
  */
 
 public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
-    private List<String> values;
+    private List<String> label;
+    private List<String> util_score;
+    private List<List<String>> myDataset;
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView txtHeader;
         public TextView txtFooter;
+        public TextView txtUtil;
         public View layout;
 
         public ViewHolder(View v) {
@@ -26,20 +33,24 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.apptitle);
             txtFooter = (TextView) v.findViewById(R.id.appdesc);
+            txtUtil = (TextView) v.findViewById(R.id.app_util);
         }
     }
     public void add(int position, String item) {
-        values.add(position, item);
+        label.add(position, item);
         notifyItemInserted(position);
     }
 
     public void remove(int position) {
-        values.remove(position);
+        label.remove(position);
         notifyItemRemoved(position);
     }
 
-    public AppAdapter(List<String> myDataset) {
-        values = myDataset;
+    public AppAdapter(List<List<String>> myDataset) {
+        this.myDataset = myDataset;
+        label = myDataset.get(0);
+        util_score = myDataset.get(3);
+
     }
 
     @Override
@@ -55,7 +66,9 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         //get element from your dataset at this position and replace the contents of the view
         // with the element
-        final String name = values.get(position);
+
+        final String name = label.get(position);
+        final String utilscore = util_score.get(position);
 
         if(position == 0) {
             holder.layout.setBackgroundResource(R.color.top1app);
@@ -63,11 +76,11 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
             holder.layout.setBackgroundResource(R.color.top2app);
         } else if (position == 2) {
             holder.layout.setBackgroundResource(R.color.top3app);
-        }else if (position == values.size()-3) {
+        }else if (position == label.size()-3) {
             holder.layout.setBackgroundResource(R.color.bottom3app);
-        }else if (position == values.size()-2) {
+        }else if (position == label.size()-2) {
             holder.layout.setBackgroundResource(R.color.bottom2app);
-        } else if (position == values.size()-1) {
+        } else if (position == label.size()-1) {
             holder.layout.setBackgroundResource(R.color.bottom1app);
         } else {
             holder.layout.setBackgroundColor(Color.WHITE);
@@ -79,11 +92,12 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
 //                remove(position);
 //            }
 //        });
+        holder.txtUtil.setText(utilscore);
         holder.txtFooter.setText("Footer: " + name);
     }
 
     @Override
     public int getItemCount() {
-        return values.size();
+        return label.size();
     }
 }

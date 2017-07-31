@@ -1,13 +1,10 @@
 package com.example.uli2.userprofilemgmt;
 
 import android.os.AsyncTask;
-import android.util.Log;
-import android.view.View;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +15,7 @@ import java.util.List;
 
 public class Singleton {
     private static  Singleton mInstance = null;
+
     private  String mString;
     ConnectionClass mConnection;
 
@@ -27,10 +25,12 @@ public class Singleton {
     String uname = "sa";
     String pass = "sqlserver2012PGE";
 
-    List<List<String>> result = new ArrayList<List<String>>();
-    ArrayList<String> input = new ArrayList<>();
+    public List<List<String>> results = new ArrayList<List<String>>();
+    public ArrayList<String> input = new ArrayList<>();
 
-    List<List<String>> MonthlyTotalUtilization = new ArrayList<>();
+    public List<List<String>> MonthlyTotalUtilization = new ArrayList<>();
+    public List<List<String>> MonthlyAppUtilization = new ArrayList<>();
+
 
     private Singleton() {
         mString = "Hello";
@@ -49,7 +49,14 @@ public class Singleton {
         return mInstance;
     }
 
+    public void newSingleton() {
+        mInstance = new Singleton();
+        mConnection = new ConnectionClass();
+
+    }
+
     private class ConnectionClass extends AsyncTask<String, String, String> {
+        public AsyncResponse delegate = null;
         String z="";
         int y = 0;
         @Override
@@ -66,6 +73,7 @@ public class Singleton {
                     z = "Cannot connect. Check your internet access!";
                 }
                 else {
+                    results = new ArrayList<List<String>>();
                     for(int j = 0; j < attributeNames.size(); j++) {
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(q);
@@ -76,7 +84,7 @@ public class Singleton {
 
                             input.add(""+value);
                         }
-                        result.add(input);
+                        results.add(input);
                         if(j == attributeNames.size()-1) {
                             rs.close();
                             con.close();
@@ -99,12 +107,12 @@ public class Singleton {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
+            delegate.processFinish(result);
         }
     }
 
-    public void inputClear() {
-        input = new ArrayList<>();
+    public void setDelegate(AsyncResponse output) {
+        mConnection.delegate = output;
     }
     public String getString() {
         return this.mString;
@@ -117,6 +125,11 @@ public class Singleton {
     public void setMonthlyTotalUtilization() {
         mConnection.execute("exec dbo.stp_GetMonthlyTotalUtilization '2017-06-01'", "Label",
                 "Value");
-        MonthlyTotalUtilization = result;
+    }
+
+    public void getApplicationActivity() {
+        mConnection.execute("exec dbo.stp_GetListMonthlyApplicationUtilization '2017-06-01'",
+                "Label", "Value", "Value2", "Value3");
+
     }
 }

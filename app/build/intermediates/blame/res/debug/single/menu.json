@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/menu/menu_app.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/menu/menu_app.xml"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\menu\\navigation_menu.xml",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\menu\\navigation_menu.xml"
     },

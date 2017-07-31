@@ -3308,10 +3308,10 @@ containing a value of this type.
         public static final int alertTitle=0x7f0f0060;
         public static final int all=0x7f0f0015;
         public static final int always=0x7f0f0042;
+        public static final int app_util=0x7f0f008b;
         public static final int appbar=0x7f0f009e;
         public static final int appbutton=0x7f0f00a4;
         public static final int appdesc=0x7f0f008c;
-        public static final int appicon=0x7f0f008b;
         public static final int apptitle=0x7f0f008d;
         public static final int auto=0x7f0f002e;
         public static final int basic=0x7f0f0016;
@@ -3328,7 +3328,7 @@ containing a value of this type.
         public static final int chronometer=0x7f0f00b2;
         public static final int clip_horizontal=0x7f0f003b;
         public static final int clip_vertical=0x7f0f003c;
-        public static final int close=0x7f0f00c5;
+        public static final int close=0x7f0f00c6;
         public static final int collapseActionView=0x7f0f0043;
         public static final int collapsing_toolbar=0x7f0f009f;
         public static final int contentPanel=0x7f0f0056;
@@ -3357,9 +3357,9 @@ containing a value of this type.
         public static final int fill_horizontal=0x7f0f003e;
         public static final int fill_vertical=0x7f0f0034;
         public static final int fixed=0x7f0f0047;
-        public static final int fr1=0x7f0f00c2;
-        public static final int fr2=0x7f0f00c3;
-        public static final int fr3=0x7f0f00c4;
+        public static final int fr1=0x7f0f00c3;
+        public static final int fr2=0x7f0f00c4;
+        public static final int fr3=0x7f0f00c5;
         public static final int hb1chart=0x7f0f0087;
         public static final int home=0x7f0f0004;
         public static final int homeAsUp=0x7f0f001d;
@@ -3383,8 +3383,8 @@ containing a value of this type.
         public static final int middle=0x7f0f0041;
         public static final int mini=0x7f0f003f;
         public static final int multiply=0x7f0f0028;
-        public static final int nav_profile=0x7f0f00c0;
-        public static final int nav_util=0x7f0f00c1;
+        public static final int nav_profile=0x7f0f00c1;
+        public static final int nav_util=0x7f0f00c2;
         public static final int nav_view=0x7f0f0083;
         public static final int navigation_header_container=0x7f0f0095;
         public static final int never=0x7f0f0045;
@@ -3434,6 +3434,7 @@ containing a value of this type.
         public static final int snackbar_action=0x7f0f0094;
         public static final int snackbar_text=0x7f0f0093;
         public static final int snap=0x7f0f0026;
+        public static final int sort=0x7f0f00c0;
         public static final int space=0x7f0f0086;
         public static final int space1=0x7f0f00a2;
         public static final int spacer=0x7f0f0054;
@@ -3571,7 +3572,8 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int menu_album=0x7f100000;
-        public static final int navigation_menu=0x7f100001;
+        public static final int menu_app=0x7f100001;
+        public static final int navigation_menu=0x7f100002;
     }
     public static final class mipmap {
         public static final int ic_close_black_24dp=0x7f030000;

@@ -40,12 +40,12 @@
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/C:\\Users\\user\\.android\\build-cache\\acb6e3c4493d71f9ccd03264fe551a1a2a42fa05\\output\\res\\layout\\select_dialog_item_material.xml"
     },
     {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_main.xml",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\layout\\content_main.xml"
-    },
-    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/C:\\Users\\user\\.android\\build-cache\\acb6e3c4493d71f9ccd03264fe551a1a2a42fa05\\output\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_main.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\layout\\content_main.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/notification_action_tombstone.xml",
@@ -64,16 +64,16 @@
         "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/abc_screen_toolbar.xml"
     },
     {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/C:\\Users\\user\\.android\\build-cache\\acb6e3c4493d71f9ccd03264fe551a1a2a42fa05\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
+        "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/abc_search_view.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu.xml",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/C:\\Users\\user\\.android\\build-cache\\d594ed8d39b24ff20d61cbc2db3e57f5e31cbdd1\\output\\res\\layout\\design_navigation_menu.xml"
     },
     {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
-        "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/abc_search_view.xml"
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/C:\\Users\\user\\.android\\build-cache\\acb6e3c4493d71f9ccd03264fe551a1a2a42fa05\\output\\res\\layout\\abc_list_menu_item_layout.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_splash_screen.xml",
@@ -88,16 +88,16 @@
         "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/notification_template_lines_media.xml"
     },
     {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar.xml",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/C:\\Users\\user\\.android\\build-cache\\d594ed8d39b24ff20d61cbc2db3e57f5e31cbdd1\\output\\res\\layout\\design_layout_snackbar.xml"
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/abc_action_bar_view_list_nav_layout.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/design_navigation_item.xml",
         "source": "/home/uli/.android/build-cache/d60324f3c0a173c0163ee00bf97de343b018d605/output/res/layout/design_navigation_item.xml"
     },
     {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
-        "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/abc_action_bar_view_list_nav_layout.xml"
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/C:\\Users\\user\\.android\\build-cache\\d594ed8d39b24ff20d61cbc2db3e57f5e31cbdd1\\output\\res\\layout\\design_layout_snackbar.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/activity_activity.xml",
