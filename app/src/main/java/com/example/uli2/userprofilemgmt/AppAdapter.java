@@ -58,15 +58,27 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
         final String name = values.get(position);
 
         if(position == 0) {
-            holder.layout.setBackgroundColor(Color.BLUE);
+            holder.layout.setBackgroundResource(R.color.top1app);
+        } else if (position == 1) {
+            holder.layout.setBackgroundResource(R.color.top2app);
+        } else if (position == 2) {
+            holder.layout.setBackgroundResource(R.color.top3app);
+        }else if (position == values.size()-3) {
+            holder.layout.setBackgroundResource(R.color.bottom3app);
+        }else if (position == values.size()-2) {
+            holder.layout.setBackgroundResource(R.color.bottom2app);
+        } else if (position == values.size()-1) {
+            holder.layout.setBackgroundResource(R.color.bottom1app);
+        } else {
+            holder.layout.setBackgroundColor(Color.WHITE);
         }
         holder.txtHeader.setText(name);
-        holder.txtHeader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                remove(position);
-            }
-        });
+//        holder.txtHeader.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                remove(position);
+//            }
+//        });
         holder.txtFooter.setText("Footer: " + name);
     }
 

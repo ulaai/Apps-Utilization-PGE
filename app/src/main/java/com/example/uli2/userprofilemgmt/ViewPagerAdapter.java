@@ -17,7 +17,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new DailyPieFragment();
+                return new AnnuallyFragment();
             case 1:
                 return new MonthlyFragment();
             case 2:

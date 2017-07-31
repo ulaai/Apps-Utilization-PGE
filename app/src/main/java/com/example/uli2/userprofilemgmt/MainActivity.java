@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar mToolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private String[] pageTitle = {"Fragment 1", "Fragment 2", "Fragment 3"};
+    private String[] pageTitle = {"Annually", "Monthly", "Daily"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

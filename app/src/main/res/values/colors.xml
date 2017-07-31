@@ -8,4 +8,12 @@
     <color name="colorHigh">#1a237e</color>
 
     <color name="white">#fff</color>
+
+    <color name="top1app">#00b0ff</color>
+    <color name="top2app">#40c4ff</color>
+    <color name="top3app">#80d8ff</color>
+    <color name="bottom1app">#ff6d00</color>
+    <color name="bottom2app">#ffab00</color>
+    <color name="bottom3app">#ffd600</color>
+
 </resources>
