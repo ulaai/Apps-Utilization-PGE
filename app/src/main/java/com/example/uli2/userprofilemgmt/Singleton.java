@@ -30,6 +30,9 @@ public class Singleton {
 
     public List<List<String>> MonthlyTotalUtilization = new ArrayList<>();
     public List<List<String>> MonthlyAppUtilization = new ArrayList<>();
+    public List<List<String>> MonthlyTopApplication = new ArrayList<>();
+    public List<List<String>> MonthlyTopUser = new ArrayList<>();
+
 
 
     private Singleton() {
@@ -132,4 +135,15 @@ public class Singleton {
                 "Label", "Value", "Value2", "Value3");
 
     }
+
+    public void getTopMonthlyApplication() {
+        mConnection.execute("exec dbo.stp_GetListTopMonthlyApplicationAccess '2017-06-01'", "Label",
+                "Value");
+    }
+
+    public void getTopMonthlyUser() {
+        mConnection.execute("exec dbo.stp_GetListTopMonthlyUserAccess '2017-06-01'", "Label",
+                "Value");
+    }
+
 }

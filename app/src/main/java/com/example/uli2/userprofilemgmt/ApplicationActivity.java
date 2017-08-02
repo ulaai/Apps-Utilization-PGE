@@ -22,7 +22,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApplicationActivity extends ActionBarActivity implements AsyncResponse {
+public class ApplicationActivity extends ActionBarActivity implements AsyncResponse, ListExpandListener {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -62,7 +62,6 @@ public class ApplicationActivity extends ActionBarActivity implements AsyncRespo
         Singleton.getInstance().setDelegate(this);
         Singleton.getInstance().getApplicationActivity();
 
-
     }
 
 
@@ -93,4 +92,12 @@ public class ApplicationActivity extends ActionBarActivity implements AsyncRespo
         recyclerView.setAdapter(mAdapter);
 
     }
+    @Override
+    public void onExpand() {
+    }
+
+    @Override
+    public void onCollapse() {
+    }
+
 }

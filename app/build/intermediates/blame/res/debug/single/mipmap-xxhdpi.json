@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_keyboard_arrow_up_black_24dp.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-xxhdpi/ic_keyboard_arrow_up_black_24dp.png"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_show_chart_black_24dp.png",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-xxhdpi/ic_show_chart_black_24dp.png"
     },
@@ -8,35 +12,19 @@
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-xxhdpi/ic_person_black_24dp.png"
     },
     {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_person_black_24dp.png",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_person_black_24dp.png"
-    },
-    {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher_round.png",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
-    },
-    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher_round.png",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_close_black_24dp.png",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_close_black_24dp.png"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher.png",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_keyboard_arrow_down_black_24dp.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-xxhdpi/ic_keyboard_arrow_down_black_24dp.png"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_close_black_24dp.png",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-xxhdpi/ic_close_black_24dp.png"
-    },
-    {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_show_chart_black_24dp.png",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/U:\\Campus\\KP\\AndroidStudioProjects\\UserProfileMgmt\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_show_chart_black_24dp.png"
     }
 ]

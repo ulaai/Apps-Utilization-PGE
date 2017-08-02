@@ -13,12 +13,18 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class TopUserActivity extends AppCompatActivity {
+public class TopUserActivity extends AppCompatActivity implements AsyncResponse {
+    HorizontalBarChart hbChart;
+    List<List<String>> MonthlyTopUser;
+    String[] mResult;
+    int[] mValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,22 +36,51 @@ public class TopUserActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        HorizontalBarChart hbChart = (HorizontalBarChart) findViewById(R.id.hb1chart);
-        float mult = 100;
-        final String[] mResult = new String[] { "High", "Low" };
-        int[] mValues = new int[] {92, 8};
-        int sumValues=0;
-        int[] mPercent = new int[mValues.length];
+        hbChart = (HorizontalBarChart) findViewById(R.id.hb1chart);
+        if(MonthlyTopUser == null) {
+            Singleton.getInstance().newSingleton();
+            Singleton.getInstance().setDelegate(this);
+            Singleton.getInstance().getTopMonthlyUser();
+        }
 
-        //getpercentage
-        for (int mValue : mValues) {
-            sumValues += mValue;
+
+    }
+
+    @Override
+    public void processFinish(String output) {
+        Singleton.getInstance().MonthlyTopUser = Singleton.getInstance().results;
+
+        MonthlyTopUser = Singleton.getInstance().MonthlyTopUser;
+
+        if(mResult == null) {
+            mResult = new String[MonthlyTopUser.get(0).size()];
+            for(int i = 0; i < MonthlyTopUser.get(0).size(); i++) {
+                String a = MonthlyTopUser.get(0).get(i);
+                if(a.length() > 15) {
+                    String anew = a.substring(a.lastIndexOf(" ") + 1);
+                    int k = a.lastIndexOf(" ");
+                    char[] aInChars = a.toCharArray();
+                    aInChars[k] = '\n';
+                    a = String.valueOf(aInChars);
+                }
+                mResult[i] = a;
+            }
+        }
+
+
+
+        if(mValues == null) {
+            mValues = new int[MonthlyTopUser.get(1).size()];
+            for(int i = 0; i < MonthlyTopUser.get(1).size(); i++) {
+                int a = Integer.valueOf(MonthlyTopUser.get(1).get(i));
+                mValues[i] = a;
+            }
+
         }
 
         MakeHorizontalBarChart(hbChart, mResult, mValues);
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -78,8 +113,9 @@ public class TopUserActivity extends AppCompatActivity {
         xl.setPosition(XAxis.XAxisPosition.BOTTOM);
         xl.setDrawAxisLine(true);
         xl.setDrawGridLines(false);
-        CategoryBarChartXaxisFormatter xaxisFormatter = new CategoryBarChartXaxisFormatter(labels);
-        xl.setValueFormatter(xaxisFormatter);
+        xl.setValueFormatter(new IndexAxisValueFormatter(mResult));
+//        CategoryBarChartXaxisFormatter xaxisFormatter = new CategoryBarChartXaxisFormatter(labels);
+//        xl.setValueFormatter(xaxisFormatter);
         xl.setGranularity(1);
 
         YAxis yl = hbChart.getAxisLeft();
@@ -94,8 +130,8 @@ public class TopUserActivity extends AppCompatActivity {
         yr.setAxisMinimum(0f);
 
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-        for (int i = 0; i < 6; i++) {
-            yVals1.add(new BarEntry(i, (i+1)*10));
+        for (int i = 0; i < mResult.length; i++) {
+            yVals1.add(new BarEntry(i, mValues[i]));
         }
 
         BarDataSet set1;
