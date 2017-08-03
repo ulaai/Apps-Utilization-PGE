@@ -2134,7 +2134,7 @@
             <enum name="screen" value="15"/>
             
             <enum name="add" value="16"/>
-        </attr><attr name="android:textOn"/><attr name="android:textOff"/><attr format="dimension" name="thumbTextPadding"/><attr format="reference" name="switchTextAppearance"/><attr format="dimension" name="switchMinWidth"/><attr format="dimension" name="switchPadding"/><attr format="boolean" name="splitTrack"/><attr format="boolean" name="showText"/></declare-styleable><declare-styleable name="ExpandableLayout"><attr format="integer|reference" name="expDuration"/><attr format="boolean" name="expWithParentScroll"/><attr format="boolean" name="expExpandScrollTogether"/></declare-styleable><declare-styleable name="AppBarLayout_Layout"><attr name="layout_scrollFlags">
+        </attr><attr name="android:textOn"/><attr name="android:textOff"/><attr format="dimension" name="thumbTextPadding"/><attr format="reference" name="switchTextAppearance"/><attr format="dimension" name="switchMinWidth"/><attr format="dimension" name="switchPadding"/><attr format="boolean" name="splitTrack"/><attr format="boolean" name="showText"/></declare-styleable><declare-styleable name="AppBarLayout_Layout"><attr name="layout_scrollFlags">
             
             <flag name="scroll" value="0x1"/>
 

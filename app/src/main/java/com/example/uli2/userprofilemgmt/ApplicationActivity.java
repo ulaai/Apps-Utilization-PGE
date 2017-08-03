@@ -86,8 +86,8 @@ public class ApplicationActivity extends ActionBarActivity implements AsyncRespo
 
     @Override
     public void processFinish(String output) {
-        Singleton.getInstance().MonthlyAppUtilization = Singleton.getInstance().results;
-        input = Singleton.getInstance().MonthlyAppUtilization;
+        progressBar.setVisibility(View.GONE);
+        input = Singleton.getInstance().hashMap.get("MAU");
         mAdapter = new AppAdapter(input);
         recyclerView.setAdapter(mAdapter);
 

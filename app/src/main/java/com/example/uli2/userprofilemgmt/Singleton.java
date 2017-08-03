@@ -1,12 +1,14 @@
 package com.example.uli2.userprofilemgmt;
 
 import android.os.AsyncTask;
+import android.os.Build;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,10 +30,16 @@ public class Singleton {
     public List<List<String>> results = new ArrayList<List<String>>();
     public ArrayList<String> input = new ArrayList<>();
 
+    public ArrayList<ConnectionClass> ConnectionList = new ArrayList<>();
+    HashMap<String, List<List<String>>> hashMap = new HashMap<>();
+
+    public List<List<String>> AnnuallyTotalUtilization = new ArrayList<>();
+
     public List<List<String>> MonthlyTotalUtilization = new ArrayList<>();
     public List<List<String>> MonthlyAppUtilization = new ArrayList<>();
     public List<List<String>> MonthlyTopApplication = new ArrayList<>();
     public List<List<String>> MonthlyTopUser = new ArrayList<>();
+
 
 
 
@@ -54,8 +62,6 @@ public class Singleton {
 
     public void newSingleton() {
         mInstance = new Singleton();
-        mConnection = new ConnectionClass();
-
     }
 
     private class ConnectionClass extends AsyncTask<String, String, String> {
@@ -65,9 +71,10 @@ public class Singleton {
         @Override
         protected String doInBackground(String... query) {
             try{
-                String q = query[0];
+                String hashIndex = query[0]; //get index
+                String q = query[1]; // da query
                 List<String> attributeNames = new ArrayList<String>();
-                for(int i = 1; i < query.length; i++) {
+                for(int i = 2; i < query.length; i++) {   //iterate until index n
                     attributeNames.add(query[i]);
                 }
                 Class.forName("net.sourceforge.jtds.jdbc.Driver");
@@ -87,7 +94,9 @@ public class Singleton {
 
                             input.add(""+value);
                         }
-                        results.add(input);
+//                        results.add(input);
+                        hashMap.get(hashIndex).add(input);
+
                         if(j == attributeNames.size()-1) {
                             rs.close();
                             con.close();
@@ -126,24 +135,53 @@ public class Singleton {
     }
 
     public void setMonthlyTotalUtilization() {
-        mConnection.execute("exec dbo.stp_GetMonthlyTotalUtilization '2017-06-01'", "Label",
-                "Value");
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("MTU", MonthlyTotalUtilization);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                        .THREAD_POOL_EXECUTOR, "MTU", "exec " + "dbo" +
+                        ".stp_GetMonthlyTotalUtilization '2017-06-01'", "Label", "Value");
+
     }
 
     public void getApplicationActivity() {
-        mConnection.execute("exec dbo.stp_GetListMonthlyApplicationUtilization '2017-06-01'",
+        hashMap.put("MAU", MonthlyAppUtilization);
+        mConnection.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "MAU",
+                "exec dbo.stp_GetListMonthlyApplicationUtilization '2017-06-01'",
                 "Label", "Value", "Value2", "Value3");
 
     }
 
     public void getTopMonthlyApplication() {
-        mConnection.execute("exec dbo.stp_GetListTopMonthlyApplicationAccess '2017-06-01'", "Label",
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("MTA", MonthlyTopApplication);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                        .THREAD_POOL_EXECUTOR, "MTA",
+                "exec dbo .stp_GetListTopMonthlyApplicationAccess '2017-06-01'", "Label",
                 "Value");
     }
 
     public void getTopMonthlyUser() {
-        mConnection.execute("exec dbo.stp_GetListTopMonthlyUserAccess '2017-06-01'", "Label",
-                "Value");
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("MU", MonthlyTopUser);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                        .THREAD_POOL_EXECUTOR, "MU", "exec dbo.stp_GetListTopMonthlyUserAccess " +
+                        "'2017-06-01'", "Label", "Value");
+    }
+
+    public void setAnnuallyTotalUtilization() {
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("ATU", AnnuallyTotalUtilization);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                .THREAD_POOL_EXECUTOR, "ATU", "exec " + "dbo" +
+                ".stp_GetAnnuallyTotalUtilization", "Label", "Value");
     }
 
 }

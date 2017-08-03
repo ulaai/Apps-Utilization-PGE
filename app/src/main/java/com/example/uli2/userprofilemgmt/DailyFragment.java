@@ -53,8 +53,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DailyPieFragment extends Fragment {
-    public DailyPieFragment() {
+public class DailyFragment extends Fragment {
+    public DailyFragment() {
         // Required empty public constructor
     }
 

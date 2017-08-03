@@ -39,7 +39,6 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
         hbChart = (HorizontalBarChart) findViewById(R.id.hb1chart);
 
         if(MonthlyTopApp == null) {
-            Singleton.getInstance().newSingleton();
             Singleton.getInstance().setDelegate(this);
             Singleton.getInstance().getTopMonthlyApplication();
         }
@@ -48,8 +47,7 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
 
     @Override
     public void processFinish(String output) {
-        Singleton.getInstance().MonthlyTopApplication = Singleton.getInstance().results;
-        MonthlyTopApp = Singleton.getInstance().MonthlyTopApplication;
+        MonthlyTopApp = Singleton.getInstance().hashMap.get("MTA");
 
         if(mResult == null) {
             mResult = new String[MonthlyTopApp.get(0).size()];

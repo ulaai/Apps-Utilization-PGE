@@ -53,6 +53,7 @@ import java.util.Objects;
 
 
 public class MonthlyFragment extends Fragment {
+    private RecyclerView recyclerView;
     private AlbumsAdapter adapter;
     private List<Album> albumList;
     private ImageView thumbnail;
@@ -62,7 +63,7 @@ public class MonthlyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_monthly, container, false);
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         PieChart pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
 
         albumList = new ArrayList<>();
@@ -70,7 +71,7 @@ public class MonthlyFragment extends Fragment {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(rootView.getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new MonthlyFragment.GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
@@ -78,7 +79,7 @@ public class MonthlyFragment extends Fragment {
         prepareAlbums();
 
 //        Preparing data for Monthly Total Utilization
-        List<List<String>> MonthlyTotalUtilization = Singleton.getInstance().MonthlyTotalUtilization;
+        List<List<String>> MonthlyTotalUtilization = Singleton.getInstance().hashMap.get("MTU");
         String[] mResult = new String[MonthlyTotalUtilization.get(0).size()];
 
         for(int i = 0; i < MonthlyTotalUtilization.get(0).size(); i++) {
@@ -91,46 +92,11 @@ public class MonthlyFragment extends Fragment {
             int a = Integer.valueOf(MonthlyTotalUtilization.get(1).get(i));
             mValues[i] = a;
         }
-        int sumValues=0;
-
-        //getpercentage
-        for (int mValue : mValues) {
-            sumValues += mValue;
-        }
 
         MakePieChart(pChart, mResult, mValues);
 
 
         return rootView;
-    }
-
-    private void initCollapsingToolbar(Fragment f) {
-        final CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) f.getActivity().findViewById(R.id.collapsing_toolbar);
-        AppBarLayout appBarLayout = (AppBarLayout) f.getActivity().findViewById(R.id.appbar);
-
-        collapsingToolbar.setTitle(" ");
-        appBarLayout.setExpanded(true);
-
-        // hiding & showing the title when toolbar expanded & collapsed
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isShow = false;
-            int scrollRange = -1;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbar.setTitle(getString(R.string.app_name));
-                    isShow = true;
-                } else if (isShow) {
-                    collapsingToolbar.setTitle(" ");
-                    isShow = false;
-                }
-            }
-        });
     }
 
     /**

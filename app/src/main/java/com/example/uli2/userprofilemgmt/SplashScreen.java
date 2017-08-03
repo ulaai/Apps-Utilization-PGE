@@ -9,43 +9,31 @@ import java.util.List;
 
 public class SplashScreen extends AppCompatActivity implements AsyncResponse {
     private boolean isConnected = false;
+    private int executed = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         getSupportActionBar().hide();
-        Singleton.getInstance().newSingleton();
         Singleton.getInstance().setDelegate(SplashScreen.this);
         Singleton.getInstance().setMonthlyTotalUtilization();
+        Singleton.getInstance().setDelegate(SplashScreen.this);
+        Singleton.getInstance().setAnnuallyTotalUtilization();
 
-//        Thread myThread = new Thread() {
-//            @Override
-//            public void run() {
-//                try {
-//                    sleep(3000);
-//                    if(isConnected) {
-//                        finish();
-//                    }
-//                    else {
-//                        finish();
-//                    }
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        };
-//
-//
-//        myThread.start();
+
     }
 
     @Override
     public void processFinish(String output) {
         isConnected = true;
-        Singleton.getInstance().MonthlyTotalUtilization = Singleton.getInstance().results;
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-        finish();
+        executed = executed+1;
+//        Singleton.getInstance().MonthlyTotalUtilization = Singleton.getInstance().results;
+//        Singleton.getInstance().hashMap.put("MTU", Singleton.getInstance().MonthlyTotalUtilization);
+        if(executed == 2) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
 }

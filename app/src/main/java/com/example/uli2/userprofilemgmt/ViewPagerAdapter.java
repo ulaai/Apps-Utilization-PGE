@@ -21,7 +21,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return new MonthlyFragment();
             case 2:
-                return new DailyPieFragment();
+                return new DailyFragment();
         }
         return null;
 

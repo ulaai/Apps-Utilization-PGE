@@ -35,6 +35,7 @@ import com.github.mikephil.charting.utils.MPPointF;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class AnnuallyFragment extends Fragment {
@@ -63,15 +64,18 @@ public class AnnuallyFragment extends Fragment {
         prepareAlbums();
 
         PieChart pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
-        float mult = 100;
-        final String[] mResult = new String[] { "High", "Low" };
-        int[] mValues = new int[] {92, 8};
-        int sumValues=0;
-        int[] mPercent = new int[mValues.length];
+        List<List<String>> AnnuallyTotalUtilization = Singleton.getInstance().hashMap.get("ATU");
+        String[] mResult = new String[AnnuallyTotalUtilization.get(0).size()];
 
-        //getpercentage
-        for (int mValue : mValues) {
-            sumValues += mValue;
+        for(int i = 0; i < AnnuallyTotalUtilization.get(0).size(); i++) {
+            String a = AnnuallyTotalUtilization.get(0).get(i);
+            mResult[i] = a;
+        }
+
+        int[] mValues = new int[AnnuallyTotalUtilization.get(1).size()];
+        for(int i = 0; i < AnnuallyTotalUtilization.get(1).size(); i++) {
+            int a = Integer.valueOf(AnnuallyTotalUtilization.get(1).get(i));
+            mValues[i] = a;
         }
 
         MakePieChart(pChart, mResult, mValues);
@@ -152,6 +156,8 @@ public class AnnuallyFragment extends Fragment {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
     private void MakePieChart(PieChart pChart, String[] mResult, int[] mValues) {
+        int average = 0;
+
         pChart.setUsePercentValues(true);
         pChart.getDescription().setEnabled(false);
         pChart.setExtraOffsets(5, 10, 5, 5);
@@ -166,9 +172,6 @@ public class AnnuallyFragment extends Fragment {
 
         pChart.setHoleRadius(58f);
         pChart.setTransparentCircleRadius(61f);
-
-        pChart.setDrawCenterText(true);
-        pChart.setCenterText(generateCenterSpannableText());
 
         pChart.setRotationAngle(0);
         // enable rotation of the chart by touch
@@ -187,9 +190,16 @@ public class AnnuallyFragment extends Fragment {
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
         for (int i = 0; i < mResult.length; i++) {
-            entries.add(new PieEntry((float) mValues[i % mValues.length],
-                    mResult[i % mResult.length]));
+            if(!Objects.equals(mResult[i], "Average")) {
+                entries.add(new PieEntry((float) mValues[i],
+                        mResult[i]));
+            } else {
+                average = mValues[i];
+            }
         }
+
+        pChart.setDrawCenterText(true);
+        pChart.setCenterText(generateCenterSpannableText(average));
 
         PieDataSet dataSet = new PieDataSet(entries, "Utilization");
 
@@ -244,9 +254,9 @@ public class AnnuallyFragment extends Fragment {
         pChart.invalidate();
 
     }
-    private SpannableString generateCenterSpannableText() {
+    private SpannableString generateCenterSpannableText(int average) {
 
-        SpannableString s = new SpannableString("92%");
+        SpannableString s = new SpannableString(Integer.toString(average));
         //make the text twice as large
         s.setSpan(new RelativeSizeSpan(8f), 0, 2, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 0, 2, 0);

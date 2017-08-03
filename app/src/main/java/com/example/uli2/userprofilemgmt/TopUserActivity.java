@@ -38,7 +38,6 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
 
         hbChart = (HorizontalBarChart) findViewById(R.id.hb1chart);
         if(MonthlyTopUser == null) {
-            Singleton.getInstance().newSingleton();
             Singleton.getInstance().setDelegate(this);
             Singleton.getInstance().getTopMonthlyUser();
         }
@@ -48,9 +47,7 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
 
     @Override
     public void processFinish(String output) {
-        Singleton.getInstance().MonthlyTopUser = Singleton.getInstance().results;
-
-        MonthlyTopUser = Singleton.getInstance().MonthlyTopUser;
+        MonthlyTopUser = Singleton.getInstance().hashMap.get("MU");
 
         if(mResult == null) {
             mResult = new String[MonthlyTopUser.get(0).size()];
@@ -144,6 +141,10 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
         data.setBarWidth(.9f);
         hbChart.setData(data);
         hbChart.getLegend().setEnabled(false);
+        hbChart.setFitBars(true);
+        hbChart.animateY(2500);
+        hbChart.setDoubleTapToZoomEnabled(false);
+
     }
 
     private class CategoryBarChartXaxisFormatter implements IAxisValueFormatter {
