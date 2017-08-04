@@ -33,9 +33,7 @@
             android:name=".TopUserActivity"
             android:theme="@style/AppThemeToolBar">
         </activity>
-        <activity android:name=".ActivityA">
-        </activity>
-        <activity android:name=".ActivityB">
+        <activity android:name=".AppRecyclerView.CActivity">
         </activity>
     </application>
 

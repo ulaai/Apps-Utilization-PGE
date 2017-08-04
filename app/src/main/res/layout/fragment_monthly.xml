@@ -3,8 +3,7 @@
                                                  android:id="@+id/main_content"
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
-                                                 android:background="@android:color/white"
-                                                 android:fitsSystemWindows="true">
+                                                 android:background="@android:color/white">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -20,6 +19,12 @@
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleTextAppearance="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDate"
+                android:gravity="center_horizontal"/>
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pie1chart"

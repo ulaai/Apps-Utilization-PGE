@@ -36,6 +36,10 @@
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/drawer_list_item.xml"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/fragment_daily.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/fragment_daily.xml"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/notification_action_tombstone.xml",
         "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/notification_action_tombstone.xml"
     },
@@ -112,10 +116,6 @@
         "source": "/home/uli/.android/build-cache/d60324f3c0a173c0163ee00bf97de343b018d605/output/res/layout/design_layout_tab_text.xml"
     },
     {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/activity_activity.xml",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/activity_activity.xml"
-    },
-    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
         "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/abc_dialog_title_material.xml"
     },
@@ -142,6 +142,10 @@
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
         "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/app_item_child_layout.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/app_item_child_layout.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/design_navigation_menu_item.xml",
@@ -180,16 +184,8 @@
         "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/abc_action_menu_item_layout.xml"
     },
     {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/activity_b.xml",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/activity_b.xml"
-    },
-    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
         "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/abc_screen_content_include.xml"
-    },
-    {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/fragment_daily_pie.xml",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/fragment_daily_pie.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/activity_application.xml",
@@ -214,6 +210,10 @@
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_title_material.xml",
         "source": "/home/uli/.android/build-cache/7a732fbf031d58f13bfa43dc43d6627a776fbcc6/output/res/layout/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/activity_c.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/activity_c.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",

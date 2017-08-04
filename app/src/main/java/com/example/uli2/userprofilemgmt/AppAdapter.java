@@ -26,7 +26,6 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
 
     private List<List<String>> myDataset;
     private HashSet<Integer> expandedPositionSet;
-    private ListExpandListener listExpandListener;
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -116,13 +115,6 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isExpanded) {
-                    listExpandListener.onCollapse();
-                    isExpanded = false;
-                } else {
-                    listExpandListener.onExpand();
-                    isExpanded = true;
-                }
             }
         });
 //        holder.txtActual.setText(numactual);
@@ -132,10 +124,6 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return label.size();
-    }
-
-    public void setListExpandListener(ListExpandListener listItemListener) {
-        this.listExpandListener = listItemListener;
     }
 
 }

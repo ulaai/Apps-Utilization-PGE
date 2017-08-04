@@ -1,10 +1,14 @@
 package com.example.uli2.userprofilemgmt;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import com.example.uli2.userprofilemgmt.AppRecyclerView.CActivity;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -42,6 +46,15 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
             Singleton.getInstance().getTopMonthlyUser();
         }
 
+        Button cbutton = (Button) findViewById(R.id.cbutton);
+        cbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (TopUserActivity.this, CActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -50,9 +63,10 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
         MonthlyTopUser = Singleton.getInstance().hashMap.get("MU");
 
         if(mResult == null) {
-            mResult = new String[MonthlyTopUser.get(0).size()];
-            for(int i = 0; i < MonthlyTopUser.get(0).size(); i++) {
-                String a = MonthlyTopUser.get(0).get(i);
+            int mResultSize = MonthlyTopUser.get(0).size();
+            mResult = new String[mResultSize];
+            for(int i = 0; i < mResultSize; i++) {
+                String a = MonthlyTopUser.get(0).get(mResultSize-i-1);
                 if(a.length() > 15) {
                     String anew = a.substring(a.lastIndexOf(" ") + 1);
                     int k = a.lastIndexOf(" ");
@@ -65,10 +79,10 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
         }
 
 
-
+        int mValuesSize = MonthlyTopUser.get(1).size();
         if(mValues == null) {
-            mValues = new int[MonthlyTopUser.get(1).size()];
-            for(int i = 0; i < MonthlyTopUser.get(1).size(); i++) {
+            mValues = new int[mValuesSize];
+            for(int i = 0; i < mValuesSize; i++) {
                 int a = Integer.valueOf(MonthlyTopUser.get(1).get(i));
                 mValues[i] = a;
             }
@@ -91,13 +105,8 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
 
     private void MakeHorizontalBarChart(HorizontalBarChart hbChart, String[] mResult, int[]
             mValues) {
-        ArrayList<String> labels = new ArrayList<>();
-        labels.add("January");
-        labels.add("February");
-        labels.add("March");
-        labels.add("April");
-        labels.add("May");
-        labels.add("June");
+
+        float spaceForBar = 100f;
 
         hbChart.setDrawBarShadow(false);
         hbChart.setDrawValueAboveBar(true);
@@ -128,7 +137,7 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
 
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
         for (int i = 0; i < mResult.length; i++) {
-            yVals1.add(new BarEntry(i, mValues[i]));
+            yVals1.add(new BarEntry(mResult.length-i-1, mValues[i]));
         }
 
         BarDataSet set1;

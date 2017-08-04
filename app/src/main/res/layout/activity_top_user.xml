@@ -40,4 +40,10 @@
         android:layout_height="378dp"
         android:layout_below="@+id/line1chart"/>
 
+    <Button
+        android:id="@+id/cbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ExpandActivity"/>
+
 </LinearLayout>

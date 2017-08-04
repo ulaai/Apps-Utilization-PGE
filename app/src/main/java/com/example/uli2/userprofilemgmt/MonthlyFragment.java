@@ -64,7 +64,6 @@ public class MonthlyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_monthly, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        PieChart pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
 
         albumList = new ArrayList<>();
         adapter = new AlbumsAdapter(rootView.getContext(), albumList);
@@ -74,7 +73,7 @@ public class MonthlyFragment extends Fragment {
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
+        PieChart pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
 
         prepareAlbums();
 
@@ -98,7 +97,6 @@ public class MonthlyFragment extends Fragment {
 
         return rootView;
     }
-
     /**
      * Adding few albums for testing
      */
@@ -188,7 +186,6 @@ public class MonthlyFragment extends Fragment {
         pChart.setHoleRadius(58f);
         pChart.setTransparentCircleRadius(61f);
 
-
         pChart.setRotationAngle(0);
         // enable rotation of the chart by touch
         pChart.setRotationEnabled(true);
@@ -213,8 +210,9 @@ public class MonthlyFragment extends Fragment {
                 average = mValues[i];
             }
         }
+
         pChart.setDrawCenterText(true);
-        pChart.setCenterText(generateCenterSpannableText(average));
+//        pChart.setCenterText(generateCenterSpannableText(average));
 
         PieDataSet dataSet = new PieDataSet(entries, "Utilization");
 

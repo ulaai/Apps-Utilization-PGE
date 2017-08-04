@@ -199,7 +199,7 @@ public class AnnuallyFragment extends Fragment {
         }
 
         pChart.setDrawCenterText(true);
-        pChart.setCenterText(generateCenterSpannableText(average));
+//        pChart.setCenterText(generateCenterSpannableText(average));
 
         PieDataSet dataSet = new PieDataSet(entries, "Utilization");
 

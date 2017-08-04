@@ -2,26 +2,34 @@ package com.example.uli2.userprofilemgmt;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.content.Context;
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -41,7 +49,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
@@ -49,81 +56,178 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 
 public class DailyFragment extends Fragment {
-    public DailyFragment() {
-        // Required empty public constructor
-    }
+    private RecyclerView recyclerView;
+    private AlbumsAdapter adapter;
+    private List<Album> albumList;
+    private ImageView thumbnail;
+    Calendar cal;
+    TextView txtDate;
+    DatePickerDialog.OnDateSetListener datePicker;
+    CoordinatorLayout.Behavior behavior;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_daily_pie, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_daily, container, false);
         PieChart pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
-        LineChart lChart = (LineChart)rootView.findViewById(R.id.line1chart);
-        HorizontalBarChart hbChart = (HorizontalBarChart)rootView.findViewById(R.id.hb1chart);
-        Button appButton = (Button)rootView.findViewById(R.id.appbutton);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
-        float mult = 100;
-        final String[] mResult = new String[] { "High", "Low" };
-        int[] mValues = new int[] {92, 8};
-        int sumValues=0;
-        int[] mPercent = new int[mValues.length];
+        albumList = new ArrayList<>();
+        adapter = new AlbumsAdapter(rootView.getContext(), albumList);
 
-        //getpercentage
-        for (int mValue : mValues) {
-            sumValues += mValue;
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(rootView.getContext(), 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+        prepareAlbums();
+
+//        Preparing data for Monthly Total Utilization
+        List<List<String>> MonthlyTotalUtilization = Singleton.getInstance().hashMap.get("MTU");
+        String[] mResult = new String[MonthlyTotalUtilization.get(0).size()];
+
+        for(int i = 0; i < MonthlyTotalUtilization.get(0).size(); i++) {
+            String a = MonthlyTotalUtilization.get(0).get(i);
+            mResult[i] = a;
         }
+
+        int[] mValues = new int[MonthlyTotalUtilization.get(1).size()];
+        for(int i = 0; i < MonthlyTotalUtilization.get(1).size(); i++) {
+            int a = Integer.valueOf(MonthlyTotalUtilization.get(1).get(i));
+            mValues[i] = a;
+        }
+
 
         MakePieChart(pChart, mResult, mValues);
 
-        MakeLineChart(lChart, mResult, mValues);
+        txtDate = (TextView) rootView.findViewById(R.id.txtDate);
+        Button btnDate = (Button) rootView.findViewById(R.id.btnDate);
+        cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMM yyyy", java.util.Locale.getDefault());
+        String currdate = sdf.format(cal.getTime());
+        txtDate.setText(currdate);
 
-        MakeHorizontalBarChart(hbChart, mResult, mValues);
-
-
-        appButton.setOnClickListener(new View.OnClickListener() {
+        datePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ApplicationActivity.class);
-                Bundle bundle = null;
-
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    bundle = ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext())
-                            .toBundle();
-                }
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent, bundle);
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int
+                    dayOfMonth) {
+                cal.set(Calendar.YEAR, year);
+                cal.set(Calendar.MONTH, monthOfYear);
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                pickDate();
             }
-        });
+        };
 
-        Button toalbum = (Button) rootView.findViewById(R.id.toalbum);
-        toalbum.setOnClickListener(new View.OnClickListener() {
+        btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ActivityA.class);
-                startActivity(intent);
+                new DatePickerDialog(getActivity(), datePicker, cal.get(Calendar.YEAR), cal
+                        .get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
+                Log.d("myTag", "change date button clicked");
             }
         });
 
         return rootView;
     }
 
-    private SpannableString generateCenterSpannableText() {
+    private void prepareAlbums() {
+        int[] icons = new int[]{
+                R.drawable.util_icon,
+                R.drawable.topapp_icon,
+                R.drawable.topuser_icon,
+                R.drawable.visitor_icon
+        };
 
-        SpannableString s = new SpannableString("92%");
+        Album a = new Album("Utilization",  icons[0], ".ApplicationActivity");
+        albumList.add(a);
+
+        a = new Album("Top Application", icons[1], ".TopApplicationActivity");
+        albumList.add(a);
+
+        a = new Album("Top User", icons[2], ".TopUserActivity");
+        albumList.add(a);
+
+        a = new Album("Visitor", icons[3], "d");
+        albumList.add(a);
+
+        adapter.notifyDataSetChanged();
+    }
+
+    private void pickDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMM yyyy", java.util.Locale.getDefault());
+        String currdate = sdf.format(cal.getTime());
+        txtDate.setText(currdate);
+    }
+
+    /**
+     * RecyclerView item decoration - give equal margin around grid item
+     */
+    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+
+        private int spanCount;
+        private int spacing;
+        private boolean includeEdge;
+
+        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+            this.spanCount = spanCount;
+            this.spacing = spacing;
+            this.includeEdge = includeEdge;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view); // item position
+            int column = position % spanCount; // item column
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
+                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+
+                if (position < spanCount) { // top edge
+                    outRect.top = spacing;
+                }
+                outRect.bottom = spacing; // item bottom
+            } else {
+                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
+                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+                if (position >= spanCount) {
+                    outRect.top = spacing; // item top
+                }
+            }
+        }
+    }
+
+    /**
+     * Converting dp to pixel
+     */
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    private SpannableString generateCenterSpannableText(int average) {
+
+        SpannableString s = new SpannableString(Integer.toString(average));
         //make the text twice as large
         s.setSpan(new RelativeSizeSpan(8f), 0, 2, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 0, 2, 0);
-        s.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.colorHigh)),
+        s.setSpan(new ForegroundColorSpan(this.getResources().getColor(R.color.colorHigh)),
                 0, 2, 0);
         return s;
     }
 
     private void MakePieChart(PieChart pChart, String[] mResult, int[] mValues) {
+        int average = 0;
+
         pChart.setUsePercentValues(true);
         pChart.getDescription().setEnabled(false);
         pChart.setExtraOffsets(5, 10, 5, 5);
@@ -138,9 +242,6 @@ public class DailyFragment extends Fragment {
 
         pChart.setHoleRadius(58f);
         pChart.setTransparentCircleRadius(61f);
-
-        pChart.setDrawCenterText(true);
-        pChart.setCenterText(generateCenterSpannableText());
 
         pChart.setRotationAngle(0);
         // enable rotation of the chart by touch
@@ -159,9 +260,15 @@ public class DailyFragment extends Fragment {
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
         for (int i = 0; i < mResult.length; i++) {
-            entries.add(new PieEntry((float) mValues[i % mValues.length],
-                    mResult[i % mResult.length]));
+            if(!Objects.equals(mResult[i], "Average")) {
+                entries.add(new PieEntry((float) mValues[i],
+                        mResult[i]));
+            } else {
+                average = mValues[i];
+            }
         }
+        pChart.setDrawCenterText(true);
+        pChart.setCenterText(generateCenterSpannableText(average));
 
         PieDataSet dataSet = new PieDataSet(entries, "Utilization");
 
@@ -296,56 +403,4 @@ public class DailyFragment extends Fragment {
         }
     }
 
-    private void MakeHorizontalBarChart(HorizontalBarChart hbChart, String[] mResult, int[]
-            mValues) {
-        ArrayList<String> labels = new ArrayList<>();
-        labels.add("January");
-        labels.add("February");
-        labels.add("March");
-        labels.add("April");
-        labels.add("May");
-        labels.add("June");
-
-        hbChart.setDrawBarShadow(false);
-        hbChart.setDrawValueAboveBar(true);
-        hbChart.getDescription().setEnabled(false);
-        hbChart.setPinchZoom(false);
-        hbChart.setDrawGridBackground(false);
-
-
-        XAxis xl = hbChart.getXAxis();
-        xl.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xl.setDrawAxisLine(true);
-        xl.setDrawGridLines(false);
-        CategoryBarChartXaxisFormatter xaxisFormatter = new CategoryBarChartXaxisFormatter(labels);
-        xl.setValueFormatter(xaxisFormatter);
-        xl.setGranularity(1);
-
-        YAxis yl = hbChart.getAxisLeft();
-        yl.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-        yl.setDrawGridLines(false);
-        yl.setEnabled(false);
-        yl.setAxisMinimum(0f);
-
-        YAxis yr = hbChart.getAxisRight();
-        yr.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-        yr.setDrawGridLines(false);
-        yr.setAxisMinimum(0f);
-
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-        for (int i = 0; i < 6; i++) {
-            yVals1.add(new BarEntry(i, (i+1)*10));
-        }
-
-        BarDataSet set1;
-        set1 = new BarDataSet(yVals1, "DataSet 1");
-        set1.setColors(ColorTemplate.MATERIAL_COLORS);
-        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-        dataSets.add(set1);
-        BarData data = new BarData(dataSets);
-        data.setValueTextSize(10f);
-        data.setBarWidth(.9f);
-        hbChart.setData(data);
-        hbChart.getLegend().setEnabled(false);
-    }
 }

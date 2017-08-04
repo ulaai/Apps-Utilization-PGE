@@ -14,6 +14,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
+import com.example.uli2.userprofilemgmt.AppRecyclerView.AppTitleChild;
+import com.example.uli2.userprofilemgmt.AppRecyclerView.AppTitleParent;
+import com.example.uli2.userprofilemgmt.AppRecyclerView.AppTitles;
+import com.example.uli2.userprofilemgmt.AppRecyclerView.CAdapter;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -22,7 +28,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApplicationActivity extends ActionBarActivity implements AsyncResponse, ListExpandListener {
+public class ApplicationActivity extends ActionBarActivity implements AsyncResponse {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -34,6 +40,8 @@ public class ApplicationActivity extends ActionBarActivity implements AsyncRespo
     String db = "jdbc:jtds:sqlserver://ptmpgesqlsvrdev.pertamina.com:1433/UserProfileManagement";
     String uname = "sa";
     String pass = "sqlserver2012PGE";
+
+    CAdapter adapter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +64,12 @@ public class ApplicationActivity extends ActionBarActivity implements AsyncRespo
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
-//        ConnectionClass connectionClass = new ConnectionClass();
-//        connectionClass.execute("select ApplicationName from Applications");
         Singleton.getInstance().newSingleton();
         Singleton.getInstance().setDelegate(this);
         Singleton.getInstance().getApplicationActivity();
+
+
+
 
     }
 
@@ -88,16 +97,35 @@ public class ApplicationActivity extends ActionBarActivity implements AsyncRespo
     public void processFinish(String output) {
         progressBar.setVisibility(View.GONE);
         input = Singleton.getInstance().hashMap.get("MAU");
-        mAdapter = new AppAdapter(input);
-        recyclerView.setAdapter(mAdapter);
+//        mAdapter = new AppAdapter(input);
+//        recyclerView.setAdapter(mAdapter);
+        adapter = new CAdapter(this,initData());
+        adapter.setParentClickableViewAnimationDefaultDuration();
+        adapter.setParentAndIconExpandOnClick(true);
+        recyclerView.setAdapter(adapter);
+
 
     }
-    @Override
-    public void onExpand() {
+
+    public List<ParentObject> initData() {
+        AppTitles titleCreator = AppTitles.get(this, input);
+        List<AppTitleParent> titles = titleCreator.getAll();
+        List<ParentObject> parentObject = new ArrayList<>();
+        for(AppTitleParent title:titles)
+        {
+            List<Object> childList = new ArrayList<>();
+            childList.add(new AppTitleChild("Add to contacts","Send message"));
+            title.setChildObjectList(childList);
+            parentObject.add(title);
+        }
+        return parentObject;
+
     }
 
     @Override
-    public void onCollapse() {
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        ((CAdapter)recyclerView.getAdapter()).onSaveInstanceState(outState);
     }
 
 }
