@@ -212,7 +212,7 @@ public class MonthlyFragment extends Fragment {
         }
 
         pChart.setDrawCenterText(true);
-//        pChart.setCenterText(generateCenterSpannableText(average));
+        pChart.setCenterText(generateCenterSpannableText(average));
 
         PieDataSet dataSet = new PieDataSet(entries, "Utilization");
 
@@ -229,10 +229,9 @@ public class MonthlyFragment extends Fragment {
         //add colorssss to the pie
         colors.add(ContextCompat.getColor(getActivity().getApplicationContext(), R.color
                 .colorHigh));
+        colors.add(ContextCompat.getColor(getActivity().getApplicationContext(), R.color
+                .colorMedium));
         colors.add(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorLow));
-
-        colors.add(ColorTemplate.getHoloBlue());
-
         dataSet.setColors(colors);
         //dataSet.setSelectionShift(0f);
 
@@ -268,13 +267,13 @@ public class MonthlyFragment extends Fragment {
 
     }
     private SpannableString generateCenterSpannableText(int average) {
-
+        int len = Integer.toString(average).length();
         SpannableString s = new SpannableString(Integer.toString(average));
         //make the text twice as large
-        s.setSpan(new RelativeSizeSpan(8f), 0, 2, 0);
-        s.setSpan(new StyleSpan(Typeface.NORMAL), 0, 2, 0);
+        s.setSpan(new RelativeSizeSpan(8f), 0, len, 0);
+        s.setSpan(new StyleSpan(Typeface.NORMAL), 0, len, 0);
         s.setSpan(new ForegroundColorSpan(this.getResources().getColor(R.color.colorHigh)),
-                0, 2, 0);
+                0, len, 0);
         return s;
     }
 

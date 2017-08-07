@@ -5,28 +5,39 @@ package com.example.uli2.userprofilemgmt.AppRecyclerView;
  */
 
 public class AppTitleChild {
-    public String option1;
-    public String option2;
+    public String util2;
+    public String actual2;
+    public String register2;
 
-    public AppTitleChild(String option1, String option2) {
-        this.option1 = option1;
-        this.option2 = option2;
+    public AppTitleChild(String util, String actual, String register) {
+        this.util2 = util;
+        this.actual2 = actual;
+        this.register2 = register;
     }
 
-    public String getOption1() {
-        return option1;
+    public String getUtil2() {
+        return util2;
     }
 
-    public void setOption1(String option1) {
-        this.option1 = option1;
+    public void setUtil2(String util2) {
+        this.util2 = util2;
     }
 
-    public String getOption2() {
-        return option2;
+    public String getActual2() {
+        return actual2;
     }
 
-    public void setOption2(String option2) {
-        this.option2 = option2;
+    public void setActual2(String actual2) {
+        this.actual2 = actual2;
     }
+
+    public String getRegister2() {
+        return register2;
+    }
+
+    public void setRegister2(String register2) {
+        this.register2 = register2;
+    }
+
 
 }

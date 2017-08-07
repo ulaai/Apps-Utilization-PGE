@@ -11,12 +11,14 @@ import com.example.uli2.userprofilemgmt.R;
  */
 
 public class VChildViewHolder extends ChildViewHolder {
-    public static TextView option1;
-    public static TextView option2;
+    public static TextView util2;
+    public static TextView actual2;
+    public static TextView registered2;
 
     public VChildViewHolder(View v) {
         super(v);
-        option1 = (TextView) itemView.findViewById(R.id.option1);
-        option2 = (TextView) itemView.findViewById(R.id.option2);
+        util2 = (TextView) itemView.findViewById(R.id.util2);
+        actual2 = (TextView) itemView.findViewById(R.id.actual2);
+        registered2 = (TextView) itemView.findViewById(R.id.register2);
     }
 }

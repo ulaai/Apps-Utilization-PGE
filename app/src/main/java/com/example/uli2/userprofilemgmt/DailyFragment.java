@@ -12,7 +12,10 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -63,21 +66,24 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class DailyFragment extends Fragment {
+public class DailyFragment extends Fragment implements AsyncResponse {
     private RecyclerView recyclerView;
     private AlbumsAdapter adapter;
     private List<Album> albumList;
     private ImageView thumbnail;
+    PieChart pChart;
     Calendar cal;
     TextView txtDate;
+    String currdate;
     DatePickerDialog.OnDateSetListener datePicker;
     CoordinatorLayout.Behavior behavior;
+    boolean changed = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_daily, container, false);
-        PieChart pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
+        pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         albumList = new ArrayList<>();
@@ -91,43 +97,36 @@ public class DailyFragment extends Fragment {
 
         prepareAlbums();
 
-//        Preparing data for Monthly Total Utilization
-        List<List<String>> MonthlyTotalUtilization = Singleton.getInstance().hashMap.get("MTU");
-        String[] mResult = new String[MonthlyTotalUtilization.get(0).size()];
 
-        for(int i = 0; i < MonthlyTotalUtilization.get(0).size(); i++) {
-            String a = MonthlyTotalUtilization.get(0).get(i);
-            mResult[i] = a;
-        }
-
-        int[] mValues = new int[MonthlyTotalUtilization.get(1).size()];
-        for(int i = 0; i < MonthlyTotalUtilization.get(1).size(); i++) {
-            int a = Integer.valueOf(MonthlyTotalUtilization.get(1).get(i));
-            mValues[i] = a;
-        }
-
-
-        MakePieChart(pChart, mResult, mValues);
+        MakePieChart(pChart);
 
         txtDate = (TextView) rootView.findViewById(R.id.txtDate);
-        Button btnDate = (Button) rootView.findViewById(R.id.btnDate);
         cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMM yyyy", java.util.Locale.getDefault());
-        String currdate = sdf.format(cal.getTime());
+        currdate = sdf.format(cal.getTime());
         txtDate.setText(currdate);
 
         datePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int
                     dayOfMonth) {
-                cal.set(Calendar.YEAR, year);
-                cal.set(Calendar.MONTH, monthOfYear);
-                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                pickDate();
+                if(datePicker.isShown()) {
+                    cal.set(Calendar.YEAR, year);
+                    cal.set(Calendar.MONTH, monthOfYear);
+                    cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    pickDate();
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale
+                            .getDefault());
+                    currdate = sdf.format(cal.getTime());
+                    Singleton.getInstance().setDelegate(DailyFragment.this);
+                    Singleton.getInstance().setDailyTotalUtilization(currdate);
+                }
             }
         };
 
-        btnDate.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DatePickerDialog(getActivity(), datePicker, cal.get(Calendar.YEAR), cal
@@ -166,6 +165,14 @@ public class DailyFragment extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMM yyyy", java.util.Locale.getDefault());
         String currdate = sdf.format(cal.getTime());
         txtDate.setText(currdate);
+    }
+
+    @Override
+    public void processFinish(String output) {
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        ft.detach(this).attach(this).commit();
+        changed = true;
+        MakePieChart(pChart);
     }
 
     /**
@@ -215,18 +222,35 @@ public class DailyFragment extends Fragment {
     }
 
     private SpannableString generateCenterSpannableText(int average) {
-
+        int len = Integer.toString(average).length();
         SpannableString s = new SpannableString(Integer.toString(average));
         //make the text twice as large
-        s.setSpan(new RelativeSizeSpan(8f), 0, 2, 0);
-        s.setSpan(new StyleSpan(Typeface.NORMAL), 0, 2, 0);
+        s.setSpan(new RelativeSizeSpan(8f), 0, len, 0);
+        s.setSpan(new StyleSpan(Typeface.NORMAL), 0, len, 0);
         s.setSpan(new ForegroundColorSpan(this.getResources().getColor(R.color.colorHigh)),
-                0, 2, 0);
+                0, len, 0);
         return s;
     }
 
-    private void MakePieChart(PieChart pChart, String[] mResult, int[] mValues) {
+    private void MakePieChart(PieChart pChart) {
         int average = 0;
+
+        //        Preparing data for Monthly Total Utilization
+        List<List<String>> DailyTotalUtilization = Singleton.getInstance().hashMap.get("DTU");
+        int numSize = DailyTotalUtilization.get(0).size();
+        int dtuSize = DailyTotalUtilization.size();
+        String[] mResult = new String[numSize];
+
+        for(int i = 0; i < DailyTotalUtilization.get(dtuSize-2).size(); i++) {
+            String a = DailyTotalUtilization.get(dtuSize-2).get(i);
+            mResult[i] = a;
+        }
+
+        int[] mValues = new int[numSize];
+        for(int i = 0; i < DailyTotalUtilization.get(dtuSize-1).size(); i++) {
+            int a = Integer.valueOf(DailyTotalUtilization.get(dtuSize-1).get(i));
+            mValues[i] = a;
+        }
 
         pChart.setUsePercentValues(true);
         pChart.getDescription().setEnabled(false);
@@ -252,7 +276,9 @@ public class DailyFragment extends Fragment {
         // mChart.setDrawUnitsInChart(true);
 
         // add a selection listener
-
+        if(changed) {
+            pChart.getData().removeDataSet(pChart.getData().getDataSet());
+        }
 
 
         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
@@ -284,10 +310,9 @@ public class DailyFragment extends Fragment {
 
         //add colorssss to the pie
         colors.add(ContextCompat.getColor(getContext(), R.color.colorHigh));
+        colors.add(ContextCompat.getColor(getActivity().getApplicationContext(), R.color
+                .colorMedium));
         colors.add(ContextCompat.getColor(getContext(), R.color.colorLow));
-
-        colors.add(ColorTemplate.getHoloBlue());
-
         dataSet.setColors(colors);
         //dataSet.setSelectionShift(0f);
 
@@ -318,7 +343,7 @@ public class DailyFragment extends Fragment {
 
         // undo all highlights
         pChart.highlightValues(null);
-
+        pChart.notifyDataSetChanged();
         pChart.invalidate();
 
     }

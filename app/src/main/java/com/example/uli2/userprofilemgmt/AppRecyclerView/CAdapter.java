@@ -66,9 +66,11 @@ public void onBindParentViewHolder(VParentViewHolder holder, int position, Objec
 @Override
 public void onBindChildViewHolder(VChildViewHolder titleChildViewHolder, int i, Object o) {
         AppTitleChild title = (AppTitleChild)o;
-        VChildViewHolder.option1.setText(title.getOption1());
-        VChildViewHolder.option2.setText(title.getOption2());
+        VChildViewHolder.util2.setText(title.getUtil2());
+        VChildViewHolder.actual2.setText(title.getActual2());
+        VChildViewHolder.registered2.setText(title.getRegister2());
 
-        }
+
+}
 
 }

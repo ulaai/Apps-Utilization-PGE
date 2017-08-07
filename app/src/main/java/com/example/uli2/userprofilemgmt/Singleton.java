@@ -40,6 +40,8 @@ public class Singleton {
     public List<List<String>> MonthlyTopApplication = new ArrayList<>();
     public List<List<String>> MonthlyTopUser = new ArrayList<>();
 
+    public List<List<String>> DailyTotalUtilization = new ArrayList<>();
+
 
 
 
@@ -182,6 +184,16 @@ public class Singleton {
         ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
                 .THREAD_POOL_EXECUTOR, "ATU", "exec " + "dbo" +
                 ".stp_GetAnnuallyTotalUtilization", "Label", "Value");
+    }
+
+    public void setDailyTotalUtilization(String currdate) {
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("DTU", DailyTotalUtilization);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                .THREAD_POOL_EXECUTOR, "DTU", "exec " + "dbo" +
+                ".stp_GetDailyTotalUtilization '"+ currdate +"'", "Label", "Value");
     }
 
 }

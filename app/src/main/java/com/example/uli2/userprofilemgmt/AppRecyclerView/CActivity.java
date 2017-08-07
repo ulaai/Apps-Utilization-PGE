@@ -39,14 +39,7 @@ public class CActivity extends AppCompatActivity {
     public List<ParentObject> initData() {
         AppTitles titleCreator = AppTitles.get(this, input);
         List<AppTitleParent> titles = titleCreator.getAll();
-        List<ParentObject> parentObject = new ArrayList<>();
-        for(AppTitleParent title:titles)
-        {
-            List<Object> childList = new ArrayList<>();
-            childList.add(new AppTitleChild("Add to contacts","Send message"));
-            title.setChildObjectList(childList);
-            parentObject.add(title);
-        }
+        List<ParentObject> parentObject = titleCreator.getChildren();
         return parentObject;
 
     }

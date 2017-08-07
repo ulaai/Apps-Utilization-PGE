@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         getSupportActionBar().hide();
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle("User Profile Management");
+        mToolbar.setTitle("Apps Utilization PGE");
 
 //        change navigation drawer header and name programmatically in class file
         View hView =  mNavigationView.getHeaderView(0);
