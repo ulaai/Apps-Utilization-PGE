@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="5dp"
-                android:src="@mipmap/ic_close_black_24dp" />
+                android:src="@mipmap/ic_date_range_black_24dp" />
 
 
         </android.support.design.widget.CollapsingToolbarLayout>

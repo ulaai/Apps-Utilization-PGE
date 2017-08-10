@@ -1,13 +1,13 @@
 package com.example.uli2.userprofilemgmt;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 
 public class SplashScreen extends AppCompatActivity implements AsyncResponse {
     private boolean isConnected = false;

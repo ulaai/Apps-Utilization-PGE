@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -50,9 +51,10 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
         MonthlyTopApp = Singleton.getInstance().hashMap.get("MTA");
 
         if(mResult == null) {
-            mResult = new String[MonthlyTopApp.get(0).size()];
-            for(int i = 0; i < MonthlyTopApp.get(0).size(); i++) {
-                String a = MonthlyTopApp.get(0).get(i);
+            int mResultSize = MonthlyTopApp.get(0).size();
+            mResult = new String[mResultSize];
+            for(int i = 0; i < mResultSize; i++) {
+                String a = MonthlyTopApp.get(0).get(mResultSize-i-1);
                 if(a.length() > 15) {
                     String anew = a.substring(a.lastIndexOf(" ") + 1);
                     int k = a.lastIndexOf(" ");
@@ -65,9 +67,10 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
 
         }
 
+        int mValuesSize = MonthlyTopApp.get(1).size();
         if(mValues == null) {
-            mValues = new int[MonthlyTopApp.get(1).size()];
-            for(int i = 0; i < MonthlyTopApp.get(1).size(); i++) {
+            mValues = new int[mValuesSize];
+            for(int i = 0; i < mValuesSize; i++) {
                 int a = Integer.valueOf(MonthlyTopApp.get(1).get(i));
                 mValues[i] = a;
             }
@@ -111,7 +114,7 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
         // (mResult));
 //        CategoryBarChartXaxisFormatter xaxisFormatter = new CategoryBarChartXaxisFormatter(labels);
 //        xl.setValueFormatter(xaxisFormatter);
-        xl.setValueFormatter(new IndexAxisValueFormatter(labels));
+        xl.setValueFormatter(new IndexAxisValueFormatter(mResult));
         xl.setGranularity(1);
 
         YAxis yl = hbChart.getAxisLeft();
@@ -127,7 +130,7 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
 
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
         for (int i = 0; i < mValues.length; i++) {
-            yVals1.add(new BarEntry(i, mValues[i]));
+            yVals1.add(new BarEntry(mResult.length-i-1, mValues[i]));
         }
 
         BarDataSet set1;

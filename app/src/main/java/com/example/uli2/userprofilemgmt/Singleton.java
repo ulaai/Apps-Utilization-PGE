@@ -1,7 +1,9 @@
 package com.example.uli2.userprofilemgmt;
 
 import android.os.AsyncTask;
-import android.os.Build;
+
+import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
+import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,7 +33,7 @@ public class Singleton {
     public ArrayList<String> input = new ArrayList<>();
 
     public ArrayList<ConnectionClass> ConnectionList = new ArrayList<>();
-    HashMap<String, List<List<String>>> hashMap = new HashMap<>();
+    public HashMap<String, List<List<String>>> hashMap = new HashMap<>();
 
     public List<List<String>> AnnuallyTotalUtilization = new ArrayList<>();
 

@@ -12,6 +12,10 @@
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_date_range_black_24dp.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-xhdpi/ic_date_range_black_24dp.png"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_keyboard_arrow_up_black_24dp.png",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-xhdpi/ic_keyboard_arrow_up_black_24dp.png"
     },

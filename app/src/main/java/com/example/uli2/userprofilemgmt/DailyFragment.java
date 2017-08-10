@@ -1,21 +1,14 @@
 package com.example.uli2.userprofilemgmt;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -29,35 +22,23 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.Album;
+import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AlbumsAdapter;
+import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.HorizontalBarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
-import com.github.mikephil.charting.utils.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -155,7 +136,7 @@ public class DailyFragment extends Fragment implements AsyncResponse {
         a = new Album("Top User", icons[2], ".TopUserActivity");
         albumList.add(a);
 
-        a = new Album("Visitor", icons[3], "d");
+        a = new Album("Visitor", icons[3], ".VisitorActivity");
         albumList.add(a);
 
         adapter.notifyDataSetChanged();
@@ -348,63 +329,6 @@ public class DailyFragment extends Fragment implements AsyncResponse {
 
     }
 
-    private void MakeLineChart(LineChart lChart, String[] mResult, int[] mValues) {
-        ArrayList<Entry> entries = new ArrayList<Entry>();
-        for (int i = 0; i < 2; i++) {
-            entries.add(new Entry(i, mValues[i]));
-        }
-        LineDataSet lineDataSet;
-
-        lChart.setDrawGridBackground(false);
-
-        //animate chart
-        lChart.animateY(2000);
-
-        if (lChart.getData() != null &&
-                lChart.getData().getDataSetCount() > 0) {
-            lineDataSet = (LineDataSet)lChart.getData().getDataSetByIndex(0);
-            lineDataSet.setValues(entries);
-            lChart.getData().notifyDataChanged();
-            lChart.notifyDataSetChanged();
-        } else {
-            // create a dataset and give it a type
-            lineDataSet = new LineDataSet(entries, "Utilization");
-
-            lineDataSet.setDrawIcons(false);
-
-            // set the line to be drawn like this "- - - - - -"
-            lineDataSet.enableDashedLine(10f, 5f, 0f);
-            lineDataSet.enableDashedHighlightLine(10f, 5f, 0f);
-            lineDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-            lineDataSet.setCircleColor(ColorTemplate.getHoloBlue());
-            lineDataSet.setLineWidth(1f);
-            lineDataSet.setCircleRadius(3f);
-            lineDataSet.setDrawCircleHole(false);
-            lineDataSet.setValueTextSize(9f);
-            lineDataSet.setDrawFilled(true);
-            lineDataSet.setFormLineWidth(1f);
-            lineDataSet.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
-            lineDataSet.setFormSize(15.f);
-
-            if (Utils.getSDKInt() >= 18) {
-                // fill drawable only supported on api level 18 and above
-                Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fade_red);
-                lineDataSet.setFillDrawable(drawable);
-            }
-            else {
-                lineDataSet.setFillColor(Color.BLACK);
-            }
-            ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-            dataSets.add(lineDataSet); // add the datasets
-
-            // create a data object with the datasets
-            LineData data = new LineData(dataSets);
-
-            // set data
-            lChart.setData(data);
-        }
-
-    }
 
     private class CategoryBarChartXaxisFormatter implements IAxisValueFormatter {
 

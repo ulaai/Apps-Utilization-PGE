@@ -25,16 +25,21 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //glide, for smooth scrolling
-    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support:appcompat-v7:26.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:support-v4:26.+'
-    compile 'com.android.support:cardview-v7:26.+'
-    compile 'com.android.support:recyclerview-v7:26.+'
-    compile 'com.android.support:design:26.+'
+    compile 'com.android.support:support-v4:26.0.0'
+    compile 'com.android.support:cardview-v7:26.0.0'
+    compile 'com.android.support:recyclerview-v7:26.0.0'
+    compile 'com.android.support:design:26.0.0'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'net.sourceforge.jtds:jtds:1.2.7'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.bignerdranch.android:expandablerecyclerview:1.0.3'
     testCompile 'junit:junit:4.12'
+    compile 'android.arch.lifecycle:extensions:1.0.0-alpha1';
+    compile 'android.arch.persistence.room:runtime:1.0.0-alpha1';
+    annotationProcessor 'android.arch.lifecycle:compiler:1.0.0-alpha1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-alpha1'
+
 }

@@ -1,14 +1,11 @@
 package com.example.uli2.userprofilemgmt;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-import com.example.uli2.userprofilemgmt.AppRecyclerView.CActivity;
+import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -45,16 +42,6 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
             Singleton.getInstance().setDelegate(this);
             Singleton.getInstance().getTopMonthlyUser();
         }
-
-        Button cbutton = (Button) findViewById(R.id.cbutton);
-        cbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent (TopUserActivity.this, CActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
     }
 

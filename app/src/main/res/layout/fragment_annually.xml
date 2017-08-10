@@ -25,7 +25,7 @@
                 android:id="@+id/pie1chart"
                 android:name="layout.Pie2Fragment"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
+                android:layout_height="500dp"/>
 
 
         </android.support.design.widget.CollapsingToolbarLayout>

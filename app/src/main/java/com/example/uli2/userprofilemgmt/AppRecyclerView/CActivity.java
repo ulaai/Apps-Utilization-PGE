@@ -22,11 +22,11 @@ public class CActivity extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.myRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        CAdapter adapter = new CAdapter(this,initData());
-        adapter.setParentClickableViewAnimationDefaultDuration();
-        adapter.setParentAndIconExpandOnClick(true);
-
-        recyclerView.setAdapter(adapter);
+//        CAdapter adapter = new CAdapter(this,initData());
+//        adapter.setParentClickableViewAnimationDefaultDuration();
+//        adapter.setParentAndIconExpandOnClick(true);
+//
+//        recyclerView.setAdapter(adapter);
 
     }
 
@@ -36,13 +36,13 @@ public class CActivity extends AppCompatActivity {
         ((CAdapter)recyclerView.getAdapter()).onSaveInstanceState(outState);
     }
 
-    public List<ParentObject> initData() {
-        AppTitles titleCreator = AppTitles.get(this, input);
-        List<AppTitleParent> titles = titleCreator.getAll();
-        List<ParentObject> parentObject = titleCreator.getChildren();
-        return parentObject;
-
-    }
+//    public List<ParentObject> initData() {
+//        AppTitles titleCreator = AppTitles.get(this, input);
+//        List<AppTitleParent> titles = titleCreator.getAll();
+//        List<ParentObject> parentObject = titleCreator.getChildren();
+//        return parentObject;
+//
+//    }
 
 
 }

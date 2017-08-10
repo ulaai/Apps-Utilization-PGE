@@ -1,11 +1,9 @@
 package com.example.uli2.userprofilemgmt;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
@@ -23,6 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.Album;
+import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AlbumsAdapter;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -30,7 +30,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 
 import java.util.ArrayList;
@@ -104,7 +103,7 @@ public class AnnuallyFragment extends Fragment {
         a = new Album("Top User", icons[2], ".TopUserActivity");
         albumList.add(a);
 
-        a = new Album("Visitor", icons[3], "d");
+        a = new Album("Visitor", icons[3], ".VisitorActivity");
         albumList.add(a);
 
         adapter.notifyDataSetChanged();

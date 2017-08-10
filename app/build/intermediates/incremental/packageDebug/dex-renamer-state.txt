@@ -1,4 +1,4 @@
-#Mon Aug 07 14:01:28 WIB 2017
+#Thu Aug 10 15:12:52 WIB 2017
 base.0=/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
 renamed.0=classes.dex
 file.0=/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

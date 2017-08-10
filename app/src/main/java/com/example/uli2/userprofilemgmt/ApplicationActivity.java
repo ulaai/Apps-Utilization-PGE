@@ -1,39 +1,39 @@
 package com.example.uli2.userprofilemgmt;
 
-import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
-import com.example.uli2.userprofilemgmt.AppRecyclerView.AppTitleChild;
 import com.example.uli2.userprofilemgmt.AppRecyclerView.AppTitleParent;
 import com.example.uli2.userprofilemgmt.AppRecyclerView.AppTitles;
 import com.example.uli2.userprofilemgmt.AppRecyclerView.CAdapter;
+import com.example.uli2.userprofilemgmt.Persistence.Annually;
+import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
+import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApplicationActivity extends ActionBarActivity implements AsyncResponse {
+public class ApplicationActivity extends AppCompatActivity implements AsyncResponse {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     ProgressBar progressBar;
     List<List<String>> input = new ArrayList<List<String>>();
+    AppDatabase database;
+    int count;
 
     Connection con = null;
     Statement stmt = null;
@@ -64,12 +64,20 @@ public class ApplicationActivity extends ActionBarActivity implements AsyncRespo
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        Singleton.getInstance().newSingleton();
-        Singleton.getInstance().setDelegate(this);
-        Singleton.getInstance().getApplicationActivity();
+        database = AppDatabase.getDatabase(getApplicationContext());
+        count = database.annuallyModel().getCount();
+        Log.d("myTag", String.valueOf(count));
+        if(count <= 0) {
+            Singleton.getInstance().newSingleton();
+            Singleton.getInstance().setDelegate(this);
+            Singleton.getInstance().getApplicationActivity();
+            Log.d("myTag", "count <= 0");
 
+        } else {
+            onFinish();
+        }
 
-
+//        String sourceActivity = getIntent().getExtras().getString("source");
 
     }
 
@@ -97,8 +105,6 @@ public class ApplicationActivity extends ActionBarActivity implements AsyncRespo
     public void processFinish(String output) {
         progressBar.setVisibility(View.GONE);
         input = Singleton.getInstance().hashMap.get("MAU");
-//        mAdapter = new AppAdapter(input);
-//        recyclerView.setAdapter(mAdapter);
         adapter = new CAdapter(this,initData());
         adapter.setParentClickableViewAnimationDefaultDuration();
         adapter.setParentAndIconExpandOnClick(true);
@@ -108,13 +114,26 @@ public class ApplicationActivity extends ActionBarActivity implements AsyncRespo
     }
 
     public List<ParentObject> initData() {
-        AppTitles titleCreator = AppTitles.get(this, input);
+        AppTitles titleCreator;
+        if(count <= 0) {
+            titleCreator = AppTitles.get(this, input, database);
+        }
+        else {
+            titleCreator = AppTitles.get(this, database);
+        }
         List<AppTitleParent> titles = titleCreator.getAll();
         List<ParentObject> parentObject = titleCreator.getChildren();
         return parentObject;
 
     }
 
+    public void onFinish() {
+        progressBar.setVisibility(View.GONE);
+        adapter = new CAdapter(this,initData());
+        adapter.setParentClickableViewAnimationDefaultDuration();
+        adapter.setParentAndIconExpandOnClick(true);
+        recyclerView.setAdapter(adapter);
+    }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
