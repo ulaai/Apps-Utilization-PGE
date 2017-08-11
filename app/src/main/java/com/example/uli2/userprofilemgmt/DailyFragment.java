@@ -26,6 +26,9 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.uli2.userprofilemgmt.Persistence.AnnuallyPie;
+import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
+import com.example.uli2.userprofilemgmt.Persistence.DailyPie;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.Album;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AlbumsAdapter;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
@@ -55,10 +58,14 @@ public class DailyFragment extends Fragment implements AsyncResponse {
     PieChart pChart;
     Calendar cal;
     TextView txtDate;
-    String currdate;
+    String currdate, icurrdate;
     DatePickerDialog.OnDateSetListener datePicker;
     CoordinatorLayout.Behavior behavior;
     boolean changed = false;
+    AppDatabase database;
+    int count;
+    String[] mResult;
+    int[] mValues;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,14 +85,20 @@ public class DailyFragment extends Fragment implements AsyncResponse {
 
         prepareAlbums();
 
-
-        MakePieChart(pChart);
+        database = AppDatabase.getDatabase(getActivity());
 
         txtDate = (TextView) rootView.findViewById(R.id.txtDate);
         cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMM yyyy", java.util.Locale.getDefault());
+        SimpleDateFormat sdfTxt = new SimpleDateFormat("EEEE, d MMM yyyy", java.util.Locale
+                .getDefault());
+        icurrdate = sdfTxt.format(cal.getTime());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale
+                .getDefault());
         currdate = sdf.format(cal.getTime());
-        txtDate.setText(currdate);
+
+        txtDate.setText(icurrdate);
+        MakePieChart(pChart);
 
         datePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -100,8 +113,13 @@ public class DailyFragment extends Fragment implements AsyncResponse {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale
                             .getDefault());
                     currdate = sdf.format(cal.getTime());
-                    Singleton.getInstance().setDelegate(DailyFragment.this);
-                    Singleton.getInstance().setDailyTotalUtilization(currdate);
+                    count = database.dailyPieModel().getCountDate(currdate);
+                    if(count <= 0) {
+                        Singleton.getInstance().setDelegate(DailyFragment.this);
+                        Singleton.getInstance().setDailyTotalUtilization(currdate);
+                    } else {
+                        MakePieChart(pChart);
+                    }
                 }
             }
         };
@@ -150,8 +168,6 @@ public class DailyFragment extends Fragment implements AsyncResponse {
 
     @Override
     public void processFinish(String output) {
-//        FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        ft.detach(this).attach(this).commit();
         changed = true;
         MakePieChart(pChart);
     }
@@ -215,24 +231,45 @@ public class DailyFragment extends Fragment implements AsyncResponse {
 
     private void MakePieChart(PieChart pChart) {
         int average = 0;
+        count = database.dailyPieModel().getCountDate(currdate);
+        if(count <= 0) {
+            //        Preparing data for Monthly Total Utilization
+            List<List<String>> DailyTotalUtilization = Singleton.getInstance().hashMap.get("DTU");
+            int numSize = DailyTotalUtilization.get(0).size();
+            int dtuSize = DailyTotalUtilization.size();
+            mResult = new String[] {"Average", "High", "Medium", "Low"};
 
-        //        Preparing data for Monthly Total Utilization
-        List<List<String>> DailyTotalUtilization = Singleton.getInstance().hashMap.get("DTU");
-        int numSize = DailyTotalUtilization.get(0).size();
-        int dtuSize = DailyTotalUtilization.size();
-        String[] mResult = new String[numSize];
+            mValues = new int[numSize];
+            for(int i = 0; i < DailyTotalUtilization.get(dtuSize-1).size(); i++) {
+                int a = Integer.valueOf(DailyTotalUtilization.get(dtuSize-1).get(i));
+                mValues[i] = a;
+            }
 
-        for(int i = 0; i < DailyTotalUtilization.get(dtuSize-2).size(); i++) {
-            String a = DailyTotalUtilization.get(dtuSize-2).get(i);
-            mResult[i] = a;
+            DailyPie build = DailyPie.builder()
+                    .setAverage(Integer.toString(mValues[0]))
+                    .setHigh(Integer.toString(mValues[1]))
+                    .setMedium(Integer.toString(mValues[2]))
+                    .setLow(Integer.toString(mValues[3]))
+                    .setDate(currdate)
+                    .build();
+            database.dailyPieModel().addDailyPie(build);
+
+
+        } else {
+            List<DailyPie> DailyTotalUtilization = database.dailyPieModel()
+                    .getPieDate(currdate);
+            mResult = new String[] {"Average", "High", "Medium", "Low"};
+            mValues = new int[4];
+            for(int i = 0; i < 4; i++) {
+                int a = Integer.valueOf(DailyTotalUtilization.get(0).getAttribute(i));
+                mValues[i] = a;
+            }
+
         }
 
-        int[] mValues = new int[numSize];
-        for(int i = 0; i < DailyTotalUtilization.get(dtuSize-1).size(); i++) {
-            int a = Integer.valueOf(DailyTotalUtilization.get(dtuSize-1).get(i));
-            mValues[i] = a;
+        if(changed) {
+            pChart.getData().removeDataSet(pChart.getData().getDataSet());
         }
-
         pChart.setUsePercentValues(true);
         pChart.getDescription().setEnabled(false);
         pChart.setExtraOffsets(5, 10, 5, 5);
@@ -257,9 +294,7 @@ public class DailyFragment extends Fragment implements AsyncResponse {
         // mChart.setDrawUnitsInChart(true);
 
         // add a selection listener
-        if(changed) {
-            pChart.getData().removeDataSet(pChart.getData().getDataSet());
-        }
+
 
 
         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();

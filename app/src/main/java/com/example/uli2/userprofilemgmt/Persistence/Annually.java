@@ -18,24 +18,17 @@ public class Annually {
     public String registered;
     public String utilization;
     public String date;
-
-    public String high;
-    public String medium;
-    public String low;
-    public String average;
+    public String access;
 
     public Annually(long id, String label, String actual, String registered, String utilization,
-                    String date, String high, String medium, String low, String average) {
+                    String date, String access) {
         this.id = id;
         this.label = label;
         this.actual = actual;
         this.registered = registered;
         this.utilization = utilization;
         this.date = date;
-        this.high = high;
-        this.medium = medium;
-        this.low = low;
-        this.average = average;
+        this.access = access;
     }
 
     public static AnnualBuilder builder() { return new AnnualBuilder(); }
@@ -47,10 +40,7 @@ public class Annually {
         public String registered;
         public String utilization;
         public String date;
-        public String high;
-        public String medium;
-        public String low;
-        public String average;
+        public String access;
 
 
         public AnnualBuilder setId(long id) {
@@ -83,37 +73,13 @@ public class Annually {
             return this;
         }
 
-        public AnnualBuilder setHigh(String high) {
-            this.high = high;
-            return this;
-        }
-
-        public AnnualBuilder setMedium(String medium) {
-            this.medium = medium;
-            return this;
-        }
-
-        public AnnualBuilder setLow(String low) {
-            this.low = low;
-            return this;
-        }
-
-        public AnnualBuilder setAverage(String average) {
-            this.average = average;
+        public AnnualBuilder setAccess(String access) {
+            this.access = access;
             return this;
         }
 
         public Annually build() { return new Annually(id, label, actual, registered, utilization,
-                date, high, medium, low, average); }
-
-    }
-
-
-    public void setAnnualPie(String high, String medium, String low, String average) {
-        this.high = high;
-        this.medium = medium;
-        this.low = low;
-        this.average = average;
+                date, access); }
     }
 
     @Override

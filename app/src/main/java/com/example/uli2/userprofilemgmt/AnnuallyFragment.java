@@ -21,6 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.uli2.userprofilemgmt.Persistence.Annually;
+import com.example.uli2.userprofilemgmt.Persistence.AnnuallyPie;
+import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.Album;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AlbumsAdapter;
 import com.github.mikephil.charting.animation.Easing;
@@ -43,6 +46,10 @@ public class AnnuallyFragment extends Fragment {
     private List<Album> albumList;
     private ImageView thumbnail;
     CoordinatorLayout.Behavior behavior;
+    AppDatabase database;
+    int count;
+    String[] mResult;
+    int[] mValues;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,23 +66,47 @@ public class AnnuallyFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-
         prepareAlbums();
 
+        database = AppDatabase.getDatabase(getActivity());
+        count = database.annuallyPieModel().getCount();
+        if(count <= 0) {
+            List<List<String>> AnnuallyTotalUtilization = Singleton.getInstance().hashMap.get("ATU");
+            mResult = new String[AnnuallyTotalUtilization.get(0).size()];
+
+            for(int i = 0; i < AnnuallyTotalUtilization.get(0).size(); i++) {
+                String a = AnnuallyTotalUtilization.get(0).get(i);
+                mResult[i] = a;
+            }
+
+            mValues = new int[AnnuallyTotalUtilization.get(1).size()];
+            for(int i = 0; i < AnnuallyTotalUtilization.get(1).size(); i++) {
+                int a = Integer.valueOf(AnnuallyTotalUtilization.get(1).get(i));
+                mValues[i] = a;
+            }
+
+            AnnuallyPie build = AnnuallyPie.builder()
+                    .setId(0)
+                    .setAverage(Integer.toString(mValues[0]))
+                    .setHigh(Integer.toString(mValues[1]))
+                    .setMedium(Integer.toString(mValues[2]))
+                    .setLow(Integer.toString(mValues[3]))
+                    .build();
+            database.annuallyPieModel().addAnnuallyPie(build);
+
+        } else {
+            List<AnnuallyPie> AnnuallyTotalUtilization = database.annuallyPieModel()
+                    .getAllAnnuallyPie();
+            mResult = new String[] {"Average", "High", "Medium", "Low"};
+            mValues = new int[4];
+            for(int i = 0; i < 4; i++) {
+                int a = Integer.valueOf(AnnuallyTotalUtilization.get(0).getAttribute(i));
+                mValues[i] = a;
+            }
+
+        }
+
         PieChart pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
-        List<List<String>> AnnuallyTotalUtilization = Singleton.getInstance().hashMap.get("ATU");
-        String[] mResult = new String[AnnuallyTotalUtilization.get(0).size()];
-
-        for(int i = 0; i < AnnuallyTotalUtilization.get(0).size(); i++) {
-            String a = AnnuallyTotalUtilization.get(0).get(i);
-            mResult[i] = a;
-        }
-
-        int[] mValues = new int[AnnuallyTotalUtilization.get(1).size()];
-        for(int i = 0; i < AnnuallyTotalUtilization.get(1).size(); i++) {
-            int a = Integer.valueOf(AnnuallyTotalUtilization.get(1).get(i));
-            mValues[i] = a;
-        }
 
         MakePieChart(pChart, mResult, mValues);
 

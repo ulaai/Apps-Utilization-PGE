@@ -3,8 +3,10 @@ package com.example.uli2.userprofilemgmt;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -26,6 +28,8 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
     List<List<String>> MonthlyTopApp;
     String[] mResult;
     int[] mValues;
+    AppDatabase database;
+    int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +43,52 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
 
         hbChart = (HorizontalBarChart) findViewById(R.id.hb1chart);
 
-        if(MonthlyTopApp == null) {
+        database = AppDatabase.getDatabase(getApplicationContext());
+        count = database.annuallyModel().getCount();
+        Log.d("myTag", String.valueOf(count));
+        if(count <= 0) {
             Singleton.getInstance().setDelegate(this);
             Singleton.getInstance().getTopMonthlyApplication();
+
+            Log.d("myTag", "count <= 0");
+
+        } else {
+            onFinish();
         }
 
     }
 
+    public void onFinish() {
+        if(mResult == null) {
+            int mResultSize = MonthlyTopApp.get(0).size();
+            mResult = new String[mResultSize];
+            for(int i = 0; i < mResultSize; i++) {
+                String a = MonthlyTopApp.get(0).get(mResultSize-i-1);
+                if(a.length() > 15) {
+                    String anew = a.substring(a.lastIndexOf(" ") + 1);
+                    int k = a.lastIndexOf(" ");
+                    char[] aInChars = a.toCharArray();
+                    aInChars[k] = '\n';
+                    a = String.valueOf(aInChars);
+                }
+                mResult[i] = a;
+            }
+
+        }
+
+        int mValuesSize = MonthlyTopApp.get(1).size();
+        if(mValues == null) {
+            mValues = new int[mValuesSize];
+            for(int i = 0; i < mValuesSize; i++) {
+                int a = Integer.valueOf(MonthlyTopApp.get(1).get(i));
+                mValues[i] = a;
+            }
+
+        }
+
+        MakeHorizontalBarChart(hbChart, mResult, mValues);
+
+    }
     @Override
     public void processFinish(String output) {
         MonthlyTopApp = Singleton.getInstance().hashMap.get("MTA");

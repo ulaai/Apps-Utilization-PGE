@@ -138,14 +138,14 @@ public class Singleton {
         mString = value;
     }
 
-    public void setMonthlyTotalUtilization() {
+    public void setMonthlyTotalUtilization(String currdate) {
         ConnectionList.add(new ConnectionClass());
         ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
 
         hashMap.put("MTU", MonthlyTotalUtilization);
         ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
                         .THREAD_POOL_EXECUTOR, "MTU", "exec " + "dbo" +
-                        ".stp_GetMonthlyTotalUtilization '2017-06-01'", "Label", "Value");
+                        ".stp_GetMonthlyTotalUtilization '"+ currdate +"'", "Label", "Value");
 
     }
 

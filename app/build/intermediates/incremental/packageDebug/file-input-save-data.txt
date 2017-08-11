@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Aug 10 15:12:53 WIB 2017
+#Thu Aug 10 16:55:47 WIB 2017
 210.set=ANDROID_RESOURCE
 282.file=/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/resources-debug.ap_/res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_000.png
 14.set=ANDROID_RESOURCE

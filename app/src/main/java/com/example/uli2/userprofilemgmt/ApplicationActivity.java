@@ -76,9 +76,6 @@ public class ApplicationActivity extends AppCompatActivity implements AsyncRespo
         } else {
             onFinish();
         }
-
-//        String sourceActivity = getIntent().getExtras().getString("source");
-
     }
 
 

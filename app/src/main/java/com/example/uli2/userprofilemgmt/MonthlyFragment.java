@@ -1,11 +1,13 @@
 package com.example.uli2.userprofilemgmt;
 
+import android.app.DatePickerDialog;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -15,14 +17,20 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
+import com.example.uli2.userprofilemgmt.Persistence.MonthlyPie;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.Album;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AlbumsAdapter;
+import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -32,17 +40,30 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.MPPointF;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
 
-public class MonthlyFragment extends Fragment {
+public class MonthlyFragment extends Fragment implements AsyncResponse {
     private RecyclerView recyclerView;
     private AlbumsAdapter adapter;
     private List<Album> albumList;
     private ImageView thumbnail;
+    PieChart pChart;
+    Calendar cal;
+    TextView txtDate;
+    String currdate, icurrdate;
+    DatePickerDialog.OnDateSetListener datePicker;
     CoordinatorLayout.Behavior behavior;
+    boolean changed = false;
+    AppDatabase database;
+    int count;
+    String[] mResult;
+    int[] mValues;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,30 +79,75 @@ public class MonthlyFragment extends Fragment {
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-        PieChart pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
+        pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
 
         prepareAlbums();
 
-//        Preparing data for Monthly Total Utilization
-        List<List<String>> MonthlyTotalUtilization = Singleton.getInstance().hashMap.get("MTU");
-        String[] mResult = new String[MonthlyTotalUtilization.get(0).size()];
+        database = AppDatabase.getDatabase(getActivity());
 
-        for(int i = 0; i < MonthlyTotalUtilization.get(0).size(); i++) {
-            String a = MonthlyTotalUtilization.get(0).get(i);
-            mResult[i] = a;
-        }
+        txtDate = (TextView) rootView.findViewById(R.id.txtDate);
+        cal = Calendar.getInstance();
+        SimpleDateFormat sdfTxt = new SimpleDateFormat("EEEE, d MMM yyyy", java.util.Locale
+                .getDefault());
+        icurrdate = sdfTxt.format(cal.getTime());
 
-        int[] mValues = new int[MonthlyTotalUtilization.get(1).size()];
-        for(int i = 0; i < MonthlyTotalUtilization.get(1).size(); i++) {
-            int a = Integer.valueOf(MonthlyTotalUtilization.get(1).get(i));
-            mValues[i] = a;
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale
+                .getDefault());
+        currdate = sdf.format(cal.getTime());
 
-        MakePieChart(pChart, mResult, mValues);
+        txtDate.setText(icurrdate);
+        MakePieChart(pChart);
 
+        datePicker = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int
+                    dayOfMonth) {
+                if(datePicker.isShown()) {
+                    cal.set(Calendar.YEAR, year);
+                    cal.set(Calendar.MONTH, monthOfYear);
+                    cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    pickDate();
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale
+                            .getDefault());
+                    currdate = sdf.format(cal.getTime());
+                    count = database.monthlyPieModel().getCountDate(currdate);
+                    if(count <= 0) {
+                        Singleton.getInstance().setDelegate(MonthlyFragment.this);
+                        Singleton.getInstance().setMonthlyTotalUtilization(currdate);
+                    } else {
+                        MakePieChart(pChart);
+                    }
+                }
+            }
+        };
+
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(getActivity(), datePicker, cal.get(Calendar.YEAR), cal
+                        .get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
+                Log.d("myTag", "change date button clicked");
+            }
+        });
 
         return rootView;
     }
+
+    private void pickDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMM yyyy", java.util.Locale.getDefault());
+        String currdate = sdf.format(cal.getTime());
+        txtDate.setText(currdate);
+    }
+
+    @Override
+    public void processFinish(String output) {
+        changed = true;
+        MakePieChart(pChart);
+    }
+
+
     /**
      * Adding few albums for testing
      */
@@ -153,8 +219,47 @@ public class MonthlyFragment extends Fragment {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
-    private void MakePieChart(PieChart pChart, String[] mResult, int[] mValues) {
+    private void MakePieChart(PieChart pChart) {
         int average = 0;
+        count = database.monthlyPieModel().getCountDate(currdate);
+        if(count <= 0) {
+            //        Preparing data for Monthly Total Utilization
+            List<List<String>> MonthlyTotalUtilization = Singleton.getInstance().hashMap.get("MTU");
+            int numSize = MonthlyTotalUtilization.get(0).size();
+            int mtuSize = MonthlyTotalUtilization.size();
+            mResult = new String[] {"Average", "High", "Medium", "Low"};
+
+            mValues = new int[numSize];
+            for(int i = 0; i < MonthlyTotalUtilization.get(mtuSize-1).size(); i++) {
+                int a = Integer.valueOf(MonthlyTotalUtilization.get(mtuSize-1).get(i));
+                mValues[i] = a;
+            }
+
+            MonthlyPie build = MonthlyPie.builder()
+                    .setAverage(Integer.toString(mValues[0]))
+                    .setHigh(Integer.toString(mValues[1]))
+                    .setMedium(Integer.toString(mValues[2]))
+                    .setLow(Integer.toString(mValues[3]))
+                    .setDate(currdate)
+                    .build();
+            database.monthlyPieModel().addMonthlyPie(build);
+
+
+        } else {
+            List<MonthlyPie> MonthlyTotalUtilization = database.monthlyPieModel()
+                    .getPieDate(currdate);
+            mResult = new String[] {"Average", "High", "Medium", "Low"};
+            mValues = new int[4];
+            for(int i = 0; i < 4; i++) {
+                int a = Integer.valueOf(MonthlyTotalUtilization.get(0).getAttribute(i));
+                mValues[i] = a;
+            }
+
+        }
+
+        if(changed) {
+            pChart.getData().removeDataSet(pChart.getData().getDataSet());
+        }
 
         pChart.setUsePercentValues(true);
         pChart.getDescription().setEnabled(false);
