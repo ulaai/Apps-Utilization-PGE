@@ -3,6 +3,7 @@ package com.example.uli2.userprofilemgmt;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
@@ -36,6 +37,12 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String value = extras.getString("sourceFragment");
+            Log.d("myTag", value);
+        }
 
         hbChart = (HorizontalBarChart) findViewById(R.id.hb1chart);
         if(MonthlyTopUser == null) {

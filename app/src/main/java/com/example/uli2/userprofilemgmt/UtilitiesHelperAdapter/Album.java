@@ -8,14 +8,16 @@ public class Album {
     private String name;
     private int thumbnail;
     private String chart;
+    private String fragment;
 
     public Album() {
     }
 
-    public Album(String name, int thumbnail, String chart) {
+    public Album(String name, int thumbnail, String chart, String fragment) {
         this.name = name;
         this.thumbnail = thumbnail;
         this.chart = chart;
+        this.fragment = fragment;
     }
 
     public String getName() {
@@ -40,5 +42,13 @@ public class Album {
 
     public void setChart(String chart) {
         this.chart = chart;
+    }
+
+    public String getFragment() {
+        return fragment;
+    }
+
+    public void setFragment(String fragment) {
+        this.fragment = fragment;
     }
 }

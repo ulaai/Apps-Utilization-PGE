@@ -72,6 +72,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
 
         //get chartactivity from album
         final String c = album.getChart();
+        final String f = album.getFragment();
 
         holder.thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +81,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
                 try {
                     intent = new Intent(v.getContext(), Class.forName("com.example.uli2.userprofilemgmt" +
                     c));
+                    intent.putExtra("sourceFragment",f);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }

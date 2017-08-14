@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -29,7 +30,13 @@ public class VisitorActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String value = extras.getString("sourceFragment");
+            Log.d("myTag", value);
+        }
+
         LineChart lChart = (LineChart) findViewById(R.id.line1chart);
         float mult = 100;
         String[] mResult = new String[] { "High", "Low" };
@@ -48,7 +55,13 @@ public class VisitorActivity extends AppCompatActivity {
         }
         LineDataSet lineDataSet;
 
+        lChart.setClickable(false);
+        lChart.setPinchZoom(false);
+        lChart.setDragEnabled(false);
+        lChart.setTouchEnabled(true);
+        lChart.setScaleEnabled(false);
         lChart.setDrawGridBackground(false);
+
 
         //animate chart
         lChart.animateY(2000);
@@ -64,6 +77,7 @@ public class VisitorActivity extends AppCompatActivity {
             lineDataSet = new LineDataSet(entries, "Utilization");
 
             lineDataSet.setDrawIcons(false);
+
 
             // set the line to be drawn like this "- - - - - -"
             lineDataSet.enableDashedLine(10f, 5f, 0f);

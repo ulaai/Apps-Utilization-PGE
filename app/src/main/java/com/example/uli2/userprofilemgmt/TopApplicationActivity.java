@@ -43,18 +43,17 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
 
         hbChart = (HorizontalBarChart) findViewById(R.id.hb1chart);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String value = extras.getString("sourceFragment");
+            Log.d("myTag", value);
+        }
+
         database = AppDatabase.getDatabase(getApplicationContext());
         count = database.annuallyModel().getCount();
         Log.d("myTag", String.valueOf(count));
-        if(count <= 0) {
-            Singleton.getInstance().setDelegate(this);
-            Singleton.getInstance().getTopMonthlyApplication();
-
-            Log.d("myTag", "count <= 0");
-
-        } else {
-            onFinish();
-        }
+        Singleton.getInstance().setDelegate(this);
+        Singleton.getInstance().getTopMonthlyApplication();
 
     }
 

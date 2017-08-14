@@ -159,16 +159,16 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
                 R.drawable.visitor_icon
         };
 
-        Album a = new Album("Utilization",  icons[0], ".ApplicationActivity");
+        Album a = new Album("Utilization",  icons[0], ".ApplicationActivity", "Monthly");
         albumList.add(a);
 
-        a = new Album("Top Application", icons[1], ".TopApplicationActivity");
+        a = new Album("Top Application", icons[1], ".TopApplicationActivity", "Monthly");
         albumList.add(a);
 
-        a = new Album("Top User", icons[2], ".TopUserActivity");
+        a = new Album("Top User", icons[2], ".TopUserActivity", "Monthly");
         albumList.add(a);
 
-        a = new Album("Visitor", icons[3], ".VisitorActivity");
+        a = new Album("Visitor", icons[3], ".VisitorActivity", "Monthly");
         albumList.add(a);
 
         adapter.notifyDataSetChanged();

@@ -35,7 +35,8 @@
         </activity>
         <activity android:name=".AppRecyclerView.CActivity">
         </activity>
-        <activity android:name=".VisitorActivity">
+        <activity android:name=".VisitorActivity"
+                  android:theme="@style/AppThemeToolBar">
         </activity>
     </application>
 

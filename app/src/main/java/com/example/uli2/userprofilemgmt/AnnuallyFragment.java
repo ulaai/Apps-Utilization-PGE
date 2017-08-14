@@ -125,16 +125,16 @@ public class AnnuallyFragment extends Fragment {
                 R.drawable.visitor_icon
         };
 
-        Album a = new Album("Utilization",  icons[0], ".ApplicationActivity");
+        Album a = new Album("Utilization",  icons[0], ".ApplicationActivity", "Annually");
         albumList.add(a);
 
-        a = new Album("Top Application", icons[1], ".TopApplicationActivity");
+        a = new Album("Top Application", icons[1], ".TopApplicationActivity", "Annually");
         albumList.add(a);
 
-        a = new Album("Top User", icons[2], ".TopUserActivity");
+        a = new Album("Top User", icons[2], ".TopUserActivity", "Annually");
         albumList.add(a);
 
-        a = new Album("Visitor", icons[3], ".VisitorActivity");
+        a = new Album("Visitor", icons[3], ".VisitorActivity", "Annually");
         albumList.add(a);
 
         adapter.notifyDataSetChanged();

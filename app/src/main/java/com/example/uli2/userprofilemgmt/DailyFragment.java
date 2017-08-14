@@ -145,16 +145,16 @@ public class DailyFragment extends Fragment implements AsyncResponse {
                 R.drawable.visitor_icon
         };
 
-        Album a = new Album("Utilization",  icons[0], ".ApplicationActivity");
+        Album a = new Album("Utilization",  icons[0], ".ApplicationActivity", "Daily");
         albumList.add(a);
 
-        a = new Album("Top Application", icons[1], ".TopApplicationActivity");
+        a = new Album("Top Application", icons[1], ".TopApplicationActivity", "Daily");
         albumList.add(a);
 
-        a = new Album("Top User", icons[2], ".TopUserActivity");
+        a = new Album("Top User", icons[2], ".TopUserActivity", "Daily");
         albumList.add(a);
 
-        a = new Album("Visitor", icons[3], ".VisitorActivity");
+        a = new Album("Visitor", icons[3], ".VisitorActivity", "Daily");
         albumList.add(a);
 
         adapter.notifyDataSetChanged();
