@@ -198,4 +198,14 @@ public class Singleton {
                 ".stp_GetDailyTotalUtilization '"+ currdate +"'", "Label", "Value");
     }
 
+    public void getPagingUser() {
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("PU", DailyTotalUtilization);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                .THREAD_POOL_EXECUTOR, "PU", "exec " + "dbo" +
+                ".stp_GetPagingUser", "UserName", "UserDisplayName");
+    }
+
 }

@@ -8,6 +8,10 @@
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/ic_launcher.png"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_travel.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/ic_travel.png"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_keyboard_arrow_up_black_24dp.png",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/ic_keyboard_arrow_up_black_24dp.png"
     },
@@ -16,8 +20,16 @@
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/ic_keyboard_arrow_down_black_24dp.png"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_food.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/ic_food.png"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher_round.png",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_movie.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/ic_movie.png"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_show_chart_black_24dp.png",
@@ -26,6 +38,10 @@
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_person_black_24dp.png",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/ic_person_black_24dp.png"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_discount.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/ic_discount.png"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_date_range_black_24dp.png",

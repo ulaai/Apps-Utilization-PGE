@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="65dp"
+    android:gravity="center"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/gradientbg_cherryred"
+    tools:context="com.example.uli2.userprofilemgmt.LoginActivity"
+    android:id="@+id/linearLayout2">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/logo_small"
+            tools:layout_editor_absoluteX="131dp"
+            tools:layout_editor_absoluteY="195dp"/>
+
+        <TextView
+            style="@style/textView_style"
+            android:id="@+id/textview"
+            android:text="Apps Utilization PGE"
+            android:textColor="@color/white"
+            android:padding="8dp"/>
+
+        <EditText
+            style="@style/editText_style"
+            android:id="@+id/textUname"
+            android:inputType="textPersonName"
+            android:hint="Username"
+            android:textColor="@color/white"
+            />
+
+        <EditText
+            style="@style/editText_style"
+            android:id="@+id/textPass"
+            android:textColor="@color/white"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="Password"/>
+
+        <Button
+            style="@style/button_style"
+            android:id="@+id/loginBtn"
+            android:text="Log In"
+            android:padding="8dp"
+            android:textColor="#ff5e62"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"/>
+
+</LinearLayout>

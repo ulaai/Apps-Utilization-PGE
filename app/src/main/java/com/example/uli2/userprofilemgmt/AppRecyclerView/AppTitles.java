@@ -1,6 +1,7 @@
 package com.example.uli2.userprofilemgmt.AppRecyclerView;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 import com.example.uli2.userprofilemgmt.DBHelper.DbHandler;
@@ -8,7 +9,10 @@ import com.example.uli2.userprofilemgmt.Persistence.Annually;
 import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by uli on 04/08/17.
@@ -59,7 +63,7 @@ public class AppTitles {
 
 
         titleParents = new ArrayList<>();
-        for(int i = 0; i < label.size()-1; i++)
+        for(int i = 0; i < label.size(); i++)
         {
             AppTitleParent title = new AppTitleParent(label.get(i), util_score.get(i));
             titleParents.add(title);
@@ -108,6 +112,21 @@ public class AppTitles {
             i++;
         }
         return parentObject;
+
+    }
+    public void sortbyUtil() {
+        Collections.sort(titleParents, new Comparator<AppTitleParent>() {
+            @Override
+            public int compare(AppTitleParent p1, AppTitleParent p2) {
+                if(Objects.equals(p1.getUtil(), "null")) p1.setUtil("0");
+                if(Objects.equals(p2.getUtil(), "null")) p2.setUtil("0");
+
+                return Integer.valueOf(p1.getUtil()) - Integer.valueOf(p2.getUtil()); // Ascending
+            }
+        });
+        for(int i = 0; i < titleParents.size(); i++) {
+            Log.d("myTag", titleParents.get(i).getTitle() + " " + titleParents.get(i).getUtil());
+        }
 
     }
 

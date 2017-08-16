@@ -120,12 +120,12 @@
         "source": "/home/uli/.android/build-cache/247a0c21839fcc391630c89729641ac0ebb1bcb6/output/res/drawable/abc_list_selector_holo_dark.xml"
     },
     {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/abc_vector_test.xml",
-        "source": "/home/uli/.android/build-cache/247a0c21839fcc391630c89729641ac0ebb1bcb6/output/res/drawable/abc_vector_test.xml"
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/edittext_background.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/edittext_background.xml"
     },
     {
-        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/logo.jpg",
-        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/logo.jpg"
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/abc_vector_test.xml",
+        "source": "/home/uli/.android/build-cache/247a0c21839fcc391630c89729641ac0ebb1bcb6/output/res/drawable/abc_vector_test.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/abc_ic_menu_overflow_material.xml",
@@ -176,6 +176,10 @@
         "source": "/home/uli/.android/build-cache/247a0c21839fcc391630c89729641ac0ebb1bcb6/output/res/drawable/abc_item_background_holo_dark.xml"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/gradientbg_cherryred.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/gradientbg_cherryred.xml"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/tooltip_frame_dark.xml",
         "source": "/home/uli/.android/build-cache/247a0c21839fcc391630c89729641ac0ebb1bcb6/output/res/drawable/tooltip_frame_dark.xml"
     },
@@ -212,7 +216,15 @@
         "source": "/home/uli/.android/build-cache/247a0c21839fcc391630c89729641ac0ebb1bcb6/output/res/drawable/abc_ic_go_search_api_material.xml"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/button_background.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/button_background.xml"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background.xml",
         "source": "/home/uli/.android/build-cache/247a0c21839fcc391630c89729641ac0ebb1bcb6/output/res/drawable/abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/logo.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/logo.png"
     }
 ]

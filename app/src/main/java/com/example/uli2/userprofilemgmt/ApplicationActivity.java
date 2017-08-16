@@ -1,6 +1,8 @@
 package com.example.uli2.userprofilemgmt;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +44,7 @@ public class ApplicationActivity extends AppCompatActivity implements AsyncRespo
     String pass = "sqlserver2012PGE";
 
     CAdapter adapter;
+    AppTitles titleCreator;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +102,7 @@ public class ApplicationActivity extends AppCompatActivity implements AsyncRespo
             finish();
         }
         if (item.getItemId() == R.id.sort) {
-
+            buildAndShowInputDialog();
         }
 
         return super.onOptionsItemSelected(item);
@@ -118,7 +121,6 @@ public class ApplicationActivity extends AppCompatActivity implements AsyncRespo
     }
 
     public List<ParentObject> initData() {
-        AppTitles titleCreator;
         if(count <= 0) {
             titleCreator = AppTitles.get(this, input, database);
         }
@@ -144,4 +146,29 @@ public class ApplicationActivity extends AppCompatActivity implements AsyncRespo
         ((CAdapter)recyclerView.getAdapter()).onSaveInstanceState(outState);
     }
 
+
+    private void buildAndShowInputDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ApplicationActivity.this);
+        builder.setTitle("Sort")
+                .setItems(R.array.sortArray, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                Log.d("myTag", "first option");
+                                dialog.dismiss();
+                                break;
+                            case 1:
+                                titleCreator.sortbyUtil();
+                                recyclerView.setAdapter(null);
+                                List<ParentObject> parentObject = titleCreator.getChildren();
+                                adapter = new CAdapter(ApplicationActivity.this, parentObject);
+                                recyclerView.setAdapter(adapter);
+                                dialog.dismiss();
+                                break;
+                        }
+                    }
+                });
+        builder.show();
+
+    }
 }

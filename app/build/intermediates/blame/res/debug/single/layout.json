@@ -28,6 +28,10 @@
         "source": "/home/uli/.android/build-cache/f2f94c18bacc93cd97862211da2cadac88725091/output/res/layout/design_navigation_item_header.xml"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/welcome_side2.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/welcome_side2.xml"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/design_layout_tab_icon.xml",
         "source": "/home/uli/.android/build-cache/f2f94c18bacc93cd97862211da2cadac88725091/output/res/layout/design_layout_tab_icon.xml"
     },
@@ -38,6 +42,10 @@
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/drawer_list_item.xml",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/drawer_list_item.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/welcome_side1.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/welcome_side1.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/fragment_daily.xml",
@@ -176,6 +184,10 @@
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/fragment_monthly.xml"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/activity_welcome.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/activity_welcome.xml"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
         "source": "/home/uli/.android/build-cache/247a0c21839fcc391630c89729641ac0ebb1bcb6/output/res/layout/abc_activity_chooser_view.xml"
     },
@@ -186,6 +198,14 @@
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/app_item_layout.xml",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/app_item_layout.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/welcome_side4.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/welcome_side4.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/activity_login.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/activity_login.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item_material.xml",
@@ -294,6 +314,10 @@
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/notification_template_big_media_narrow.xml",
         "source": "/home/uli/.android/build-cache/333f02435a3f15adbbdcf74cf3dbfb3d16edb7da/output/res/layout/notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/welcome_side3.xml",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/layout/welcome_side3.xml"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",

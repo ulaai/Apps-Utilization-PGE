@@ -60,9 +60,9 @@ public class AnnuallyFragment extends Fragment {
         albumList = new ArrayList<>();
         adapter = new AlbumsAdapter(rootView.getContext(), albumList);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(rootView.getContext(), 2);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(rootView.getContext(), 4);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+//        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
