@@ -76,6 +76,10 @@
         "source": "/home/uli/.android/build-cache/47c8a4ecca2ea7b0121f326f3eab6c56ca7484b7/output/res/drawable/notification_tile_bg.xml"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/logo_small.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/logo_small.png"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/abc_ic_arrow_drop_right_black_24dp.xml",
         "source": "/home/uli/.android/build-cache/247a0c21839fcc391630c89729641ac0ebb1bcb6/output/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
     },
@@ -218,6 +222,10 @@
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/button_background.xml",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/button_background.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/rinjani.jpg",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/rinjani.jpg"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background.xml",

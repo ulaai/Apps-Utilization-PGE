@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -36,11 +37,14 @@ public class VisitorActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        String value = "";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String value = extras.getString("sourceFragment");
+            value = extras.getString("sourceFragment");
             Log.d("myTag", value);
         }
+        String title = value + " Visitor";
+        getSupportActionBar().setTitle(title);
 
         LineChart lChart = (LineChart) findViewById(R.id.line1chart);
         float mult = 100;
@@ -104,9 +108,6 @@ public class VisitorActivity extends AppCompatActivity {
 
 
 
-
-
-
         //animate chart
         lChart.animateY(2000);
 
@@ -158,5 +159,16 @@ public class VisitorActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }

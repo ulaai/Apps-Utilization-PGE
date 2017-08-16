@@ -38,11 +38,15 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        String value = "";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String value = extras.getString("sourceFragment");
+            value = extras.getString("sourceFragment");
             Log.d("myTag", value);
         }
+        String title = value + " Top Users";
+        getSupportActionBar().setTitle(title);
+
 
         hbChart = (HorizontalBarChart) findViewById(R.id.hb1chart);
         if(MonthlyTopUser == null) {

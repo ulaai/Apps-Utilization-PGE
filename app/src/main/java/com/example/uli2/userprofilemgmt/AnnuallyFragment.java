@@ -20,12 +20,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.uli2.userprofilemgmt.Persistence.Annually;
 import com.example.uli2.userprofilemgmt.Persistence.AnnuallyPie;
 import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.Album;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AlbumsAdapter;
+import com.github.anastr.speedviewlib.SpeedView;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -35,7 +37,9 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.MPPointF;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,6 +54,10 @@ public class AnnuallyFragment extends Fragment {
     int count;
     String[] mResult;
     int[] mValues;
+    Calendar cal;
+    TextView txtDate;
+    String currdate, icurrdate;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +73,14 @@ public class AnnuallyFragment extends Fragment {
 //        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+
+        txtDate = (TextView) rootView.findViewById(R.id.txtDate);
+        cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy", java.util.Locale
+                .getDefault());
+        currdate = sdf.format(cal.getTime());
+
+        txtDate.setText(currdate);
 
         prepareAlbums();
 
@@ -87,19 +103,18 @@ public class AnnuallyFragment extends Fragment {
 
             AnnuallyPie build = AnnuallyPie.builder()
                     .setId(0)
-                    .setAverage(Integer.toString(mValues[0]))
-                    .setHigh(Integer.toString(mValues[1]))
-                    .setMedium(Integer.toString(mValues[2]))
-                    .setLow(Integer.toString(mValues[3]))
+                    .setHigh(Integer.toString(mValues[0]))
+                    .setMedium(Integer.toString(mValues[1]))
+                    .setLow(Integer.toString(mValues[2]))
                     .build();
             database.annuallyPieModel().addAnnuallyPie(build);
 
         } else {
             List<AnnuallyPie> AnnuallyTotalUtilization = database.annuallyPieModel()
                     .getAllAnnuallyPie();
-            mResult = new String[] {"Average", "High", "Medium", "Low"};
-            mValues = new int[4];
-            for(int i = 0; i < 4; i++) {
+            mResult = new String[] {"High", "Medium", "Low"};
+            mValues = new int[3];
+            for(int i = 0; i < 3; i++) {
                 int a = Integer.valueOf(AnnuallyTotalUtilization.get(0).getAttribute(i));
                 mValues[i] = a;
             }
@@ -109,6 +124,10 @@ public class AnnuallyFragment extends Fragment {
         PieChart pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
 
         MakePieChart(pChart, mResult, mValues);
+
+        SpeedView gChart = (SpeedView) rootView.findViewById(R.id.speedView);
+        gChart.speedTo(50, 4000);
+        gChart.setWithTremble(false);
 
         return rootView;
     }
@@ -188,19 +207,19 @@ public class AnnuallyFragment extends Fragment {
     private void MakePieChart(PieChart pChart, String[] mResult, int[] mValues) {
         int average = 0;
 
+        pChart.getLegend().setEnabled(false);
         pChart.setUsePercentValues(true);
         pChart.getDescription().setEnabled(false);
         pChart.setExtraOffsets(5, 10, 5, 5);
         pChart.setDragDecelerationFrictionCoef(0.95f);
 
 
-        pChart.setDrawHoleEnabled(true);
+        pChart.setDrawHoleEnabled(false);
         pChart.setHoleColor(Color.WHITE);
+        pChart.setHoleRadius(58f);
 
         pChart.setTransparentCircleColor(Color.WHITE);
         pChart.setTransparentCircleAlpha(110);
-
-        pChart.setHoleRadius(58f);
         pChart.setTransparentCircleRadius(61f);
 
         pChart.setRotationAngle(0);
@@ -228,8 +247,8 @@ public class AnnuallyFragment extends Fragment {
             }
         }
 
-        pChart.setDrawCenterText(true);
-        pChart.setCenterText(generateCenterSpannableText(average));
+//        pChart.setDrawCenterText(true);
+//        pChart.setCenterText(generateCenterSpannableText(average));
 
         PieDataSet dataSet = new PieDataSet(entries, "Utilization");
 
@@ -268,6 +287,13 @@ public class AnnuallyFragment extends Fragment {
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setForm(Legend.LegendForm.CIRCLE);
+        l.setWordWrapEnabled(true);
+        l.setDrawInside(false); l.getCalculatedLineSizes();
 
         // entry label styling
         pChart.setEntryLabelColor(Color.WHITE);
@@ -295,5 +321,6 @@ public class AnnuallyFragment extends Fragment {
                 0, len, 0);
         return s;
     }
+
 
 }

@@ -64,11 +64,15 @@ public class ApplicationActivity extends AppCompatActivity implements AsyncRespo
         //use this if recyclerview size is fixed
 //        recyclerView.setHasFixedSize(true);
 
+        String value = "";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String value = extras.getString("sourceFragment");
+            value = extras.getString("sourceFragment");
             Log.d("myTag", value);
         }
+        String title = value + " Applications Utilization";
+        getSupportActionBar().setTitle(title);
+
 
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);

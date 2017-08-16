@@ -198,7 +198,7 @@ public class Singleton {
                 ".stp_GetDailyTotalUtilization '"+ currdate +"'", "Label", "Value");
     }
 
-    public void getPagingUser() {
+    public void setCurrentUser() {
         ConnectionList.add(new ConnectionClass());
         ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
 

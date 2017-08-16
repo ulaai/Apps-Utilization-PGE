@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.ViewPagerAdapter;
 
@@ -70,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //change Tab selection when swipe ViewPager
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        ImageView cover = (ImageView) findViewById(R.id.cover);
+        cover.setImageResource(R.drawable.rinjani);
 
     }
 

@@ -38,10 +38,8 @@ public class MonthlyPie {
 
         switch(position) {
             case 0:
-                return this.average;
-            case 1:
                 return this.high;
-            case 2:
+            case 1:
                 return this.medium;
             default:
                 return this.low;

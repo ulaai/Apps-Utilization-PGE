@@ -37,14 +37,6 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
             title = (TextView) view.findViewById(R.id.title);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), ApplicationActivity.class);
-                    v.getContext().startActivity(intent);
-
-                }
-            });
 
         }
 
@@ -99,6 +91,32 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
             }
         });
 
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = null;
+                try {
+                    intent = new Intent(v.getContext(), Class.forName("com.example.uli2.userprofilemgmt" +
+                            c));
+                    intent.putExtra("sourceFragment",f);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                Bundle bundle = null;
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    bundle = ActivityOptions.makeSceneTransitionAnimation((Activity) v
+                            .getContext())
+                            .toBundle();
+                }
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+                v.getContext().startActivity(intent, bundle);
+
+
+            }
+        });
+
     }
 
     @Override
@@ -106,8 +124,6 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
         return albumList.size();
     }
 
-    @SuppressWarnings("unchecked") void transitionTo(Intent intent) {
 
 
-    }
 }

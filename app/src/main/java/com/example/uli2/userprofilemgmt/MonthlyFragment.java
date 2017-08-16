@@ -74,9 +74,9 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
         albumList = new ArrayList<>();
         adapter = new AlbumsAdapter(rootView.getContext(), albumList);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(rootView.getContext(), 2);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(rootView.getContext(), 4);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+//        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
@@ -227,7 +227,7 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
             List<List<String>> MonthlyTotalUtilization = Singleton.getInstance().hashMap.get("MTU");
             int numSize = MonthlyTotalUtilization.get(0).size();
             int mtuSize = MonthlyTotalUtilization.size();
-            mResult = new String[] {"Average", "High", "Medium", "Low"};
+            mResult = new String[] {"High", "Medium", "Low"};
 
             mValues = new int[numSize];
             for(int i = 0; i < MonthlyTotalUtilization.get(mtuSize-1).size(); i++) {
@@ -236,10 +236,9 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
             }
 
             MonthlyPie build = MonthlyPie.builder()
-                    .setAverage(Integer.toString(mValues[0]))
-                    .setHigh(Integer.toString(mValues[1]))
-                    .setMedium(Integer.toString(mValues[2]))
-                    .setLow(Integer.toString(mValues[3]))
+                    .setHigh(Integer.toString(mValues[0]))
+                    .setMedium(Integer.toString(mValues[1]))
+                    .setLow(Integer.toString(mValues[2]))
                     .setDate(currdate)
                     .build();
             database.monthlyPieModel().addMonthlyPie(build);
@@ -248,9 +247,9 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
         } else {
             List<MonthlyPie> MonthlyTotalUtilization = database.monthlyPieModel()
                     .getPieDate(currdate);
-            mResult = new String[] {"Average", "High", "Medium", "Low"};
-            mValues = new int[4];
-            for(int i = 0; i < 4; i++) {
+            mResult = new String[] {"High", "Medium", "Low"};
+            mValues = new int[3];
+            for(int i = 0; i < 3; i++) {
                 int a = Integer.valueOf(MonthlyTotalUtilization.get(0).getAttribute(i));
                 mValues[i] = a;
             }
@@ -261,19 +260,18 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
             pChart.getData().removeDataSet(pChart.getData().getDataSet());
         }
 
+        pChart.getLegend().setEnabled(false);
         pChart.setUsePercentValues(true);
         pChart.getDescription().setEnabled(false);
         pChart.setExtraOffsets(5, 10, 5, 5);
         pChart.setDragDecelerationFrictionCoef(0.95f);
 
-
-        pChart.setDrawHoleEnabled(true);
+        pChart.setDrawHoleEnabled(false);
         pChart.setHoleColor(Color.WHITE);
+        pChart.setHoleRadius(58f);
 
         pChart.setTransparentCircleColor(Color.WHITE);
         pChart.setTransparentCircleAlpha(110);
-
-        pChart.setHoleRadius(58f);
         pChart.setTransparentCircleRadius(61f);
 
         pChart.setRotationAngle(0);
@@ -301,8 +299,8 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
             }
         }
 
-        pChart.setDrawCenterText(true);
-        pChart.setCenterText(generateCenterSpannableText(average));
+//        pChart.setDrawCenterText(true);
+//        pChart.setCenterText(generateCenterSpannableText(average));
 
         PieDataSet dataSet = new PieDataSet(entries, "Utilization");
 

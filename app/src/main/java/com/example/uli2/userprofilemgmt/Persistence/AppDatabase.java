@@ -14,8 +14,8 @@ import android.content.Context;
  * Created by uli on 10/08/17.
  */
 
-@Database(entities = {Annually.class, AnnuallyPie.class, MonthlyPie.class, DailyPie.class},
-        version = 4,
+@Database(entities = {Annually.class, AnnuallyPie.class, MonthlyPie.class, DailyPie.class, Users.class},
+        version = 5,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
@@ -25,6 +25,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract AnnuallyPieDao annuallyPieModel();
     public abstract MonthlyPieDao monthlyPieModel();
     public abstract DailyPieDao dailyPieModel();
+
+    public abstract UsersDao usersModel();
 
     public static AppDatabase getDatabase(Context context) {
         if(INSTANCE == null) {
