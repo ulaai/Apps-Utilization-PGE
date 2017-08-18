@@ -1,10 +1,7 @@
 package com.example.uli2.userprofilemgmt.Persistence;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.db.SupportSQLiteOpenHelper;
 import android.arch.persistence.room.Database;
-import android.arch.persistence.room.DatabaseConfiguration;
-import android.arch.persistence.room.InvalidationTracker;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.migration.Migration;
@@ -15,8 +12,9 @@ import android.content.Context;
  */
 
 @Database(entities = {Annually.class, AnnuallyPie.class, MonthlyPie.class, DailyPie.class,
-        TopUsers.class, Users.class},
-        version = 6,
+        TopUsers.class, Users.class, DailyVisitors.class, MonthlyVisitors.class, AnnuallyVisitors
+        .class},
+        version = 8,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
@@ -29,6 +27,11 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UsersDao usersModel();
     public abstract TopUsersDao topUsersModel();
+
+    public abstract DailyVisitorsDao dailyVisitorsModel();
+    public abstract MonthlyVisitorsDao monthlyVisitorsModel();
+    public abstract AnnuallyVisitorsDao annuallyVisitorsModel();
+
 
     public static AppDatabase getDatabase(Context context) {
         if(INSTANCE == null) {

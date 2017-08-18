@@ -149,6 +149,7 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
                 mValues[i] = a;
 
             }
+        }
             float spaceForBar = 100f;
 
             hbChart.setDrawBarShadow(false);
@@ -198,7 +199,6 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
             hbChart.setDoubleTapToZoomEnabled(false);
 
         }
-    }
 
     private class CategoryBarChartXaxisFormatter implements IAxisValueFormatter {
 

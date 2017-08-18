@@ -49,6 +49,11 @@ public class Singleton {
 
     public List<List<String>> DailyTotalUtilization = new ArrayList<>();
 
+    public List<List<String>> AnnuallyVisitor = new ArrayList<>();
+    public List<List<String>> MonthlyVisitor = new ArrayList<>();
+    public List<List<String>> DailyVisitor = new ArrayList<>();
+
+
 
 
 
@@ -80,7 +85,6 @@ public class Singleton {
         int y = 0;
         @Override
         protected String doInBackground(String... query) {
-//            dialog.show();
 
             try{
                 String hashIndex = query[0]; //get index
@@ -125,19 +129,12 @@ public class Singleton {
 
         @Override
         protected void onPreExecute() {
-            dialog = new Dialog(delegate.getDelegateContext());
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.loading_dialog);
-            dialog.setTitle("Loading");
-//            dialog.setCancelable(false);
-            ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.loadingProgressBar);
 
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            dialog.dismiss();
             delegate.processFinish(result);
         }
     }
@@ -221,6 +218,39 @@ public class Singleton {
         ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
                 .THREAD_POOL_EXECUTOR, "PU", "exec " + "dbo" +
                 ".stp_GetPagingUser", "UserName", "UserDisplayName");
+    }
+
+    public void setAnnuallyVisitor() {
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("AV", AnnuallyVisitor);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                .THREAD_POOL_EXECUTOR, "AV", "exec " + "dbo" +
+                ".stp_GetListAnnuallyVisitor", "Label", "Value");
+
+    }
+
+    public void setMonthlyVisitor(String currdate) {
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("MV", MonthlyVisitor);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                .THREAD_POOL_EXECUTOR, "MV", "exec " + "dbo" +
+                ".stp_GetListMonthlyVisitor '"+ currdate +"'", "Label", "Value");
+
+    }
+
+    public void setDailyVisitor(String currdate) {
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("DV", MonthlyVisitor);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                .THREAD_POOL_EXECUTOR, "DV", "exec " + "dbo" +
+                ".stp_GetListDailyVisitor '"+ currdate +"'", "Label", "Value");
+
     }
 
 }
