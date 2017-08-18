@@ -16,6 +16,7 @@ import com.example.uli2.userprofilemgmt.Persistence.Users;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity implements AsyncResponse {
     Button loginBtn;
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
         getSupportActionBar().hide();
         loginBtn = (Button) findViewById(R.id.loginBtn);
         textUname = (EditText) findViewById(R.id.textUname);
-        textPass = (EditText) findViewById(R.id.textPass);
+//        textPass = (EditText) findViewById(R.id.textPass);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         progressBar.setVisibility(View.GONE);
@@ -44,23 +45,27 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
             @Override
             public void onClick(View view) {
                 entered_username = textUname.getText().toString();
-                entered_password = textPass.getText().toString();
+//                entered_password = textPass.getText().toString();
 
                 progressBar.setVisibility(View.VISIBLE);
 
                 database = AppDatabase.getDatabase(getApplicationContext());
                 userscount = database.usersModel().getCount();
-                if(userscount <= 0 && entered_username != null) {
+                if(userscount <= 0 && !Objects.equals(entered_username, "")) {
                     Singleton.getInstance().setDelegate(LoginActivity.this);
                     Singleton.getInstance().setCurrentUser();
                 } else {
                     String queryName = '%'+ entered_username + '%';
                     List<Users> currentUsers = database.usersModel().getUsers(queryName);
 
-                    if(currentUsers.size() > 0) {
+                    if(currentUsers.size() == 1) {
                         Toast status = Toast.makeText(LoginActivity.this, "Login successful", Toast
                                 .LENGTH_SHORT);
                         status.show();
+
+                        //set as current user
+                        long currentUsersID = currentUsers.get(0).id;
+                        database.usersModel().setLoggedInUser(currentUsersID);
                         Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
                         startActivity(intent);
                     } else {

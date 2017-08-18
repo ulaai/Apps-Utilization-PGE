@@ -6,7 +6,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.uli2.userprofilemgmt.Persistence.Annually;
 import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
+import com.example.uli2.userprofilemgmt.Persistence.MonthlyPie;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -54,75 +56,21 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
 
         database = AppDatabase.getDatabase(getApplicationContext());
         count = database.annuallyModel().getCount();
-        Log.d("myTag", String.valueOf(count));
-        Singleton.getInstance().setDelegate(this);
-        Singleton.getInstance().getTopMonthlyApplication();
+
+        if(count <= 0) {
+            Singleton.getInstance().setDelegate(this);
+            Singleton.getInstance().getTopMonthlyApplication();
+
+        } else {
+            MakeHorizontalBarChart(hbChart);
+        }
 
     }
 
-    public void onFinish() {
-        if(mResult == null) {
-            int mResultSize = MonthlyTopApp.get(0).size();
-            mResult = new String[mResultSize];
-            for(int i = 0; i < mResultSize; i++) {
-                String a = MonthlyTopApp.get(0).get(mResultSize-i-1);
-                if(a.length() > 15) {
-                    String anew = a.substring(a.lastIndexOf(" ") + 1);
-                    int k = a.lastIndexOf(" ");
-                    char[] aInChars = a.toCharArray();
-                    aInChars[k] = '\n';
-                    a = String.valueOf(aInChars);
-                }
-                mResult[i] = a;
-            }
-
-        }
-
-        int mValuesSize = MonthlyTopApp.get(1).size();
-        if(mValues == null) {
-            mValues = new int[mValuesSize];
-            for(int i = 0; i < mValuesSize; i++) {
-                int a = Integer.valueOf(MonthlyTopApp.get(1).get(i));
-                mValues[i] = a;
-            }
-
-        }
-
-        MakeHorizontalBarChart(hbChart, mResult, mValues);
-
-    }
     @Override
     public void processFinish(String output) {
-        MonthlyTopApp = Singleton.getInstance().hashMap.get("MTA");
 
-        if(mResult == null) {
-            int mResultSize = MonthlyTopApp.get(0).size();
-            mResult = new String[mResultSize];
-            for(int i = 0; i < mResultSize; i++) {
-                String a = MonthlyTopApp.get(0).get(mResultSize-i-1);
-                if(a.length() > 15) {
-                    String anew = a.substring(a.lastIndexOf(" ") + 1);
-                    int k = a.lastIndexOf(" ");
-                    char[] aInChars = a.toCharArray();
-                    aInChars[k] = '\n';
-                    a = String.valueOf(aInChars);
-                }
-                mResult[i] = a;
-            }
-
-        }
-
-        int mValuesSize = MonthlyTopApp.get(1).size();
-        if(mValues == null) {
-            mValues = new int[mValuesSize];
-            for(int i = 0; i < mValuesSize; i++) {
-                int a = Integer.valueOf(MonthlyTopApp.get(1).get(i));
-                mValues[i] = a;
-            }
-
-        }
-
-        MakeHorizontalBarChart(hbChart, mResult, mValues);
+        MakeHorizontalBarChart(hbChart);
 
     }
     @Override
@@ -135,14 +83,57 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
         return super.onOptionsItemSelected(item);
     }
 
-    private void MakeHorizontalBarChart(HorizontalBarChart hbChart, String[] mResult, int[]
-            mValues) {
+    private void MakeHorizontalBarChart(HorizontalBarChart hbChart) {
+        count = database.annuallyModel().getCount();
         ArrayList<String> labels = new ArrayList<>();
-        for(int i = 0; i < mResult.length; i++) {
-            String a = mResult[i];
-            labels.add(a);
-        }
 
+        if(count <= 0) {
+            MonthlyTopApp = Singleton.getInstance().hashMap.get("MTA");
+
+            if(mResult == null && mValues == null) {
+                int mResultSize = MonthlyTopApp.get(0).size();
+                int mValuesSize = MonthlyTopApp.get(1).size();
+
+                mResult = new String[mResultSize];
+                mValues = new int[mValuesSize];
+
+                for (int i = 0; i < mResultSize; i++) {
+                    String a = MonthlyTopApp.get(0).get(mResultSize - i - 1);
+                    if (a.length() > 15) {
+                        String anew = a.substring(a.lastIndexOf(" ") + 1);
+                        int k = a.lastIndexOf(" ");
+                        char[] aInChars = a.toCharArray();
+                        aInChars[k] = '\n';
+                        a = String.valueOf(aInChars);
+                    }
+                    mResult[i] = a;
+                    String c = mResult[i];
+                    labels.add(c);
+
+                    int b = Integer.valueOf(MonthlyTopApp.get(1).get(i));
+                    mValues[i] = b;
+
+                    Annually build = Annually.builder()
+                            .setId(i)
+                            .setLabel(a)
+                            .setAccess(Integer.toString(b))
+                            .build();
+                    database.annuallyModel().addAnnually(build);
+
+                }
+            }
+        } else {
+            List<Annually> MonthlyTopApp = database.annuallyModel().getAllAnnually();
+            int numSize = MonthlyTopApp.size();
+            mResult = new String[numSize];
+            mValues = new int[numSize];
+            for(int i = 0; i < numSize; i++) {
+                mResult[i] = MonthlyTopApp.get(i).label;
+                int a = Integer.valueOf(MonthlyTopApp.get(i).access);
+                mValues[i] = a;
+            }
+
+        }
 
         hbChart.setDrawBarShadow(false);
         hbChart.setDrawValueAboveBar(true);

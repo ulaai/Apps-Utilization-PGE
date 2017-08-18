@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -27,6 +28,8 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
     List<List<String>> MonthlyTopUser;
     String[] mResult;
     int[] mValues;
+    AppDatabase database;
+    int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,8 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        hbChart = (HorizontalBarChart) findViewById(R.id.hb1chart);
+
         String value = "";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -48,7 +53,6 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
         getSupportActionBar().setTitle(title);
 
 
-        hbChart = (HorizontalBarChart) findViewById(R.id.hb1chart);
         if(MonthlyTopUser == null) {
             Singleton.getInstance().setDelegate(this);
             Singleton.getInstance().getTopMonthlyUser();

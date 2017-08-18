@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
-import com.example.uli2.userprofilemgmt.DBHelper.DbHandler;
 import com.example.uli2.userprofilemgmt.Persistence.Annually;
 import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
 
@@ -26,7 +25,6 @@ public class AppTitles {
     private List<String> util_score = new ArrayList<>();
     private List<String> num_actual = new ArrayList<>();
     private List<String> num_registered = new ArrayList<>();
-    DbHandler db;
 
     public AppTitles(Context context, AppDatabase database) {
         List<Annually> annually = database.annuallyModel().getAllAnnually();

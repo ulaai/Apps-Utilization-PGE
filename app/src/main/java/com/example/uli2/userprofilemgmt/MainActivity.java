@@ -10,11 +10,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
+import com.example.uli2.userprofilemgmt.Persistence.Users;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.ViewPagerAdapter;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private NavigationView mNavigationView;
@@ -24,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private String[] pageTitle = {"Annually", "Monthly", "Daily"};
+    AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +40,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        getSupportActionBar().hide();
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView welcome_greetings = (TextView) findViewById(R.id.welcome_greetings);
+        TextView currentuser_greetings = (TextView) findViewById(R.id.currentuser_greetings);
+
+        getSupportActionBar().hide();
         mToolbar.setTitle("Apps Utilization PGE");
+
+        database = AppDatabase.getDatabase(getApplicationContext());
 
 //        change navigation drawer header and name programmatically in class file
         View hView =  mNavigationView.getHeaderView(0);
-//        TextView nav_user = (TextView)hView.findViewById(R.id.nav_name);
-//        nav_user.setText(user);
+        TextView nav_user = (TextView)hView.findViewById(R.id.currentUserDisplayName);
+        Users currentUser = database.usersModel().getLoggedInUser();
+        String currentUserDisplayName = currentUser.userDisplayName;
+        nav_user.setText(currentUserDisplayName);
+        currentuser_greetings.setText(currentUserDisplayName);
 
         //create default navigation drawer toggle
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
@@ -49,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         //setting Tab layout (number of Tabs = number of ViewPager pages)
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
 
         for (int i = 0; i < 3; i++) {
@@ -74,6 +90,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         ImageView cover = (ImageView) findViewById(R.id.cover);
         cover.setImageResource(R.drawable.rinjani);
+
+        Menu menu = mNavigationView.getMenu();
+
+        Calendar cal = Calendar.getInstance();
+        int timeOfDay = cal.get(Calendar.HOUR_OF_DAY);
+
+        if(timeOfDay >= 0 && timeOfDay < 12){
+            welcome_greetings.setText("Good Morning, ");
+        }else if(timeOfDay >= 12 && timeOfDay < 16){
+            welcome_greetings.setText("Good Afternoon, ");
+        }else if(timeOfDay >= 16 && timeOfDay < 21){
+            welcome_greetings.setText("Good Evening, ");
+        }else if(timeOfDay >= 21 && timeOfDay < 24){
+            welcome_greetings.setText("Good Night, ");
+        }
+
 
     }
 

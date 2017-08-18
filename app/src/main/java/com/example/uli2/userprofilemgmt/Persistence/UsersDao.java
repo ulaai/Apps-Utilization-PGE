@@ -29,8 +29,11 @@ public interface UsersDao {
     @Query("select * from users where id = :id")
     public List<Users> getUserId(long id);
 
-    @Query("select * from users where loggedIn = :loggedIn")
-    public List<Users> getLoggedInUser(boolean loggedIn);
+    @Query("select * from users where loggedIn = 1")
+    public Users getLoggedInUser();
+
+    @Query("update users set loggedIn = 1 where id = :id")
+    public void setLoggedInUser(long id);
 
     @Query("select count(*) from users")
     public int getCount();

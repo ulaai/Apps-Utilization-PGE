@@ -27,12 +27,37 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             tools:layout_editor_absoluteY="-2dp"/>
 
-        <ImageView
-            android:id="@+id/cover"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"/>
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/cover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+                <TextView
+                    android:id="@+id/welcome_greetings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/currentuser_greetings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/welcome_greetings"/>
+            </RelativeLayout>
+        </RelativeLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
