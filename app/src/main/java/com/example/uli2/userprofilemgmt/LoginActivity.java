@@ -1,5 +1,6 @@
 package com.example.uli2.userprofilemgmt;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -135,6 +136,11 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
             }
         }
 
+    }
+
+    @Override
+    public Context getDelegateContext() {
+        return this;
     }
 
 }

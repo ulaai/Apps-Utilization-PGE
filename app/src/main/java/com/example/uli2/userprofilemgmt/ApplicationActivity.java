@@ -1,5 +1,6 @@
 package com.example.uli2.userprofilemgmt;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -110,6 +111,11 @@ public class ApplicationActivity extends AppCompatActivity implements AsyncRespo
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public Context getDelegateContext() {
+        return this;
     }
 
     @Override

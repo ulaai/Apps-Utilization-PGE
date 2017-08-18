@@ -1,6 +1,11 @@
 package com.example.uli2.userprofilemgmt;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
@@ -70,10 +75,13 @@ public class Singleton {
 
     private class ConnectionClass extends AsyncTask<String, String, String> {
         public AsyncResponse delegate = null;
+        Dialog dialog;
         String z="";
         int y = 0;
         @Override
         protected String doInBackground(String... query) {
+//            dialog.show();
+
             try{
                 String hashIndex = query[0]; //get index
                 String q = query[1]; // da query
@@ -117,12 +125,19 @@ public class Singleton {
 
         @Override
         protected void onPreExecute() {
+            dialog = new Dialog(delegate.getDelegateContext());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.loading_dialog);
+            dialog.setTitle("Loading");
+//            dialog.setCancelable(false);
+            ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.loadingProgressBar);
 
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            dialog.dismiss();
             delegate.processFinish(result);
         }
     }
@@ -157,18 +172,18 @@ public class Singleton {
 
     }
 
-    public void getTopMonthlyApplication() {
+    public void getTopMonthlyApplication(String currdate) {
         ConnectionList.add(new ConnectionClass());
         ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
 
         hashMap.put("MTA", MonthlyTopApplication);
         ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
                         .THREAD_POOL_EXECUTOR, "MTA",
-                "exec dbo .stp_GetListTopMonthlyApplicationAccess '2017-06-01'", "Label",
+                "exec dbo .stp_GetListTopMonthlyApplicationAccess '"+ currdate +"'", "Label",
                 "Value");
     }
 
-    public void getTopMonthlyUser() {
+    public void getTopMonthlyUser(String currdate) {
         ConnectionList.add(new ConnectionClass());
         ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
 

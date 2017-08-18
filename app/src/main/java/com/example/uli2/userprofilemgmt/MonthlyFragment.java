@@ -1,6 +1,7 @@
 package com.example.uli2.userprofilemgmt;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -147,6 +148,10 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
         MakePieChart(pChart);
     }
 
+    @Override
+    public Context getDelegateContext() {
+        return getActivity().getApplicationContext();
+    }
 
     /**
      * Adding few albums for testing

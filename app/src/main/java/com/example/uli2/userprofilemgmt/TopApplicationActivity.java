@@ -1,5 +1,6 @@
 package com.example.uli2.userprofilemgmt;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -22,7 +23,9 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class TopApplicationActivity extends AppCompatActivity implements AsyncResponse {
@@ -32,6 +35,8 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
     int[] mValues;
     AppDatabase database;
     int count;
+    Calendar cal;
+    String currdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +59,17 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
         String title = value + " Top Applications";
         getSupportActionBar().setTitle(title);
 
+        cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale
+                .getDefault());
+        currdate = sdf.format(cal.getTime());
+
         database = AppDatabase.getDatabase(getApplicationContext());
         count = database.annuallyModel().getCount();
 
         if(count <= 0) {
             Singleton.getInstance().setDelegate(this);
-            Singleton.getInstance().getTopMonthlyApplication();
+            Singleton.getInstance().getTopMonthlyApplication(currdate);
 
         } else {
             MakeHorizontalBarChart(hbChart);
@@ -73,6 +83,12 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
         MakeHorizontalBarChart(hbChart);
 
     }
+
+    @Override
+    public Context getDelegateContext() {
+        return this;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) // Press Back Icon
