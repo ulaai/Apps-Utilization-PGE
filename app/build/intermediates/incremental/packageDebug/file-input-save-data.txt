@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Aug 18 18:47:31 WIB 2017
+#Mon Aug 21 11:51:21 WIB 2017
 210.set=ANDROID_RESOURCE
 282.file=/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/resources-debug.ap_/res/mipmap-hdpi-v4/ic_launcher.png
 14.set=ANDROID_RESOURCE

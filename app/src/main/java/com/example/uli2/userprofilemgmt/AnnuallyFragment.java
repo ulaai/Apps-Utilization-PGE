@@ -51,12 +51,13 @@ public class AnnuallyFragment extends Fragment {
     private ImageView thumbnail;
     CoordinatorLayout.Behavior behavior;
     AppDatabase database;
-    int count;
+    int count, average = -1;
     String[] mResult;
     int[] mValues;
     Calendar cal;
     TextView txtDate;
     String currdate, icurrdate;
+    AnnuallyPie annuallyPie;
 
 
     @Override
@@ -101,13 +102,20 @@ public class AnnuallyFragment extends Fragment {
                 mValues[i] = a;
             }
 
+            List<List<String>> AnnuallyAverageUtilization = Singleton.getInstance().hashMap.get
+                    ("AAU");
+
             AnnuallyPie build = AnnuallyPie.builder()
                     .setId(0)
                     .setHigh(Integer.toString(mValues[0]))
                     .setMedium(Integer.toString(mValues[1]))
                     .setLow(Integer.toString(mValues[2]))
+                    .setAverage(AnnuallyAverageUtilization.get(0).get(0))
                     .build();
             database.annuallyPieModel().addAnnuallyPie(build);
+
+            annuallyPie = database.annuallyPieModel().getAnnuallyPie(0);
+            average = Integer.valueOf(annuallyPie.getAverage());
 
         } else {
             List<AnnuallyPie> AnnuallyTotalUtilization = database.annuallyPieModel()
@@ -118,6 +126,8 @@ public class AnnuallyFragment extends Fragment {
                 int a = Integer.valueOf(AnnuallyTotalUtilization.get(0).getAttribute(i));
                 mValues[i] = a;
             }
+            average = Integer.valueOf(AnnuallyTotalUtilization.get(0).getAverage());
+
 
         }
 
@@ -126,7 +136,12 @@ public class AnnuallyFragment extends Fragment {
         MakePieChart(pChart, mResult, mValues);
 
         SpeedView gChart = (SpeedView) rootView.findViewById(R.id.speedView);
-        gChart.speedTo(50, 4000);
+
+        if(average != -1) {
+            gChart.speedTo((float)average, 4000);
+        } else {
+            gChart.speedTo(50, 4000);
+        }
         gChart.setWithTremble(false);
 
         return rootView;

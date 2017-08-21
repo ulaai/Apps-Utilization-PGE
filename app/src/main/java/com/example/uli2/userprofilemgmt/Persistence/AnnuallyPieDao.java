@@ -21,7 +21,7 @@ public interface AnnuallyPieDao {
     public List<AnnuallyPie> getAllAnnuallyPie();
 
     @Query("select * from AnnuallyPie where id = :id")
-    public List<AnnuallyPie> getTask(long id);
+    public AnnuallyPie getAnnuallyPie(long id);
 
     @Query("select * from AnnuallyPie where date = :date")
     public List<AnnuallyPie> getTaskDate(String date);

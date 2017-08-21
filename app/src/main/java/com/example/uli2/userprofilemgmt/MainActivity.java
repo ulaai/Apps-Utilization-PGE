@@ -1,5 +1,6 @@
 package com.example.uli2.userprofilemgmt;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ViewPager viewPager;
     private String[] pageTitle = {"Annually", "Monthly", "Daily"};
     AppDatabase database;
+    Users currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        change navigation drawer header and name programmatically in class file
         View hView =  mNavigationView.getHeaderView(0);
         TextView nav_user = (TextView)hView.findViewById(R.id.currentUserDisplayName);
-        Users currentUser = database.usersModel().getLoggedInUser();
+        currentUser = database.usersModel().getLoggedInUser();
         String currentUserDisplayName = currentUser.userDisplayName;
         nav_user.setText(currentUserDisplayName);
         currentuser_greetings.setText(currentUserDisplayName);
@@ -123,6 +125,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPager.setCurrentItem(2);
         } else if (id == R.id.close) {
             finish();
+        } else if (id == R.id.logout) {
+            currentUser.loggedIn = false;
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);

@@ -21,7 +21,7 @@ public interface DailyPieDao {
     public List<DailyPie> getAllDailyPie();
 
     @Query("select * from DailyPie where id = :id")
-    public List<DailyPie> getPie(long id);
+    public DailyPie getDailyPie(long id);
 
     @Query("select * from DailyPie where date = :date")
     public List<DailyPie> getPieDate(String date);

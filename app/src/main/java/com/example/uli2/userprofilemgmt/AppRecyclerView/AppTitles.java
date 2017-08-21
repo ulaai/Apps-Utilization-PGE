@@ -65,15 +65,26 @@ public class AppTitles {
         {
             AppTitleParent title = new AppTitleParent(label.get(i), util_score.get(i));
             titleParents.add(title);
-            Annually build = Annually.builder()
-                    .setId(i)
-                    .setLabel(label.get(i))
-                    .setActual(num_actual.get(i))
-                    .setRegistered(num_registered.get(i))
-                    .setUtilization(util_score.get(i))
-                    .setDate("2017")
-                    .build();
-            database.annuallyModel().addAnnually(build);
+            Annually annually = database.annuallyModel().getTask(i);
+            if(annually != null) {
+                annually.label = label.get(i);
+                annually.actual = num_actual.get(i);
+                annually.registered = num_registered.get(i);
+                annually.utilization = util_score.get(i);
+                annually.date = "2017";
+            }
+            else {
+                Annually build = Annually.builder()
+                        .setId(i)
+                        .setLabel(label.get(i))
+                        .setActual(num_actual.get(i))
+                        .setRegistered(num_registered.get(i))
+                        .setUtilization(util_score.get(i))
+                        .setDate("2017")
+                        .build();
+                database.annuallyModel().addAnnually(build);
+
+            }
 
         }
     }

@@ -3,6 +3,7 @@ package com.example.uli2.userprofilemgmt;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -41,13 +42,17 @@ public class Singleton {
     public HashMap<String, List<List<String>>> hashMap = new HashMap<>();
 
     public List<List<String>> AnnuallyTotalUtilization = new ArrayList<>();
+    public List<List<String>> AnnuallyAverageUtilization = new ArrayList<>();
+
 
     public List<List<String>> MonthlyTotalUtilization = new ArrayList<>();
     public List<List<String>> MonthlyAppUtilization = new ArrayList<>();
     public List<List<String>> MonthlyTopApplication = new ArrayList<>();
     public List<List<String>> MonthlyTopUser = new ArrayList<>();
+    public List<List<String>> MonthlyAverageUtilization = new ArrayList<>();
 
     public List<List<String>> DailyTotalUtilization = new ArrayList<>();
+    public List<List<String>> DailyAverageUtilization = new ArrayList<>();
 
     public List<List<String>> AnnuallyVisitor = new ArrayList<>();
     public List<List<String>> MonthlyVisitor = new ArrayList<>();
@@ -104,18 +109,22 @@ public class Singleton {
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(q);
                         input = new ArrayList<>();
+                        Log.d("myTag", "ugh heeelp");
 
                         while (rs.next()) {
                             String value = rs.getString(attributeNames.get(j));
-
+                            Log.d("myTag", "query ga ada isinya");
                             input.add(""+value);
                         }
 //                        results.add(input);
                         hashMap.get(hashIndex).add(input);
+                        Log.d("myTag", "klo ini ke print, input added to hashmap");
 
                         if(j == attributeNames.size()-1) {
                             rs.close();
                             con.close();
+                            Log.d("myTag", "closed da KONEKSHION");
+
                         }
                     }
 
@@ -165,7 +174,7 @@ public class Singleton {
         hashMap.put("MAU", MonthlyAppUtilization);
         mConnection.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "MAU",
                 "exec dbo.stp_GetListMonthlyApplicationUtilization '2017-06-01'",
-                "Label", "Value", "Value2", "Value3");
+                "ApplicationName", "UserActual", "UserRegistered", "Utilization");
 
     }
 
@@ -251,6 +260,36 @@ public class Singleton {
                 .THREAD_POOL_EXECUTOR, "DV", "exec " + "dbo" +
                 ".stp_GetListDailyVisitor '"+ currdate +"'", "Label", "Value");
 
+    }
+
+    public void setAnnuallyAverageUtilization() {
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("AAU", AnnuallyAverageUtilization);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                .THREAD_POOL_EXECUTOR, "AAU", "exec " + "dbo" +
+                ".stp_GetAnnuallyAverageUtilization", "Value4");
+    }
+
+    public void setMonthlyAverageUtilization(String currdate) {
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("MAAU", MonthlyAverageUtilization);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                .THREAD_POOL_EXECUTOR, "MAAU", "exec " + "dbo" +
+                ".stp_GetMonthlyAverageUtilization'"+ currdate +"'", "Value4");
+    }
+
+    public void setDailyAverageUtilization(String currdate) {
+        ConnectionList.add(new ConnectionClass());
+        ConnectionList.get(ConnectionList.size()-1).delegate = mConnection.delegate;
+
+        hashMap.put("DAU", DailyAverageUtilization);
+        ConnectionList.get(ConnectionList.size()-1).executeOnExecutor(AsyncTask
+                .THREAD_POOL_EXECUTOR, "DAU", "exec " + "dbo" +
+                ".stp_GetDailyAverageUtilization'"+ currdate +"'", "Value4");
     }
 
 }

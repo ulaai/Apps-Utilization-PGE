@@ -80,8 +80,11 @@ public class ApplicationActivity extends AppCompatActivity implements AsyncRespo
 
         database = AppDatabase.getDatabase(getApplicationContext());
         count = database.annuallyModel().getCount();
+
+        List<String> checkUtil;
+        checkUtil = database.annuallyModel().getUtil();
         Log.d("myTag", String.valueOf(count));
-        if(count <= 0) {
+        if(count <= 0 || checkUtil.get(0) == null) {
             Singleton.getInstance().newSingleton();
             Singleton.getInstance().setDelegate(this);
             Singleton.getInstance().getApplicationActivity();

@@ -47,6 +47,10 @@ public class DailyPie {
 
     }
 
+    public String getAverage() {
+        return this.average;
+    }
+
     public static DailyPie.DailyBuilder builder() { return new DailyPie.DailyBuilder(); }
 
     public static class DailyBuilder {

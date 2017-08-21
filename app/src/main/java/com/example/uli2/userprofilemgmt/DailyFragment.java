@@ -33,6 +33,7 @@ import com.example.uli2.userprofilemgmt.Persistence.DailyPie;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.Album;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AlbumsAdapter;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
+import com.github.anastr.speedviewlib.SpeedView;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -64,9 +65,12 @@ public class DailyFragment extends Fragment implements AsyncResponse {
     CoordinatorLayout.Behavior behavior;
     boolean changed = false;
     AppDatabase database;
-    int count;
+    int count, average = -1;
     String[] mResult;
     int[] mValues;
+    DailyPie dailyPie;
+    SpeedView gChart;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,6 +78,7 @@ public class DailyFragment extends Fragment implements AsyncResponse {
         View rootView = inflater.inflate(R.layout.fragment_daily, container, false);
         pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        gChart = (SpeedView) rootView.findViewById(R.id.speedView);
 
         albumList = new ArrayList<>();
         adapter = new AlbumsAdapter(rootView.getContext(), albumList);
@@ -118,6 +123,8 @@ public class DailyFragment extends Fragment implements AsyncResponse {
                     if(count <= 0) {
                         Singleton.getInstance().setDelegate(DailyFragment.this);
                         Singleton.getInstance().setDailyTotalUtilization(currdate);
+                        Singleton.getInstance().setDelegate(DailyFragment.this);
+                        Singleton.getInstance().setDailyAverageUtilization(currdate);
                     } else {
                         MakePieChart(pChart);
                     }
@@ -251,14 +258,20 @@ public class DailyFragment extends Fragment implements AsyncResponse {
                 mValues[i] = a;
             }
 
+            List<List<String>> DailyAverageUtilization = Singleton.getInstance().hashMap.get
+                    ("DAU");
+
             DailyPie build = DailyPie.builder()
                     .setHigh(Integer.toString(mValues[0]))
                     .setMedium(Integer.toString(mValues[1]))
                     .setLow(Integer.toString(mValues[2]))
+                    .setAverage(DailyAverageUtilization.get(0).get(0))
                     .setDate(currdate)
                     .build();
             database.dailyPieModel().addDailyPie(build);
 
+            dailyPie = database.dailyPieModel().getDailyPie(0);
+            average = Integer.valueOf(dailyPie.getAverage());
 
         } else {
             List<DailyPie> DailyTotalUtilization = database.dailyPieModel()
@@ -269,6 +282,7 @@ public class DailyFragment extends Fragment implements AsyncResponse {
                 int a = Integer.valueOf(DailyTotalUtilization.get(0).getAttribute(i));
                 mValues[i] = a;
             }
+            average = Integer.valueOf(DailyTotalUtilization.get(0).getAverage());
 
         }
 
@@ -365,6 +379,14 @@ public class DailyFragment extends Fragment implements AsyncResponse {
         pChart.highlightValues(null);
         pChart.notifyDataSetChanged();
         pChart.invalidate();
+
+        //make speedview
+        if(average != -1) {
+            gChart.speedTo((float)average, 4000);
+        } else {
+            gChart.speedTo(50, 4000);
+        }
+        gChart.setWithTremble(false);
 
     }
 

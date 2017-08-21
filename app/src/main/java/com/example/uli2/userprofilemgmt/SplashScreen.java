@@ -17,6 +17,7 @@ public class SplashScreen extends AppCompatActivity implements AsyncResponse {
     Calendar cal;
     AppDatabase database;
     int annualcount, monthlycount, dailycount, daytoday, monthtoday;
+    String annualaverage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +33,27 @@ public class SplashScreen extends AppCompatActivity implements AsyncResponse {
         if(annualcount <= 0) {
             Singleton.getInstance().setDelegate(SplashScreen.this);
             Singleton.getInstance().setAnnuallyTotalUtilization();
+            Singleton.getInstance().setDelegate(SplashScreen.this);
+            Singleton.getInstance().setAnnuallyAverageUtilization();
+
             isConnected = true;
         } else {
-            executed = executed+1;
+            executed = executed+2;
         }
+
 
         dailycount = database.dailyPieModel().getCount();
         daytoday = database.dailyPieModel().getCountDate(currdate);
         if(dailycount <= 0 || daytoday <= 0) {
             Singleton.getInstance().setDelegate(SplashScreen.this);
             Singleton.getInstance().setDailyTotalUtilization(currdate);
+            Singleton.getInstance().setDelegate(SplashScreen.this);
+            Singleton.getInstance().setDailyAverageUtilization(currdate);
+
             isConnected = true;
 
         } else {
-            executed = executed+1;
+            executed = executed+2;
         }
 
         monthlycount = database.monthlyPieModel().getCount();
@@ -53,14 +61,17 @@ public class SplashScreen extends AppCompatActivity implements AsyncResponse {
         if(monthlycount <= 0 || monthtoday <= 0) {
             Singleton.getInstance().setDelegate(SplashScreen.this);
             Singleton.getInstance().setMonthlyTotalUtilization(currdate);
+            Singleton.getInstance().setDelegate(SplashScreen.this);
+            Singleton.getInstance().setMonthlyAverageUtilization(currdate);
+
             isConnected = true;
 
         } else {
-            executed = executed+1;
+            executed = executed+2;
         }
 
 
-        if(executed == 3 && !isConnected) {
+        if(executed == 6 && !isConnected) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
@@ -70,9 +81,10 @@ public class SplashScreen extends AppCompatActivity implements AsyncResponse {
     @Override
     public void processFinish(String output) {
         executed = executed+1;
+
 //        Singleton.getInstance().MonthlyTotalUtilization = Singleton.getInstance().results;
 //        Singleton.getInstance().hashMap.put("MTU", Singleton.getInstance().MonthlyTotalUtilization);
-        if(executed == 3) {
+        if(executed == 6) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();

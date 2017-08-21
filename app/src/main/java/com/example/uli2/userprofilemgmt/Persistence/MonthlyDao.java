@@ -21,7 +21,7 @@ public interface MonthlyDao {
     public List<Monthly> getAllMonthly();
 
     @Query("select * from monthly where id = :id")
-    public List<Monthly> getMonthly(long id);
+    public Monthly getMonthly(long id);
 
     @Query("select * from monthly where date = :date")
     public List<Monthly> getMonthlyDate(String date);

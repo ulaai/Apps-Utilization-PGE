@@ -32,6 +32,7 @@ import com.example.uli2.userprofilemgmt.Persistence.MonthlyPie;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.Album;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AlbumsAdapter;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
+import com.github.anastr.speedviewlib.SpeedView;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -61,10 +62,11 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
     CoordinatorLayout.Behavior behavior;
     boolean changed = false;
     AppDatabase database;
-    int count;
+    int count, average = -1;
     String[] mResult;
     int[] mValues;
-
+    MonthlyPie monthlyPie;
+    SpeedView gChart;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,6 +83,7 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         pChart = (PieChart)rootView.findViewById(R.id.pie1chart);
+        gChart = (SpeedView) rootView.findViewById(R.id.speedView);
 
         prepareAlbums();
 
@@ -116,6 +119,9 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
                     if(count <= 0) {
                         Singleton.getInstance().setDelegate(MonthlyFragment.this);
                         Singleton.getInstance().setMonthlyTotalUtilization(currdate);
+                        Singleton.getInstance().setDelegate(MonthlyFragment.this);
+                        Singleton.getInstance().setMonthlyAverageUtilization(currdate);
+
                     } else {
                         MakePieChart(pChart);
                     }
@@ -240,14 +246,20 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
                 mValues[i] = a;
             }
 
+            List<List<String>> MonthlyAverageUtilization = Singleton.getInstance().hashMap.get
+                    ("MAAU");
+
             MonthlyPie build = MonthlyPie.builder()
                     .setHigh(Integer.toString(mValues[0]))
                     .setMedium(Integer.toString(mValues[1]))
                     .setLow(Integer.toString(mValues[2]))
+                    .setAverage(MonthlyAverageUtilization.get(0).get(0))
                     .setDate(currdate)
                     .build();
             database.monthlyPieModel().addMonthlyPie(build);
 
+            monthlyPie = database.monthlyPieModel().getMonthlyPie(0);
+            average = Integer.valueOf(monthlyPie.getAverage());
 
         } else {
             List<MonthlyPie> MonthlyTotalUtilization = database.monthlyPieModel()
@@ -258,6 +270,8 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
                 int a = Integer.valueOf(MonthlyTotalUtilization.get(0).getAttribute(i));
                 mValues[i] = a;
             }
+            average = Integer.valueOf(MonthlyTotalUtilization.get(0).getAverage());
+
 
         }
 
@@ -357,6 +371,14 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
         pChart.highlightValues(null);
 
         pChart.invalidate();
+
+        //make speedview
+        if(average != -1) {
+            gChart.speedTo((float)average, 4000);
+        } else {
+            gChart.speedTo(50, 4000);
+        }
+        gChart.setWithTremble(false);
 
     }
     private SpannableString generateCenterSpannableText(int average) {

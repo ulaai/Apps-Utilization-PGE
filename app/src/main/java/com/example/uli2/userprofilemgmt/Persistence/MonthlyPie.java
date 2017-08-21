@@ -47,6 +47,10 @@ public class MonthlyPie {
 
     }
 
+    public String getAverage() {
+        return this.average;
+    }
+
     public static MonthlyBuilder builder() { return new MonthlyBuilder(); }
 
     public static class MonthlyBuilder {

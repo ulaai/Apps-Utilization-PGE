@@ -43,6 +43,10 @@ public class AnnuallyPie {
 
     }
 
+    public String getAverage() {
+        return this.average;
+    }
+
     public static AnnualBuilder builder() { return new AnnualBuilder(); }
 
     public static class AnnualBuilder {

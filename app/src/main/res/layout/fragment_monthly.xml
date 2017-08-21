@@ -62,23 +62,92 @@
 
                 </RelativeLayout>
 
-                <com.github.anastr.speedviewlib.SpeedView
-                    android:id="@+id/speedView"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center_vertical"
-                    app:sv_minSpeed="0"
-                    app:sv_maxSpeed="100"
-                    app:sv_withTremble="false"
-                    app:sv_startDegree="180"
-                    app:sv_endDegree="360"
-                    app:sv_indicator="NormalSmallIndicator"
-                    app:sv_unit=""
-                    app:sv_lowSpeedColor="@color/colorLow"
-                    app:sv_mediumSpeedColor="@color/colorMedium"
-                    app:sv_highSpeedColor="@color/colorHigh"
-                    app:sv_lowSpeedPercent="50"
-                    app:sv_mediumSpeedPercent="65"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_vertical"
+                    android:orientation="vertical">
+
+                    <com.github.anastr.speedviewlib.SpeedView
+                        android:id="@+id/speedView"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:paddingBottom="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_gravity="center_vertical"
+                        app:sv_endDegree="360"
+                        app:sv_highSpeedColor="@color/colorHigh"
+                        app:sv_indicator="NormalSmallIndicator"
+                        app:sv_lowSpeedColor="@color/colorLow"
+                        app:sv_lowSpeedPercent="50"
+                        app:sv_maxSpeed="100"
+                        app:sv_mediumSpeedColor="@color/colorMedium"
+                        app:sv_mediumSpeedPercent="65"
+                        app:sv_minSpeed="0"
+                        app:sv_startDegree="180"
+                        app:sv_unit=""
+                        app:sv_withTremble="false"
+                        app:sv_speedTextPadding="0dp"
+                        app:sv_speedTextPosition="BOTTOM_CENTER"
+
+                        />
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:layout_gravity="center_vertical">
+
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@color/colorHigh"/>
+
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:text="High"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="10sp"/>
+
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@color/colorMedium"/>
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:text="Medium"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="10sp"/>
+
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@color/colorLow"/>
+
+                        <TextView
+                            android:id="@+id/textView0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:text="Low"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="10sp"/>
+
+
+                    </TableRow>
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
             <android.support.v7.widget.RecyclerView

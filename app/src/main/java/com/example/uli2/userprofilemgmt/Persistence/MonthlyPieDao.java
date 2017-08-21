@@ -21,7 +21,7 @@ public interface MonthlyPieDao {
     public List<MonthlyPie> getAllMonthlyPie();
 
     @Query("select * from MonthlyPie where id = :id")
-    public List<MonthlyPie> getPie(long id);
+    public MonthlyPie getMonthlyPie(long id);
 
     @Query("select * from MonthlyPie where date = :date")
     public List<MonthlyPie> getPieDate(String date);

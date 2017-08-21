@@ -22,10 +22,13 @@ public interface AnnuallyDao {
     public List<Annually> getAllAnnually();
 
     @Query("select * from annually where id = :id")
-    public List<Annually> getTask(long id);
+    public Annually getTask(long id);
 
     @Query("select * from annually where date = :date")
     public List<Annually> getTaskDate(String date);
+
+    @Query("select utilization from annually")
+    public List<String> getUtil();
 
     @Query("select count(*) from annually")
     public int getCount();

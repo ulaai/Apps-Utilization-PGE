@@ -35,6 +35,11 @@
 
     <group>
         <item
+            android:id="@+id/logout"
+            android:orderInCategory="100"
+            android:title="Log Out"
+            app:showAsAction="always"/>
+        <item
             android:id="@+id/close"
             android:orderInCategory="100"
             android:title="Close"
