@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.uli2.userprofilemgmt.IntroSlider.WelcomeActivity;
 import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 
@@ -72,7 +73,7 @@ public class SplashScreen extends AppCompatActivity implements AsyncResponse {
 
 
         if(executed == 6 && !isConnected) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
             startActivity(intent);
             finish();
         }
@@ -85,7 +86,7 @@ public class SplashScreen extends AppCompatActivity implements AsyncResponse {
 //        Singleton.getInstance().MonthlyTotalUtilization = Singleton.getInstance().results;
 //        Singleton.getInstance().hashMap.put("MTU", Singleton.getInstance().MonthlyTotalUtilization);
         if(executed == 6) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
             startActivity(intent);
             finish();
         }

@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.example.uli2.userprofilemgmt.Persistence.Annually;
 import com.example.uli2.userprofilemgmt.Persistence.AppDatabase;
+import com.example.uli2.userprofilemgmt.Persistence.Monthly;
 import com.example.uli2.userprofilemgmt.Persistence.MonthlyPie;
 import com.example.uli2.userprofilemgmt.UtilitiesHelperAdapter.AsyncResponse;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -37,6 +38,7 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
     int count;
     Calendar cal;
     String currdate;
+    Monthly monthly;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
         currdate = sdf.format(cal.getTime());
 
         database = AppDatabase.getDatabase(getApplicationContext());
-        count = database.annuallyModel().getCount();
+        count = database.monthlyModel().getCount();
 
         if(count <= 0) {
             Singleton.getInstance().setDelegate(this);
@@ -100,7 +102,7 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
     }
 
     private void MakeHorizontalBarChart(HorizontalBarChart hbChart) {
-        count = database.annuallyModel().getCount();
+        count = database.monthlyModel().getCount();
         ArrayList<String> labels = new ArrayList<>();
 
         if(count <= 0) {
@@ -129,17 +131,23 @@ public class TopApplicationActivity extends AppCompatActivity implements AsyncRe
                     int b = Integer.valueOf(MonthlyTopApp.get(1).get(i));
                     mValues[i] = b;
 
-                    Annually build = Annually.builder()
-                            .setId(i)
-                            .setLabel(a)
-                            .setAccess(Integer.toString(b))
-                            .build();
-                    database.annuallyModel().addAnnually(build);
+                    monthly = database.monthlyModel().getMonthlyName(a);
+                    if(monthly != null) {
+                        monthly.access = MonthlyTopApp.get(1).get(i);
+                    } else {
+                        Monthly build = Monthly.builder()
+                                .setId(i)
+                                .setLabel(a)
+                                .setAccess(Integer.toString(b))
+                                .build();
+                        database.monthlyModel().addMonthly(build);
+
+                    }
 
                 }
             }
         } else {
-            List<Annually> MonthlyTopApp = database.annuallyModel().getAllAnnually();
+            List<Monthly> MonthlyTopApp = database.monthlyModel().getAllMonthly();
             int numSize = MonthlyTopApp.size();
             mResult = new String[numSize];
             mValues = new int[numSize];

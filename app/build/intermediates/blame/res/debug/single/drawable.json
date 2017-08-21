@@ -76,6 +76,10 @@
         "source": "/home/uli/.android/build-cache/47c8a4ecca2ea7b0121f326f3eab6c56ca7484b7/output/res/drawable/notification_tile_bg.xml"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/ic_show_chart_black_24dp.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/ic_show_chart_black_24dp.png"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/logo_small.png",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/logo_small.png"
     },
@@ -154,6 +158,14 @@
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/abc_ic_voice_search_api_material.xml",
         "source": "/home/uli/.android/build-cache/247a0c21839fcc391630c89729641ac0ebb1bcb6/output/res/drawable/abc_ic_voice_search_api_material.xml"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/icon.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/icon.png"
+    },
+    {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/ic_date_range_black_24dp.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/drawable/ic_date_range_black_24dp.png"
     },
     {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/drawable/abc_ratingbar_indicator_material.xml",

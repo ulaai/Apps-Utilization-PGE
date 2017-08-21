@@ -11,15 +11,17 @@ import android.content.Context;
  * Created by uli on 10/08/17.
  */
 
-@Database(entities = {Annually.class, AnnuallyPie.class, MonthlyPie.class, DailyPie.class,
+@Database(entities = {Annually.class, AnnuallyPie.class, Monthly.class, MonthlyPie.class, DailyPie
+        .class,
         TopUsers.class, Users.class, DailyVisitors.class, MonthlyVisitors.class, AnnuallyVisitors
         .class},
-        version = 8,
+        version = 9,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
 
     public abstract AnnuallyDao annuallyModel();
+    public abstract MonthlyDao monthlyModel();
 
     public abstract AnnuallyPieDao annuallyPieModel();
     public abstract MonthlyPieDao monthlyPieModel();

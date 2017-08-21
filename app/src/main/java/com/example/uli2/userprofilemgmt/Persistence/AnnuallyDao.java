@@ -22,10 +22,13 @@ public interface AnnuallyDao {
     public List<Annually> getAllAnnually();
 
     @Query("select * from annually where id = :id")
-    public Annually getTask(long id);
+    public Annually getAnnually(long id);
 
-    @Query("select * from annually where date = :date")
-    public List<Annually> getTaskDate(String date);
+    @Query("select * from annually where label = :label")
+    public Annually getAnnuallyName(String label);
+
+    @Query("update annually set access = :access where label = :label")
+    public void updateAccess(String access, String label);
 
     @Query("select utilization from annually")
     public List<String> getUtil();

@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                         database.usersModel().setLoggedInUser(currentUsersID);
                         Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
                         startActivity(intent);
+                        finish();
                     } else {
                         if(entered_username != null) {
                             Toast status = Toast.makeText(LoginActivity.this, "Login failed, " +
@@ -119,6 +120,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                     try {
                         Thread.sleep(1500); // As I am using LENGTH_LONG in Toast
                         startActivity(intent);
+                        finish();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

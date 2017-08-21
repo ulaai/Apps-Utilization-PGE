@@ -36,6 +36,10 @@
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/ic_show_chart_black_24dp.png"
     },
     {
+        "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-mdpi/appsutilization_icon.png",
+        "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/appsutilization_icon.png"
+    },
+    {
         "merged": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_person_black_24dp.png",
         "source": "/home/uli/AndroidStudioProjects/UserProfileMgmt/app/src/main/res/mipmap-mdpi/ic_person_black_24dp.png"
     },

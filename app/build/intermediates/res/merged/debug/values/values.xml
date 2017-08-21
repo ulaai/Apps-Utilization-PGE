@@ -2,13 +2,13 @@
 <resources xmlns:ns1="http://schemas.android.com/tools">
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>
-        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen1</item>
         <item>@color/dot_light_screen3</item>
         <item>@color/dot_light_screen4</item>
     </array>
     <array name="array_dot_inactive">
         <item>@color/dot_dark_screen1</item>
-        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen1</item>
         <item>@color/dot_dark_screen3</item>
         <item>@color/dot_dark_screen4</item>
     </array>
@@ -898,10 +898,10 @@
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="search_menu_title">Search</string>
     <string name="skip">SKIP</string>
-    <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
-    <string name="slide_1_title">Hello Food!</string>
-    <string name="slide_2_desc">Book movie tickets for your family and friends!</string>
-    <string name="slide_2_title">Movie Tickets</string>
+    <string name="slide_1_desc">Quick information, right in your hand.</string>
+    <string name="slide_1_title">Welcome to\nApps Utilization PGE</string>
+    <string name="slide_2_desc">Annual, monthly, daily. Just tap and view.</string>
+    <string name="slide_2_title">See the data you want</string>
     <string name="slide_3_desc">Best discounts on every single service we offer!</string>
     <string name="slide_3_title">Great Discounts</string>
     <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
@@ -919,7 +919,7 @@
         <item name="android:windowExitAnimation">@anim/design_bottom_sheet_slide_out</item>
     </style>
     <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>

@@ -65,7 +65,7 @@ public class AppTitles {
         {
             AppTitleParent title = new AppTitleParent(label.get(i), util_score.get(i));
             titleParents.add(title);
-            Annually annually = database.annuallyModel().getTask(i);
+            Annually annually = database.annuallyModel().getAnnually(i);
             if(annually != null) {
                 annually.label = label.get(i);
                 annually.actual = num_actual.get(i);

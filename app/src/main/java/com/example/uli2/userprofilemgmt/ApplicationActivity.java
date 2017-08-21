@@ -109,10 +109,10 @@ public class ApplicationActivity extends AppCompatActivity implements AsyncRespo
         {
             finish();
         }
-        if (item.getItemId() == R.id.sort) {
-            buildAndShowInputDialog();
-        }
-
+//        if (item.getItemId() == R.id.sort) {
+//            buildAndShowInputDialog();
+//        }
+//
         return super.onOptionsItemSelected(item);
     }
 

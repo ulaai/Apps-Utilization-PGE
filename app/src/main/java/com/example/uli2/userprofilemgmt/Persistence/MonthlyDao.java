@@ -23,6 +23,9 @@ public interface MonthlyDao {
     @Query("select * from monthly where id = :id")
     public Monthly getMonthly(long id);
 
+    @Query("select * from monthly where label = :label")
+    public Monthly getMonthlyName(String label);
+
     @Query("select * from monthly where date = :date")
     public List<Monthly> getMonthlyDate(String date);
 
