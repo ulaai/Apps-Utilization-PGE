@@ -265,25 +265,32 @@ public class DailyFragment extends Fragment implements AsyncResponse {
                     .setHigh(Integer.toString(mValues[0]))
                     .setMedium(Integer.toString(mValues[1]))
                     .setLow(Integer.toString(mValues[2]))
-                    .setAverage(DailyAverageUtilization.get(0).get(0))
                     .setDate(currdate)
                     .build();
             database.dailyPieModel().addDailyPie(build);
 
             dailyPie = database.dailyPieModel().getDailyPie(0);
-            average = Integer.valueOf(dailyPie.getAverage());
+            average = Integer.valueOf(DailyAverageUtilization.get(DailyAverageUtilization.size()
+                    -1).get(0));
 
         } else {
             List<DailyPie> DailyTotalUtilization = database.dailyPieModel()
                     .getPieDate(currdate);
+            List<List<String>> DailyAverageUtilization = Singleton.getInstance().hashMap.get
+                    ("DAU");
+
             mResult = new String[] {"High", "Medium", "Low"};
             mValues = new int[3];
             for(int i = 0; i < 3; i++) {
                 int a = Integer.valueOf(DailyTotalUtilization.get(0).getAttribute(i));
                 mValues[i] = a;
             }
-            average = Integer.valueOf(DailyTotalUtilization.get(0).getAverage());
-
+            if(DailyTotalUtilization.get(0).getAverage() != null) {
+                average = Integer.valueOf(DailyTotalUtilization.get(0).getAverage());
+            } else {
+                average = Integer.valueOf(DailyAverageUtilization.get(DailyAverageUtilization.size()
+                        -1).get(0));
+            }
         }
 
         if(changed) {

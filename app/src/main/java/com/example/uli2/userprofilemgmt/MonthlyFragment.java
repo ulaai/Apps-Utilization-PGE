@@ -253,13 +253,15 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
                     .setHigh(Integer.toString(mValues[0]))
                     .setMedium(Integer.toString(mValues[1]))
                     .setLow(Integer.toString(mValues[2]))
-                    .setAverage(MonthlyAverageUtilization.get(0).get(0))
+                    .setAverage(MonthlyAverageUtilization.get(MonthlyAverageUtilization.size()-1).get
+                            (0))
                     .setDate(currdate)
                     .build();
             database.monthlyPieModel().addMonthlyPie(build);
 
             monthlyPie = database.monthlyPieModel().getMonthlyPie(0);
-            average = Integer.valueOf(monthlyPie.getAverage());
+            average = Integer.valueOf(MonthlyAverageUtilization.get(MonthlyAverageUtilization.size()-1).get
+                    (0));
 
         } else {
             List<MonthlyPie> MonthlyTotalUtilization = database.monthlyPieModel()
@@ -270,8 +272,9 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
                 int a = Integer.valueOf(MonthlyTotalUtilization.get(0).getAttribute(i));
                 mValues[i] = a;
             }
-            average = Integer.valueOf(MonthlyTotalUtilization.get(0).getAverage());
-
+            if(MonthlyTotalUtilization.get(0).getAverage() != null) {
+                average = Integer.valueOf(MonthlyTotalUtilization.get(0).getAverage());
+            }
 
         }
 
@@ -379,6 +382,7 @@ public class MonthlyFragment extends Fragment implements AsyncResponse {
             gChart.speedTo(50, 4000);
         }
         gChart.setWithTremble(false);
+
 
     }
     private SpannableString generateCenterSpannableText(int average) {

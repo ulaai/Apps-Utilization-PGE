@@ -125,7 +125,7 @@ public class TopUserActivity extends AppCompatActivity implements AsyncResponse 
                 }
 
                 for (int i = 0; i < mResultSize; i++) {
-                    String a = mResult[mResult.length - i - 1];
+                    String a = mResult[i];
                     int b = mValues[i];
                     TopUsers build = TopUsers.builder()
                             .setId(i)

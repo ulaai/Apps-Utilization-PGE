@@ -54,6 +54,11 @@ public class SplashScreen extends AppCompatActivity implements AsyncResponse {
             isConnected = true;
 
         } else {
+            Singleton.getInstance().setDelegate(SplashScreen.this);
+            Singleton.getInstance().setDailyTotalUtilization(currdate);
+            Singleton.getInstance().setDelegate(SplashScreen.this);
+            Singleton.getInstance().setDailyAverageUtilization(currdate);
+
             executed = executed+2;
         }
 
@@ -68,6 +73,11 @@ public class SplashScreen extends AppCompatActivity implements AsyncResponse {
             isConnected = true;
 
         } else {
+            Singleton.getInstance().setDelegate(SplashScreen.this);
+            Singleton.getInstance().setMonthlyTotalUtilization(currdate);
+            Singleton.getInstance().setDelegate(SplashScreen.this);
+            Singleton.getInstance().setMonthlyAverageUtilization(currdate);
+
             executed = executed+2;
         }
 
